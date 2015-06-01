@@ -1,0 +1,61 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="it_shop_app.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Opacity="0.8">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF002EFF" Offset="0"/>
+                <GradientStop Color="#FF00E8FF" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="IT-SHOP" Style="{StaticResource PhoneTextLargeStyle}" Margin="12,0"/>
+            <Button Name="but_kategorije" Height="80" Margin="12,0" Click="but_kategorije_Click">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill"/>
+                </Button.Background> Svi proizvodi
+            </Button>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="katalog" Grid.Row="1" Margin="12,0,12,0">
+            <!--Button Name="Dugme1"
+                    Background="Red"
+                    Width="200"
+                    Height="100"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Click="Dugme1_Click">Dugme
+            </>
+            <Image Name="slika"
+                   Width="200"
+                   Height="200"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Source="/Assets/aaa.jpg"
+                   Tap="slika_Tap"></Image-->
+        </Grid>
+        <ScrollBar HorizontalAlignment="Left" Margin="468,10,0,-592" Grid.Row="1" VerticalAlignment="Top" Height="656"/>
+
+    </Grid>
+
+</phone:PhoneApplicationPage>
