@@ -14,21 +14,16 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 
-
-namespace it_shop
-{
+namespace it_shop.View {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class LoginView : Window
-    {
-        public LoginView()
-        {
+    public partial class LoginView : Window {
+        public LoginView ( ) {
             InitializeComponent();
         }
 
-        private void btn_login_Click(object sender, RoutedEventArgs e)
-        {
+        private void btn_login_Click ( object sender, RoutedEventArgs e ) {
             {
                 MySqlConnection con = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
                 con.Open();
@@ -36,13 +31,11 @@ namespace it_shop
                 MySqlCommand upit = new MySqlCommand("select * from login where binary username = '" + txt_username.Text + "' and binary password = '" + txt_password.Text + "';", con);
                 MySqlDataReader r = upit.ExecuteReader();
 
-                if (r.HasRows)
-                {
+                if (r.HasRows) {
                     //MessageBox.Show("Ima");
                     int tipUposlenika;
                     Int32.TryParse(r.GetString("Tip"), out tipUposlenika);
-                    switch (tipUposlenika)
-                    {
+                    switch (tipUposlenika) {
                         case 1:
                         //neki drugi uposlenik 
                         case 2:
@@ -54,9 +47,7 @@ namespace it_shop
                     }
 
 
-                }
-                else
-                {
+                } else {
                     MessageBox.Show("Pogresni podaci.");
                     txt_username.Text = "";
                     txt_password.Text = "";
@@ -68,19 +59,20 @@ namespace it_shop
             }
         }
 
-        private void txt_username_GotFocus(object sender, RoutedEventArgs e)
-        {
+        private void txt_username_GotFocus ( object sender, RoutedEventArgs e ) {
             if (txt_username.Text == "Username")
                 txt_username.Text = String.Empty;
         }
 
-        private void txt_password_GotFocus(object sender, RoutedEventArgs e)
-        {
+        private void txt_password_GotFocus ( object sender, RoutedEventArgs e ) {
 
             if (txt_password.Text == "Password")
                 txt_password.Text = String.Empty;
         }
 
-     
+
+
+
+
     }
 }
