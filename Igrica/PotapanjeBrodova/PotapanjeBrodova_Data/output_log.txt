@@ -12,16 +12,16 @@ Platform assembly: D:\HeritageDev\Igrica\PotapanjeBrodova\PotapanjeBrodova_Data\
 Loading D:\HeritageDev\Igrica\PotapanjeBrodova\PotapanjeBrodova_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: D:\HeritageDev\Igrica\PotapanjeBrodova\PotapanjeBrodova_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\HeritageDev\Igrica\PotapanjeBrodova\PotapanjeBrodova_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.127 seconds
-desktop: 1920x1080 59Hz; virtual: 3200x1080 at 0,0
+- Completed reload, in  0.057 seconds
+desktop: 1920x1080 59Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 XInput1_3.dll not found.
 <RI> Input initialized.
 Platform assembly: D:\HeritageDev\Igrica\PotapanjeBrodova\PotapanjeBrodova_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: D:\HeritageDev\Igrica\PotapanjeBrodova\PotapanjeBrodova_Data\Managed\System.dll (this message is harmless)
-UnloadTime: 3.236931 ms
+UnloadTime: 3.303375 ms
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 315.
-Total: 0.646465 ms (FindLiveObjects: 0.020715 ms CreateObjectMapping: 0.013152 ms MarkObjects: 0.150929 ms  DeleteObjects: 0.009207 ms)
+Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 319.
+Total: 0.639235 ms (FindLiveObjects: 0.018085 ms CreateObjectMapping: 0.013481 ms MarkObjects: 0.136791 ms  DeleteObjects: 0.008878 ms)
 
