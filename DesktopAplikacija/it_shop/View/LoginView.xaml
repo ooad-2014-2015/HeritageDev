@@ -10,8 +10,8 @@
         </Grid.RowDefinitions>
         <Image Source="login_screen.jpg" Stretch="Fill" Grid.Row="0" Height="198" VerticalAlignment="Top"/>
         <Button Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Width="112" Margin="172,165,0,0" Grid.Row="1" x:Name="btn_login" Click="btn_login_Click" Height="28"/>
-        <TextBox x:Name="txt_username" GotFocus="txt_username_GotFocus" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="211" Margin="73,44,0,0" Grid.Row="1" FontSize="14" FontStyle="Italic" Foreground="Gray"/>
-        <TextBox Name="txt_password"  GotFocus="txt_password_GotFocus" HorizontalAlignment="Left" Height="30" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="211" Margin="73,94,0,0" Grid.Row="1" FontSize="14" FontStyle="Italic" Foreground="Gray"/>
+        <TextBox x:Name="txt_username" GotFocus="txt_username_GotFocus" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="211" Margin="73,44,0,0" Grid.Row="1" FontSize="14" FontStyle="Italic" Foreground="Gray"/>
+        <TextBox Name="txt_password"  GotFocus="txt_password_GotFocus" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="211" Margin="73,94,0,0" Grid.Row="1" FontSize="14" FontStyle="Italic" Foreground="Gray"/>
         
 
     </Grid>
