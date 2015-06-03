@@ -116,7 +116,7 @@ namespace it_shop.ViewModel
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Došlo je do greške!\nMolimo pokušajte ponovo ili kontaktirajte administratora.");
+                MessageBox.Show("Došlo je do greške!\nMolimo pokušajte ponovo ili kontaktirajte administratora!");
                 Username = String.Empty;
                 Password = String.Empty;
             }
