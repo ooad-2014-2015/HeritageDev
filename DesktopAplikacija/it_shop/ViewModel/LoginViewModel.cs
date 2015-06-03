@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -34,15 +35,20 @@ namespace it_shop.ViewModel {
     }
 
     public LoginViewModel ( ) {
-        btn_login = new RelayCommand(new Action(ValidirajLogin));
+        btn_login = new RelayCommand(new Action(KreirajNit));
     }
 
-    public void ValidirajLogin ( ) {
+    private void KreirajNit ( ) {
+        Thread nit = new Thread(( ) => ValidirajLogin()) { IsBackground = true };
+        nit.Start();
+    }
+
+    private void ValidirajLogin ( ) {
         MySqlConnection con = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
         try {
             con.Open();
             //login --> zaposlenici
-            MySqlCommand upit = new MySqlCommand("SELECT * FORM uposlenici WHERE username = '" + Username+ "' AND password = '" + Password + "';", con);
+            MySqlCommand upit = new MySqlCommand("SELECT * FROM uposlenici WHERE username = '" + Username+ "' AND password = '" + Password + "';", con);
             MySqlDataReader r = upit.ExecuteReader();
 
             if (r.HasRows && r.Read()) {
