@@ -13,7 +13,7 @@ using System.Windows.Input;
 namespace it_shop.ViewModel {
     public class LoginViewModel : INotifyPropertyChanged {
         private LoginView loginForma;
-        private ICommand _button;
+        private ICommand button;
         private string username;
         private string password;
 	    
@@ -29,8 +29,8 @@ namespace it_shop.ViewModel {
 		    set { password = value;}
 	    }
         public ICommand btn_login {
-            get { return _button; }
-            set { _button = value; }
+            get { return button; }
+            set { button = value; }
         }
 
         public LoginViewModel (LoginView loginForma) {
@@ -65,6 +65,10 @@ namespace it_shop.ViewModel {
                             loginForma.Close();
                         break;
                         case "DIREKTOR":
+                            DirectorView direktor = new DirectorView();
+                            direktor.Show();
+                            loginForma.Close();
+                        break;
                         case "SERVISER":
                         case "MONTER":
                             MessageBox.Show("Tip uposlenika: " + tipuposlenika);
