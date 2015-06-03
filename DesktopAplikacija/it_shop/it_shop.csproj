@@ -74,13 +74,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Artikal.cs" />
     <Compile Include="Model\Direktor.cs" />
+    <Compile Include="Model\Kupac.cs" />
     <Compile Include="Model\Monter.cs" />
     <Compile Include="Model\Osoba.cs" />
+    <Compile Include="Model\ProdajniRacun.cs" />
     <Compile Include="Model\Prodavac.cs" />
+    <Compile Include="Model\Proizvod.cs" />
+    <Compile Include="Model\Racun.cs" />
     <Compile Include="Model\Serviser.cs" />
+    <Compile Include="Model\ServisniPredracun.cs" />
+    <Compile Include="Model\ServisniUredjaj.cs" />
+    <Compile Include="Model\StavkaNarudzbe.cs" />
     <Compile Include="Model\Supervizor.cs" />
     <Compile Include="Model\Uposlenik.cs" />
+    <Compile Include="Model\ZahtjevZaDostavu.cs" />
+    <Compile Include="Model\ZahtjevZaPlacanjeNaRate.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="View\LoginView.xaml.cs">
