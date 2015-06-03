@@ -11,7 +11,10 @@
         <StatusBar x:Name="e3" VerticalAlignment="Bottom">
             <StatusBarItem Name="poruka"></StatusBarItem>
         </StatusBar>
-        <DataGrid x:Name="e1" Margin="0,18,0,18"/>
-        <TextBlock x:Name="txt" HorizontalAlignment="Left" Margin="48,118,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="316" Height="350"/>
+        <DataGrid x:Name="e1" Margin="0,18,200,18"/>
+        <TextBlock x:Name="txt" HorizontalAlignment="Left" Margin="48,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316" Height="350"><Run Text="TextBlock"/></TextBlock>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="382,330,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="382,429,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <Image x:Name="slicica" HorizontalAlignment="Left" Height="100" Margin="600,368,0,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>
