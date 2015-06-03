@@ -13,7 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace it_shop.ViewModel {
-    class ProdavacViewModel : INotifyPropertyChanged {
+    public class ProdavacViewModel : INotifyPropertyChanged {
 
         private string idProizvoda;
         private string nazivProizvoda;
@@ -39,39 +39,66 @@ namespace it_shop.ViewModel {
         }
         public string Kolicina {
             get { return kolicina; }
-            set { kolicina = value; }
+            set {
+                kolicina = value;
+                OnPropertyChanged("Kolicina");
+            }
         }
         public string DodatnaOprema {
             get { return dodatnaOprema; }
-            set { dodatnaOprema = value; }
+            set { 
+                dodatnaOprema = value;
+                OnPropertyChanged("DodatnaOprema");
+            }
         }
         public string Proizvodjac {
             get { return proizvodjac; }
-            set { proizvodjac = value; }
+            set { 
+                proizvodjac = value;
+                OnPropertyChanged("Proizvodjac");
+            }
         }
         public string MjeseciGarancije {
             get { return mjeseciGarancije; }
-            set { mjeseciGarancije = value; }
+            set { 
+                mjeseciGarancije = value;
+                OnPropertyChanged("MjeseciGarancije");
+            }
         }
         public string Cijena {
             get { return cijena; }
-            set { cijena = value; }
+            set { 
+                cijena = value;
+                OnPropertyChanged("Cijena");
+            }
         }
         public string Opis {
             get { return opis; }
-            set { opis = value; }
+            set { 
+                opis = value;
+                OnPropertyChanged("Opis");
+            }
         }
-        public string KategorijaPRoizvoda {
+        public string KategorijaProizvoda {
             get { return kategorijaProizvoda; }
-            set { kategorijaProizvoda = value; }
+            set { 
+                kategorijaProizvoda = value;
+                OnPropertyChanged("KategorijaProizvoda");
+            }
         }
         public string NazivProizvoda {
             get { return nazivProizvoda; }
-            set { nazivProizvoda = value; }
+            set { 
+                nazivProizvoda = value;
+                OnPropertyChanged("NazivProizvoda");
+            }
         }
         public string IdProizvoda {
             get { return idProizvoda; }
-            set { idProizvoda = value; }
+            set { 
+                idProizvoda = value;
+                OnPropertyChanged("IdProizvoda");
+            }
         }
         #endregion Properties
 
@@ -82,12 +109,15 @@ namespace it_shop.ViewModel {
 
         private void UnosArtikla ( ) {
             MessageBox.Show(MjeseciGarancije.ToString());
+
+
+
         }
 
         private void PonistiIzmjene ( ) {
             IdProizvoda = string.Empty;
             NazivProizvoda = string.Empty;
-            KategorijaPRoizvoda = string.Empty;
+            KategorijaProizvoda = string.Empty;
             Cijena = string.Empty;
             Opis = string.Empty;
             MjeseciGarancije = string.Empty;

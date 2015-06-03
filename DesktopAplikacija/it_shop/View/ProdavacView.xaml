@@ -235,7 +235,8 @@
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Top" 
-                             SelectedItem="{Binding Path=MjeseciGarancije}">                        <ComboBoxItem Content="1" HorizontalAlignment="Stretch"/>
+                             SelectedValue="{Binding Path=MjeseciGarancije}">                        
+                        <ComboBoxItem Content="1" HorizontalAlignment="Stretch"/>
                         <ComboBoxItem Content="2" HorizontalAlignment="Stretch"/>
                         <ComboBoxItem Content="3" HorizontalAlignment="Stretch"/>
                         <ComboBoxItem Content="6" HorizontalAlignment="Stretch"/>
@@ -249,7 +250,7 @@
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Top"
-                             Text="{Binding Path=Proizvodi}"></TextBox>
+                             Text="{Binding Path=Proizvodjac}"></TextBox>
                     <TextBox Margin="175,335,50,0"
                              Height="50"
                              Grid.Column="1"
