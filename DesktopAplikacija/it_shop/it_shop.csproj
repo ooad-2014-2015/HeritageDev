@@ -93,6 +93,9 @@
     <Compile Include="Model\ZahtjevZaPlacanjeNaRate.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="View\DirectorView.xaml.cs">
+      <DependentUpon>DirectorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
     <Compile Include="View\ProdavacView.xaml.cs">
       <DependentUpon>ProdavacView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\DirectorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
