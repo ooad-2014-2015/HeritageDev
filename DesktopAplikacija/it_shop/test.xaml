@@ -1,0 +1,10 @@
+﻿<Window x:Class="it_shop.test"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="test" Height="513.636" Width="729.79">
+    <Grid>
+        <Button x:Name="b_test" Height="100" Width="200" Margin="450,145,72,238" Content="Unesi" Click="b_test_Click"/>
+        <Button x:Name="b_test2" Height="100" Width="200" Margin="450,274,72,109" Content="Load" Click="b_test2_Click"/>
+        <Image x:Name="slika" Height="300" Width="300" Margin="87,74,335,109"/>
+    </Grid>
+</Window>
