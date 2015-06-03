@@ -22,7 +22,6 @@ namespace it_shop.View {
     public partial class LoginView : Window {
         public LoginView ( ) {
             InitializeComponent();
-            InitializeComponent();
             this.DataContext = new LoginViewModel();
         }
     }

@@ -42,11 +42,11 @@ namespace it_shop.ViewModel {
         try {
             con.Open();
             //login --> zaposlenici
-            MySqlCommand upit = new MySqlCommand("select * from login where username = '" + Username+ "' and password = '" + Password + "';", con);
+            MySqlCommand upit = new MySqlCommand("SELECT * FORM uposlenici WHERE username = '" + Username+ "' AND password = '" + Password + "';", con);
             MySqlDataReader r = upit.ExecuteReader();
 
             if (r.HasRows && r.Read()) {
-                string tipuposlenika = r.GetString("tipuposlenika");
+                string tipuposlenika = r.GetString("tip_uposlenika");
                 switch (tipuposlenika) {
                     case "DIREKTOR":
                     //neki drugi uposlenik 
@@ -61,8 +61,6 @@ namespace it_shop.ViewModel {
                 }
             } else {
                 MessageBox.Show("Pogresni podaci.");
-                Username = "";
-                Password = "";
             }
 
         } catch (Exception ex) {
