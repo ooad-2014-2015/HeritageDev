@@ -108,9 +108,17 @@ namespace it_shop.ViewModel
                 }
 
             }
-            catch (Exception ex)
+            catch (System.AggregateException)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Neuspjela konekcija sa bazom podataka!\nPokušajte ponovo.");
+                Username = String.Empty;
+                Password = String.Empty;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Došlo je do greške!\nMolimo pokušajte ponovo ili kontaktirajte administratora.");
+                Username = String.Empty;
+                Password = String.Empty;
             }
             con.Close();
         }
