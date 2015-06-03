@@ -12,7 +12,6 @@ namespace it_shop.ViewModel {
             _action = action;
         }
         public event EventHandler CanExecuteChanged;
-
         public bool CanExecute ( object parameter ) { 
             return true; 
         }
