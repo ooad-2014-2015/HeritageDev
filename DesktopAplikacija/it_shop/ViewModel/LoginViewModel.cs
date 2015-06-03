@@ -16,25 +16,37 @@ namespace it_shop.ViewModel {
         private ICommand button;
         private string username;
         private string password;
-	    
-       
+
+
+        #region Properties
         public string Username
 	    {
 		    get { return username;}
-		    set { username = value;}
+		    set 
+            { 
+                username = value;
+                OnPropertyChanged("Username");
+            }
 	    }
 	    public string Password
 	    {
 		    get { return password;}
-		    set { password = value;}
+		    set
+            { 
+                password = value;
+                OnPropertyChanged("Password");
+            }
 	    }
-        public ICommand btn_login {
+
+        public ICommand Button {
             get { return button; }
             set { button = value; }
         }
 
+        #endregion
+
         public LoginViewModel (LoginView loginForma) {
-            btn_login = new RelayCommand(new Action(ValidirajLogin));
+            Button = new RelayCommand(new Action(ValidirajLogin));
             this.loginForma = loginForma;
         }
 
@@ -79,6 +91,8 @@ namespace it_shop.ViewModel {
                     }
                 } else {
                     MessageBox.Show("Pogresni podaci.");
+                    Username = String.Empty;
+                    Password = String.Empty;
                 }
 
             } catch (Exception ex) {
