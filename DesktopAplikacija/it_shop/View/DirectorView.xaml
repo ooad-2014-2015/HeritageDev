@@ -5,11 +5,29 @@
         WindowStartupLocation="CenterScreen"
         MinHeight="600" MinWidth="800" Icon="/it_shop;component/Resources/prodavac_icon.png">
     <Grid>
-        <TabControl Margin="0,20, 5, 22">
-            <TabItem Header="Zahtjevi za nabavke"/>
+        <TabControl Margin="0,20, 0, 22">
+            <TabItem Header="Zahtjevi za nabavke">
+                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="5,5,5,10"
+                           Width="200"
+                           Height="25"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Lista zahtjeva:</Label>
+                    <ListView Margin="5,30,0,5"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"></ListView>
+                </Grid>
+            </TabItem>
             <TabItem Header="Pregled zaposlenika"/>
             <TabItem Header="Dodavanje novog zaposlenika"/>
-
         </TabControl>
+        <Menu Grid.ColumnSpan="2" Height="20" VerticalAlignment="Top" Margin="0,0,0,0"/>
+        <StatusBar Margin="0" VerticalAlignment="Bottom" RenderTransformOrigin="0.9,4.6" Grid.ColumnSpan="2" Height="22">
+            <StatusBarItem Content="StatusBarItem" VerticalAlignment="Bottom"/>
+        </StatusBar>
     </Grid>
 </Window>

@@ -150,38 +150,44 @@
                            Height="25"
                            Grid.Column="1"
                            HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Kategorija proizvoda</Label>
+                           VerticalAlignment="Top">Naziv proizvoda</Label>
                     <Label Margin="20,110,0,0"
                            Width="150"
                            Height="25"
                            Grid.Column="1"
                            HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Opis</Label>
-                    <Label Margin="20,215,0,0"
+                           VerticalAlignment="Top">Kategorija proizvoda</Label>
+                    <Label Margin="20,140,0,0"
                            Width="150"
                            Height="25"
                            Grid.Column="1"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top">Cijena</Label>
-                    <Label Margin="20,245,0,0"
+                    <Label Margin="20,170,0,0"
                            Width="150"
                            Height="25"
                            Grid.Column="1"
                            HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Mjeseci garancije</Label>
+                           VerticalAlignment="Top">Opis</Label>
                     <Label Margin="20,275,0,0"
                            Width="150"
                            Height="25"
                            Grid.Column="1"
                            HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Proizvodjac</Label>
+                           VerticalAlignment="Top">Mjeseci garancije</Label>
                     <Label Margin="20,305,0,0"
                            Width="150"
                            Height="25"
                            Grid.Column="1"
                            HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Proizvodjac</Label>
+                    <Label Margin="20,335,0,0"
+                           Width="150"
+                           Height="25"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
                            VerticalAlignment="Top">Dodatna oprema</Label>
-                    <Label Margin="20,360,0,0"
+                    <Label Margin="20,395,0,0"
                            Width="150"
                            Height="25"
                            Grid.Column="1"
@@ -192,7 +198,12 @@
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Top"></TextBox>
-                    <ComboBox Margin="175,80,50,0"
+                    <TextBox Margin="175,80,50,0"
+                             Height="25"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"></TextBox>
+                    <ComboBox Margin="175,110,50,0"
                               Height="25"
                               Grid.Column="1"
                               HorizontalAlignment="Stretch"
@@ -203,17 +214,17 @@
                         <ComboBoxItem Content="Mrezna oprema" HorizontalAlignment="Stretch"/>
                         <ComboBoxItem Content="Softver" HorizontalAlignment="Stretch"/>
                     </ComboBox>
-                    <TextBox Margin="175,110,50,0"
-                             Height="100"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
-                    <TextBox Margin="175,215,50,0"
+                    <TextBox Margin="175,140,50,0"
                              Height="25"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Top"></TextBox>
-                    <ComboBox Margin="175,245,50,0"
+                    <TextBox Margin="175,170,50,0"
+                             Height="100"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"></TextBox>
+                    <ComboBox Margin="175,275,50,0"
                              Height="25"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
@@ -227,17 +238,17 @@
                         <ComboBoxItem Content="36" HorizontalAlignment="Stretch"/>
                         <ComboBoxItem Content="48" HorizontalAlignment="Stretch"/>
                     </ComboBox>
-                    <TextBox Margin="175,275,50,0"
+                    <TextBox Margin="175,305,50,0"
                              Height="25"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Top"></TextBox>
-                    <TextBox Margin="175,305,50,0"
+                    <TextBox Margin="175,335,50,0"
                              Height="50"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Top"></TextBox>
-                    <TextBox Margin="175,360,50,0"
+                    <TextBox Margin="175,395,50,0"
                              Height="25"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
@@ -246,12 +257,12 @@
                             Grid.Column="1"
                             VerticalAlignment="Top"
                             HorizontalAlignment="Left"
-                            Margin="175,400,0,0">Unesi</Button>
+                            Margin="175,430,0,0">Unesi</Button>
                     <Button Width="100" Height="25"
                             Grid.Column="1"
                             VerticalAlignment="Top"
                             HorizontalAlignment="Left"
-                            Margin="285,400,0,0">Ponisti</Button>
+                            Margin="285,430,0,0">Ponisti</Button>
                 </Grid>
             </TabItem>
         </TabControl>
