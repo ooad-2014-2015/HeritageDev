@@ -24,55 +24,43 @@ namespace it_shop.View {
         }
 
         private void btn_login_Click ( object sender, RoutedEventArgs e ) {
-            {
-                MySqlConnection con = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+            MySqlConnection con = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+            try {
                 con.Open();
                 //login --> zaposlenici
-                MySqlCommand upit = new MySqlCommand("select * from login where binary username = '" + txt_username.Text + "' and binary password = '" + txt_password.Text + "';", con);
+                MySqlCommand upit = new MySqlCommand("select * from login where username = '" + txt_username.Text + "' and password = '" + txt_password.Password + "';", con);
                 MySqlDataReader r = upit.ExecuteReader();
 
-                if (r.HasRows) {
-                    //MessageBox.Show("Ima");
-                    int tipUposlenika;
-                    Int32.TryParse(r.GetString("Tip"), out tipUposlenika);
-                    switch (tipUposlenika) {
-                        case 1:
+                if (r.HasRows && r.Read()) {
+                    string tipuposlenika = r.GetString("tipuposlenika");
+                    switch (tipuposlenika) {
+                        case "DIREKTOR":
                         //neki drugi uposlenik 
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                            MessageBox.Show("Tip uposlenika: " + tipUposlenika.ToString());
+                        case "PRODAVAC":
+                        case "SERVISER":
+                        case "MONTER":
+                            MessageBox.Show("Tip uposlenika: " + tipuposlenika);
+                            break;
+                        default:
+                            MessageBox.Show("Nema uposlenog sa tim tipom.");
                             break;
                     }
-
-
                 } else {
                     MessageBox.Show("Pogresni podaci.");
                     txt_username.Text = "";
-                    txt_password.Text = "";
+                    txt_password.Password = "";
                 }
 
+            } catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            }
+            con.Close();
+        }
 
-                con.Close();
-
+        private void OnKeyDownHandler ( object sender, KeyEventArgs e ) {
+            if (e.Key == Key.Return) {
+                btn_login_Click(this, e);
             }
         }
-
-        private void txt_username_GotFocus ( object sender, RoutedEventArgs e ) {
-            if (txt_username.Text == "Username")
-                txt_username.Text = String.Empty;
-        }
-
-        private void txt_password_GotFocus ( object sender, RoutedEventArgs e ) {
-
-            if (txt_password.Text == "Password")
-                txt_password.Text = String.Empty;
-        }
-
-
-
-
-
     }
 }
