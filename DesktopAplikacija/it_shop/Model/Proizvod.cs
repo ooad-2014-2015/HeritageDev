@@ -12,6 +12,7 @@ namespace it_shop.Model
         private DateTime godinaProizvodnje;
         private string proizvodjac;
         private string serijskiBroj;
+
         public Proizvod(string naziv, DateTime godinaPro, string proizvodjac, string serijski)
         {
             this.naziv = naziv;
@@ -21,8 +22,36 @@ namespace it_shop.Model
 
         }
 
+        #region Properties
 
-      
+        public string Naziv
+        {
+            get { return naziv; }
+            set { naziv = value; }
+        }
+
+
+        public DateTime GodinaProizvodnje
+        {
+            get { return godinaProizvodnje; }
+            set { godinaProizvodnje = value; }
+        }
+
+        public string Proizvodjac
+        {
+            get { return proizvodjac; }
+            set { proizvodjac = value; }
+        }
+
+        public string SerijskiBroj
+        {
+            get { return serijskiBroj; }
+            set { serijskiBroj = value; }
+        }
+        #endregion
+
+
+
     }
 }
 
