@@ -45,7 +45,7 @@ namespace it_shop.Model
             set { cijena = value; }
         }
         
-        public readonly int BarKod
+        public int BarKod
         {
             get { return barKod; }
 
