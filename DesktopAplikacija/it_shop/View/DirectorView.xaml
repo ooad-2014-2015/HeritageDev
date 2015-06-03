@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Direktor" Height="625" Width="925"
         WindowStartupLocation="CenterScreen"
-        MinHeight="600" MinWidth="800" Icon="/it_shop;component/Resources/prodavac_icon.png">
+        MinHeight="500" MinWidth="800" Icon="/it_shop;component/Resources/prodavac_icon.png">
     <Grid>
         <TabControl Margin="0,20, 0, 22">
             <TabItem Header="Zahtjevi za nabavke">
@@ -17,9 +17,10 @@
                            Height="25"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top">Lista zahtjeva:</Label>
-                    <ListView Margin="5,30,0,35"
+                    <ListBox Margin="5,30,0,35"
                               HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch"></ListView>
+                              VerticalAlignment="Stretch"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"></ListBox>
                     <Button Margin="5,0,0,5"
                             Width="100"
                             Height="25"
@@ -33,7 +34,8 @@
                     <ListView Margin="5,30,5,35"
                               HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
-                              Grid.Column="1"></ListView>
+                              Grid.Column="1"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"></ListView>
                     <Button Margin="5,0,0,5"
                             Width="100" Height="25"
                             HorizontalAlignment="Center"
@@ -55,185 +57,194 @@
                                VerticalAlignment="Top">Lista zaposlenika:</Label>
                         <ListView Margin="5,35,0,5"
                                   HorizontalAlignment="Stretch"
-                                  VerticalAlignment="Stretch"></ListView>
+                                  VerticalAlignment="Stretch"
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"></ListView>
                         <Button Margin="0,5,5,0"
                                 Width="100"
                                 Height="25"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Top">Obrisi</Button>
-                        <Rectangle Fill="Black"  Width="100" Height="100"
-                                   Margin="0,10,50,0"
-                                   VerticalAlignment="Top"
-                                   HorizontalAlignment="Right"
-                                   Grid.Column="1"></Rectangle>
-                        <Image Width="100" Height="100"
-                               Margin="0,10,50,0"
-                               VerticalAlignment="Top"
-                               HorizontalAlignment="Right"
-                               Grid.Column="1"></Image>
-                        <Label Margin="20,120,0,0"
-                               Width="150"
-                               Height="25"
-                               Grid.Column="1"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">Ime</Label>
-                        <Label Margin="20,150,0,0"
-                               Width="150"
-                               Height="25"
-                               Grid.Column="1"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">Prezime</Label>
-                        <Label Margin="20,180,0,0"
-                               Width="150"
-                               Height="25"
-                               Grid.Column="1"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">Spol</Label>
-                        <Label Margin="20,210,0,0"
-                               Width="150"
-                               Height="25"
-                               Grid.Column="1"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">Broj telefona</Label>
-                        <Label Margin="20,240,0,0"
-                               Width="150"
-                               Height="25"
-                               Grid.Column="1"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">Adresa</Label>
-                        <Label Margin="20,270,0,0"
-                               Width="150"
-                               Height="25"
-                               Grid.Column="1"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">Tip uposlenika</Label>
-                        <Label Margin="20,300,0,0"
-                               Width="150"
-                               Height="25"
-                               Grid.Column="1"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">Datum zaspolenja</Label>
-                        <Label Margin="20,330,0,0"
-                               Width="150"
-                               Height="25"
-                               Grid.Column="1"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">Plata</Label>
-                        <Label Margin="20,360,0,0"
-                               Width="150"
-                               Height="25"
-                               Grid.Column="1"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">Dodatak na platu</Label>
-                        <Label Margin="20,390,0,0"
-                               Width="150"
-                               Height="25"
-                               Grid.Column="1"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">Dani godisnjeg odmora</Label>
-                        <Label Margin="20,420,0,0"
-                               Width="150"
-                               Height="25"
-                               Grid.Column="1"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">Username</Label>
-                        <Label Margin="20,450,0,0"
-                               Width="150"
-                               Height="25"
-                               Grid.Column="1"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">Password</Label>
-                        <TextBox Margin="175,120,50,0"
-                                 Height="25"
-                                 Grid.Column="1"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Top"></TextBox>
-                        <TextBox Margin="175,150,50,0"
-                                 Height="25"
-                                 Grid.Column="1"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Top"></TextBox>
-                        <ComboBox Margin="175,180,50,0"
-                                  Height="25"
-                                  Grid.Column="1"
-                                  HorizontalAlignment="Stretch"
-                                  VerticalAlignment="Top">
-                            <ComboBoxItem Content="M" HorizontalAlignment="Stretch"/>
-                            <ComboBoxItem Content="Z" HorizontalAlignment="Stretch"/>
-                        </ComboBox>
-                        <TextBox Margin="175,210,50,0"
-                                 Height="25"
-                                 Grid.Column="1"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Top"></TextBox>
-                        <TextBox Margin="175,240,50,0"
-                                 Height="25"
-                                 Grid.Column="1"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Top"></TextBox>
-                        <ComboBox Margin="175,270,50,0"
-                                  Height="25"
-                                  Grid.Column="1"
-                                  HorizontalAlignment="Stretch"
-                                  VerticalAlignment="Top">
-                            <ComboBoxItem Content="Direktor" HorizontalAlignment="Stretch"/>
-                            <ComboBoxItem Content="Supervizor" HorizontalAlignment="Stretch"/>
-                            <ComboBoxItem Content="Prodavac" HorizontalAlignment="Stretch"/>
-                            <ComboBoxItem Content="Serviser" HorizontalAlignment="Stretch"/>
-                            <ComboBoxItem Content="Monter" HorizontalAlignment="Stretch"/>
-                        </ComboBox>
-                        <TextBox Margin="175,300,50,0"
-                                 Height="25"
-                                 Grid.Column="1"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Top"></TextBox>
-                        <TextBox Margin="175,330,50,0"
-                                 Height="25"
-                                 Grid.Column="1"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Top"></TextBox>
-                        <TextBox Margin="175,360,50,0"
-                                 Height="25"
-                                 Grid.Column="1"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Top"></TextBox>
-                        <ComboBox Margin="175,390,50,0"
-                                  Height="25"
-                                  Grid.Column="1"
-                                  HorizontalAlignment="Stretch"
-                                  VerticalAlignment="Top">
-                            <ComboBoxItem Content="18" HorizontalAlignment="Stretch"/>
-                            <ComboBoxItem Content="21" HorizontalAlignment="Stretch"/>
-                            <ComboBoxItem Content="24" HorizontalAlignment="Stretch"/>
-                            <ComboBoxItem Content="27" HorizontalAlignment="Stretch"/>
-                            <ComboBoxItem Content="30" HorizontalAlignment="Stretch"/>
-                            <ComboBoxItem Content="40" HorizontalAlignment="Stretch"/>
-                        </ComboBox>
-                        <TextBox Margin="175,420,50,0"
-                                 Height="25"
-                                 Grid.Column="1"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Top"></TextBox>
-                        <TextBox Margin="175,450,50,0"
-                                 Height="25"
-                                 Grid.Column="1"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Top"></TextBox>
-                        <Button Width="100" Height="25"
-                                Grid.Column="1"
-                                VerticalAlignment="Top"
-                                HorizontalAlignment="Left"
-                                Margin="175,485,0,0">Unesi</Button>
-                        <Button Width="100" Height="25"
-                                Grid.Column="1"
-                                VerticalAlignment="Top"
-                                HorizontalAlignment="Left"
-                                Margin="285,485,0,0">Ponisti</Button>
-                        <Button Width="100" Height="25"
-                                Margin="395,485,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Grid.Column="1">Promijeni sliku</Button>
+                        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                            <StackPanel >
+                                <Grid HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch">
+                                    <Rectangle Fill="Black"  
+                                           Width="100" Height="100"
+                                           Margin="0,10,50,0"
+                                           VerticalAlignment="Top"
+                                           HorizontalAlignment="Right"
+                                           Grid.Column="1"></Rectangle>
+                                    <Image Width="100" Height="100"
+                                           Margin="0,10,50,0"
+                                           VerticalAlignment="Top"
+                                           HorizontalAlignment="Right"
+                                           Grid.Column="1"></Image>
+                                    <Label Margin="20,120,0,0"
+                                           Width="150"
+                                           Height="25"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top">Ime</Label>
+                                    <Label Margin="20,150,0,0"
+                                           Width="150"
+                                           Height="25"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top">Prezime</Label>
+                                    <Label Margin="20,180,0,0"
+                                           Width="150"
+                                           Height="25"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top">Spol</Label>
+                                    <Label Margin="20,210,0,0"
+                                           Width="150"
+                                           Height="25"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top">Broj telefona</Label>
+                                    <Label Margin="20,240,0,0"
+                                           Width="150"
+                                           Height="25"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top">Adresa</Label>
+                                    <Label Margin="20,270,0,0"
+                                           Width="150"
+                                           Height="25"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top">Tip uposlenika</Label>
+                                    <Label Margin="20,300,0,0"
+                                           Width="150"
+                                           Height="25"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top">Datum zaspolenja</Label>
+                                    <Label Margin="20,330,0,0"
+                                           Width="150"
+                                           Height="25"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top">Plata</Label>
+                                    <Label Margin="20,360,0,0"
+                                           Width="150"
+                                           Height="25"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top">Dodatak na platu</Label>
+                                    <Label Margin="20,390,0,0"
+                                           Width="150"
+                                           Height="25"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top">Dani godisnjeg odmora</Label>
+                                    <Label Margin="20,420,0,0"
+                                           Width="150"
+                                           Height="25"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top">Username</Label>
+                                    <Label Margin="20,450,0,0"
+                                           Width="150"
+                                           Height="25"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top">Password</Label>
+                                    <TextBox Margin="175,120,50,0"
+                                             Height="25"
+                                             Grid.Column="1"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Top"></TextBox>
+                                    <TextBox Margin="175,150,50,0"
+                                             Height="25"
+                                             Grid.Column="1"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Top"></TextBox>
+                                    <ComboBox Margin="175,180,50,0"
+                                              Height="25"
+                                              Grid.Column="1"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Top">
+                                        <ComboBoxItem Content="M" HorizontalAlignment="Stretch"/>
+                                        <ComboBoxItem Content="Z" HorizontalAlignment="Stretch"/>
+                                    </ComboBox>
+                                    <TextBox Margin="175,210,50,0"
+                                             Height="25"
+                                             Grid.Column="1"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Top"></TextBox>
+                                    <TextBox Margin="175,240,50,0"
+                                             Height="25"
+                                             Grid.Column="1"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Top"></TextBox>
+                                    <ComboBox Margin="175,270,50,0"
+                                              Height="25"
+                                              Grid.Column="1"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Top">
+                                        <ComboBoxItem Content="Direktor" HorizontalAlignment="Stretch"/>
+                                        <ComboBoxItem Content="Supervizor" HorizontalAlignment="Stretch"/>
+                                        <ComboBoxItem Content="Prodavac" HorizontalAlignment="Stretch"/>
+                                        <ComboBoxItem Content="Serviser" HorizontalAlignment="Stretch"/>
+                                        <ComboBoxItem Content="Monter" HorizontalAlignment="Stretch"/>
+                                    </ComboBox>
+                                    <TextBox Margin="175,300,50,0"
+                                             Height="25"
+                                             Grid.Column="1"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Top"></TextBox>
+                                    <TextBox Margin="175,330,50,0"
+                                             Height="25"
+                                             Grid.Column="1"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Top"></TextBox>
+                                    <TextBox Margin="175,360,50,0"
+                                             Height="25"
+                                             Grid.Column="1"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Top"></TextBox>
+                                    <ComboBox Margin="175,390,50,0"
+                                              Height="25"
+                                              Grid.Column="1"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Top">
+                                        <ComboBoxItem Content="18" HorizontalAlignment="Stretch"/>
+                                        <ComboBoxItem Content="21" HorizontalAlignment="Stretch"/>
+                                        <ComboBoxItem Content="24" HorizontalAlignment="Stretch"/>
+                                        <ComboBoxItem Content="27" HorizontalAlignment="Stretch"/>
+                                        <ComboBoxItem Content="30" HorizontalAlignment="Stretch"/>
+                                        <ComboBoxItem Content="40" HorizontalAlignment="Stretch"/>
+                                    </ComboBox>
+                                    <TextBox Margin="175,420,50,0"
+                                             Height="25"
+                                             Grid.Column="1"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Top"></TextBox>
+                                    <TextBox Margin="175,450,50,0"
+                                             Height="25"
+                                             Grid.Column="1"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Top"></TextBox>
+                                    <Button Width="100" Height="25"
+                                            Grid.Column="1"
+                                            VerticalAlignment="Top"
+                                            HorizontalAlignment="Left"
+                                            Margin="175,485,0,0">Unesi</Button>
+                                    <Button Width="100" Height="25"
+                                            Grid.Column="1"
+                                            VerticalAlignment="Top"
+                                            HorizontalAlignment="Left"
+                                            Margin="285,485,0,0">Ponisti</Button>
+                                    <Button Width="100" Height="25"
+                                            Margin="395,485,0,0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Grid.Column="1">Promijeni sliku</Button>
+                                </Grid>
+                            </StackPanel>
+                        </ScrollViewer>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -257,169 +268,175 @@
                             Margin="0,355,0,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top">Izaberi sliku</Button>
-                    <Label Margin="20,50,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Ime</Label>
-                    <Label Margin="20,80,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Prezime</Label>
-                    <Label Margin="20,110,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Spol</Label>
-                    <Label Margin="20,140,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Broj telefona</Label>
-                    <Label Margin="20,170,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Adresa</Label>
-                    <Label Margin="20,200,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Tip uposlenika</Label>
-                    <Label Margin="20,230,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Datum zaspolenja</Label>
-                    <Label Margin="20,260,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Plata</Label>
-                    <Label Margin="20,290,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Dodatak na platu</Label>
-                    <Label Margin="20,320,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Dani godisnjeg odmora</Label>
-                    <Label Margin="20,350,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Username</Label>
-                    <Label Margin="20,380,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Password</Label>
-                    <TextBox Margin="175,50,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
-                    <TextBox Margin="175,80,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
-                    <ComboBox Margin="175,110,50,0"
-                              Height="25"
-                              Grid.Column="1"
-                              HorizontalAlignment="Stretch"
-                              VerticalAlignment="Top">
-                        <ComboBoxItem Content="M" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="Z" HorizontalAlignment="Stretch"/>
-                    </ComboBox>
-                    <TextBox Margin="175,140,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
-                    <TextBox Margin="175,170,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
-                    <ComboBox Margin="175,200,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top">
-                        <ComboBoxItem Content="Direktor" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="Supervizor" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="Prodavac" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="Serviser" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="Monter" HorizontalAlignment="Stretch"/>
-                    </ComboBox>
-                    <TextBox Margin="175,230,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
-                    <TextBox Margin="175,260,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
-                    <TextBox Margin="175,290,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
-                    <TextBox Margin="175,290,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
-                    <ComboBox Margin="175,320,50,0"
-                              Height="25"
-                              Grid.Column="1"
-                              HorizontalAlignment="Stretch"
-                              VerticalAlignment="Top">
-                        <ComboBoxItem Content="18" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="21" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="24" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="27" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="30" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="40" HorizontalAlignment="Stretch"/>
-                    </ComboBox>
-                    <TextBox Margin="175,350,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
-                    <TextBox Margin="175,380,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
-                    <Button Width="100" Height="25"
-                            Grid.Column="1"
-                            VerticalAlignment="Top"
-                            HorizontalAlignment="Left"
-                            Margin="175,415,0,0">Unesi</Button>
-                    <Button Width="100" Height="25"
-                            Grid.Column="1"
-                            VerticalAlignment="Top"
-                            HorizontalAlignment="Left"
-                            Margin="285,415,0,0">Ponisti</Button>
+                    <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <Grid>
+                                <Label Margin="20,50,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Ime</Label>
+                                <Label Margin="20,80,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Prezime</Label>
+                                <Label Margin="20,110,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Spol</Label>
+                                <Label Margin="20,140,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Broj telefona</Label>
+                                <Label Margin="20,170,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Adresa</Label>
+                                <Label Margin="20,200,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Tip uposlenika</Label>
+                                <Label Margin="20,230,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Datum zaspolenja</Label>
+                                <Label Margin="20,260,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Plata</Label>
+                                <Label Margin="20,290,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Dodatak na platu</Label>
+                                <Label Margin="20,320,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Dani godisnjeg odmora</Label>
+                                <Label Margin="20,350,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Username</Label>
+                                <Label Margin="20,380,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Password</Label>
+                                <TextBox Margin="175,50,50,0"
+                                         Height="25"
+                                         Grid.Column="1"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="175,80,50,0"
+                                         Height="25"
+                                         Grid.Column="1"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"></TextBox>
+                                <ComboBox Margin="175,110,50,0"
+                                          Height="25"
+                                          Grid.Column="1"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Top">
+                                    <ComboBoxItem Content="M" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="Z" HorizontalAlignment="Stretch"/>
+                                </ComboBox>
+                                <TextBox Margin="175,140,50,0"
+                                         Height="25"
+                                         Grid.Column="1"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="175,170,50,0"
+                                         Height="25"
+                                         Grid.Column="1"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"></TextBox>
+                                <ComboBox Margin="175,200,50,0"
+                                         Height="25"
+                                         Grid.Column="1"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top">
+                                    <ComboBoxItem Content="Direktor" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="Supervizor" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="Prodavac" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="Serviser" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="Monter" HorizontalAlignment="Stretch"/>
+                                </ComboBox>
+                                <TextBox Margin="175,230,50,0"
+                                         Height="25"
+                                         Grid.Column="1"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="175,260,50,0"
+                                         Height="25"
+                                         Grid.Column="1"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="175,290,50,0"
+                                         Height="25"
+                                         Grid.Column="1"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="175,290,50,0"
+                                         Height="25"
+                                         Grid.Column="1"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"></TextBox>
+                                <ComboBox Margin="175,320,50,0"
+                                          Height="25"
+                                          Grid.Column="1"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Top">
+                                    <ComboBoxItem Content="18" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="21" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="24" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="27" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="30" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="40" HorizontalAlignment="Stretch"/>
+                                </ComboBox>
+                                <TextBox Margin="175,350,50,0"
+                                         Height="25"
+                                         Grid.Column="1"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="175,380,50,0"
+                                         Height="25"
+                                         Grid.Column="1"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"></TextBox>
+                                <Button Width="100" Height="25"
+                                        Grid.Column="1"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Left"
+                                        Margin="175,415,0,0">Unesi</Button>
+                                <Button Width="100" Height="25"
+                                        Grid.Column="1"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Left"
+                                        Margin="285,415,0,0">Ponisti</Button>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
             </TabItem>
         </TabControl>
