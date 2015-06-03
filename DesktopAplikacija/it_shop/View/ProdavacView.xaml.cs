@@ -52,7 +52,7 @@ namespace it_shop {
                 Grid.SetRow(txt, i / 4);
                 Grid.SetColumn(txt, (i % 4) + 1);
                 grid_proizvodi.Children.Add(txt);
-                txt.Margin = new Thickness(10, 10, 0, 0);
+                txt.Margin = new Thickness(10, 10, 0, 25);
                 txt.FontStyle = FontStyles.Normal;
 
 
@@ -61,8 +61,8 @@ namespace it_shop {
                 //btn_korpa += dodajUKorpu(Artikal a);
                 btn_korpa.Width = 100;
                 btn_korpa.Height = 20;
-                btn_korpa.Margin = new Thickness(0, 0, 5, 5);
-                btn_korpa.HorizontalAlignment = HorizontalAlignment.Right;
+                btn_korpa.Margin = new Thickness(0, 5, 0, 5);
+                btn_korpa.HorizontalAlignment = HorizontalAlignment.Center;
                 btn_korpa.VerticalAlignment = VerticalAlignment.Bottom;
                 Grid.SetRow(btn_korpa, i / 4);
                 Grid.SetColumn(btn_korpa, (i % 4) + 1);
@@ -174,5 +174,7 @@ namespace it_shop {
                     "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        
     }
 }
