@@ -1,7 +1,5 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +10,11 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
+using it_shop.ViewModel;
+using System.IO;
 
 namespace it_shop {
     /// <summary>
@@ -21,6 +23,7 @@ namespace it_shop {
     public partial class ProdavacView : Window {
         public ProdavacView() {
             InitializeComponent();
+            this.DataContext = new ProdavacViewModel();
             popuni();
             for (int i = 0; i < 100; i++) {
                 txt_kategorije.Items.Add("kategorija" + (i + 1).ToString());

@@ -197,18 +197,22 @@
                              Height="25"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
+                             VerticalAlignment="Top" 
+                             Text ="{Binding Path = IdProizvoda}">
+                    </TextBox>
                     <TextBox Margin="175,80,50,0"
                              Height="25"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
+                             VerticalAlignment="Top"
+                             Text ="{Binding Path = NazivProizvoda}"></TextBox>
                     <ComboBox Margin="175,110,50,0"
                               Height="25"
                               Grid.Column="1"
                               HorizontalAlignment="Stretch"
-                              VerticalAlignment="Top">
-                        <ComboBoxItem Content="Laptop" HorizontalAlignment="Stretch"/>
+                              VerticalAlignment="Top"
+                              SelectedValue="{Binding Path=KategorijaProizvoda}">
+                        <ComboBoxItem Content="Laptop" HorizontalAlignment="Stretch" />
                         <ComboBoxItem Content="Racunar" HorizontalAlignment="Stretch"/>
                         <ComboBoxItem Content="Mobitel" HorizontalAlignment="Stretch"/>
                         <ComboBoxItem Content="Mrezna oprema" HorizontalAlignment="Stretch"/>
@@ -218,18 +222,20 @@
                              Height="25"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
+                             VerticalAlignment="Top"
+                             Text="{Binding Path=Cijena}"></TextBox>
                     <TextBox Margin="175,170,50,0"
                              Height="100"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
+                             VerticalAlignment="Top"
+                             Text="{Binding Path=Opis}"></TextBox>
                     <ComboBox Margin="175,275,50,0"
                              Height="25"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top">
-                        <ComboBoxItem Content="1" HorizontalAlignment="Stretch"/>
+                             VerticalAlignment="Top" 
+                             SelectedItem="{Binding Path=MjeseciGarancije}">                        <ComboBoxItem Content="1" HorizontalAlignment="Stretch"/>
                         <ComboBoxItem Content="2" HorizontalAlignment="Stretch"/>
                         <ComboBoxItem Content="3" HorizontalAlignment="Stretch"/>
                         <ComboBoxItem Content="6" HorizontalAlignment="Stretch"/>
@@ -242,27 +248,32 @@
                              Height="25"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
+                             VerticalAlignment="Top"
+                             Text="{Binding Path=Proizvodi}"></TextBox>
                     <TextBox Margin="175,335,50,0"
                              Height="50"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
+                             VerticalAlignment="Top"
+                             Text ="{Binding Path=DodatnaOprema}"></TextBox>
                     <TextBox Margin="175,395,50,0"
                              Height="25"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
+                             VerticalAlignment="Top"
+                             Text="{Binding Path=Kolicina}"></TextBox>
                     <Button Width="100" Height="25"
                             Grid.Column="1"
                             VerticalAlignment="Top"
                             HorizontalAlignment="Left"
-                            Margin="175,430,0,0">Unesi</Button>
+                            Margin="175,430,0,0"
+                            Command="{Binding Path=UnesiButton}">Unesi</Button>
                     <Button Width="100" Height="25"
                             Grid.Column="1"
                             VerticalAlignment="Top"
                             HorizontalAlignment="Left"
-                            Margin="285,430,0,0">Ponisti</Button>
+                            Margin="285,430,0,0"
+                            Command="{Binding Path=PonistiButton}">Ponisti</Button>
                 </Grid>
             </TabItem>
         </TabControl>
