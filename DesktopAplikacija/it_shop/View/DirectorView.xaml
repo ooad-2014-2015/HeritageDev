@@ -17,13 +17,233 @@
                            Height="25"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top">Lista zahtjeva:</Label>
-                    <ListView Margin="5,30,0,5"
+                    <ListView Margin="5,30,0,35"
                               HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"></ListView>
+                    <Button Margin="5,0,0,5"
+                            Width="100"
+                            Height="25"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom">Obrisi zahtjev</Button>
+                    <Label Margin="5,5,5,5"
+                           Width="200" Height="25"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Grid.Column="1">Stavke zahtjeva</Label>
+                    <ListView Margin="5,30,5,35"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Grid.Column="1"></ListView>
+                    <Button Margin="5,0,0,5"
+                            Width="100" Height="25"
+                            HorizontalAlignment="Center"
+                            Grid.Column="1"
+                            VerticalAlignment="Bottom">Odobri zahtjev</Button>
                 </Grid>
             </TabItem>
-            <TabItem Header="Pregled zaposlenika"/>
-            <TabItem Header="Dodavanje novog zaposlenika"/>
+            <TabItem Header="Pregled zaposlenika">
+                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Label Margin="5,5,5,10"
+                           Width="200"
+                           Height="25"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Lista zaposlenika:</Label>
+                    <ListView Margin="5,35,0,5"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"></ListView>
+                    <Button Margin="0,5,0,0"
+                            Width="100"
+                            Height="25"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top">Obrisi</Button>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Dodavanje novog zaposlenika">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="Black"  Width="300" Height="300"
+                               Margin="0,50,0,0"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center"></Rectangle>
+                    <Image Grid.Column="0"
+                           Width="300" Height="300"
+                           Margin="25,50,0,0"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left"></Image>
+                    <Button Name="btn_izaberiSliku"
+                            Width="100"
+                            Height="25"
+                            Margin="0,355,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top">Izaberi sliku</Button>
+                    <Label Margin="20,50,0,0"
+                           Width="150"
+                           Height="25"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Ime</Label>
+                    <Label Margin="20,80,0,0"
+                           Width="150"
+                           Height="25"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Prezime</Label>
+                    <Label Margin="20,110,0,0"
+                           Width="150"
+                           Height="25"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Spol</Label>
+                    <Label Margin="20,140,0,0"
+                           Width="150"
+                           Height="25"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Broj telefona</Label>
+                    <Label Margin="20,170,0,0"
+                           Width="150"
+                           Height="25"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Adresa</Label>
+                    <Label Margin="20,200,0,0"
+                           Width="150"
+                           Height="25"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Tip uposlenika</Label>
+                    <Label Margin="20,230,0,0"
+                           Width="150"
+                           Height="25"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Datum zaspolenja</Label>
+                    <Label Margin="20,260,0,0"
+                           Width="150"
+                           Height="25"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Plata</Label>
+                    <Label Margin="20,290,0,0"
+                           Width="150"
+                           Height="25"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Dodatak na platu</Label>
+                    <Label Margin="20,320,0,0"
+                           Width="150"
+                           Height="25"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Dani godisnjeg odmora</Label>
+                    <Label Margin="20,350,0,0"
+                           Width="150"
+                           Height="25"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Username</Label>
+                    <Label Margin="20,380,0,0"
+                           Width="150"
+                           Height="25"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Password</Label>
+                    <TextBox Margin="175,50,50,0"
+                             Height="25"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"></TextBox>
+                    <TextBox Margin="175,80,50,0"
+                             Height="25"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"></TextBox>
+                    <ComboBox Margin="175,110,50,0"
+                              Height="25"
+                              Grid.Column="1"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Top">
+                        <ComboBoxItem Content="M" HorizontalAlignment="Stretch"/>
+                        <ComboBoxItem Content="Z" HorizontalAlignment="Stretch"/>
+                    </ComboBox>
+                    <TextBox Margin="175,140,50,0"
+                             Height="25"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"></TextBox>
+                    <TextBox Margin="175,170,50,0"
+                             Height="25"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"></TextBox>
+                    <ComboBox Margin="175,200,50,0"
+                             Height="25"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top">
+                        <ComboBoxItem Content="Direktor" HorizontalAlignment="Stretch"/>
+                        <ComboBoxItem Content="Supervizor" HorizontalAlignment="Stretch"/>
+                        <ComboBoxItem Content="Prodavac" HorizontalAlignment="Stretch"/>
+                        <ComboBoxItem Content="Serviser" HorizontalAlignment="Stretch"/>
+                        <ComboBoxItem Content="Monter" HorizontalAlignment="Stretch"/>
+                    </ComboBox>
+                    <TextBox Margin="175,230,50,0"
+                             Height="25"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"></TextBox>
+                    <TextBox Margin="175,260,50,0"
+                             Height="25"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"></TextBox>
+                    <TextBox Margin="175,290,50,0"
+                             Height="25"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"></TextBox>
+                    <TextBox Margin="175,290,50,0"
+                             Height="25"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"></TextBox>
+                    <ComboBox Margin="175,320,50,0"
+                              Height="25"
+                              Grid.Column="1"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Top">
+                        <ComboBoxItem Content="18" HorizontalAlignment="Stretch"/>
+                        <ComboBoxItem Content="21" HorizontalAlignment="Stretch"/>
+                        <ComboBoxItem Content="24" HorizontalAlignment="Stretch"/>
+                        <ComboBoxItem Content="27" HorizontalAlignment="Stretch"/>
+                        <ComboBoxItem Content="30" HorizontalAlignment="Stretch"/>
+                        <ComboBoxItem Content="40" HorizontalAlignment="Stretch"/>
+                    </ComboBox>
+                    <TextBox Margin="175,350,50,0"
+                             Height="25"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"></TextBox>
+                    <TextBox Margin="175,380,50,0"
+                             Height="25"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"></TextBox>
+                    <Button Width="100" Height="25"
+                            Grid.Column="1"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left"
+                            Margin="175,415,0,0">Unesi</Button>
+                    <Button Width="100" Height="25"
+                            Grid.Column="1"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left"
+                            Margin="285,415,0,0">Ponisti</Button>
+                </Grid>
+            </TabItem>
         </TabControl>
         <Menu Grid.ColumnSpan="2" Height="20" VerticalAlignment="Top" Margin="0,0,0,0"/>
         <StatusBar Margin="0" VerticalAlignment="Bottom" RenderTransformOrigin="0.9,4.6" Grid.ColumnSpan="2" Height="22">
