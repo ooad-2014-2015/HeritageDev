@@ -11,7 +11,7 @@ namespace it_shop.Model
         private string opisKvara;
         private double cijenaPopravke;
 
-        public ServisniUredjaj(string naziv, DateTime godinaProizvodnje, string proizvodjac, string serijskiBroj, string opisKvara, double cijena) 
+        public ServisniUredjaj(string naziv, int godinaProizvodnje, string proizvodjac, string serijskiBroj, string opisKvara, double cijena) 
             : base(naziv, godinaProizvodnje, proizvodjac, serijskiBroj)
         {
             CijenaPopravke = cijena;

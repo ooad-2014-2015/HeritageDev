@@ -9,17 +9,16 @@ namespace it_shop.Model
     public abstract class Proizvod
     {
         private string naziv;
-        private DateTime godinaProizvodnje;
+        private int godinaProizvodnje;
         private string proizvodjac;
         private string serijskiBroj;
 
-        public Proizvod(string naziv, DateTime godinaPro, string proizvodjac, string serijski)
+        public Proizvod(string naziv, int godinaPro, string proizvodjac, string serijski)
         {
             this.naziv = naziv;
             this.godinaProizvodnje = godinaPro;
             this.proizvodjac = proizvodjac;
             this.serijskiBroj = serijski;
-
         }
 
         #region Properties
@@ -29,9 +28,7 @@ namespace it_shop.Model
             get { return naziv; }
             set { naziv = value; }
         }
-
-
-        public DateTime GodinaProizvodnje
+        public int GodinaProizvodnje
         {
             get { return godinaProizvodnje; }
             set { godinaProizvodnje = value; }

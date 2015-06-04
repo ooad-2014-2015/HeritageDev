@@ -69,7 +69,7 @@
                     <ComboBox Name="cbox_pretraga" Text="Pretraga po:" Width="200" Height="25"
                               HorizontalAlignment="Left" VerticalAlignment="Top"
                               Margin="140,5,0,0"
-                              SelectedIndex="0">
+                              SelectedIndex="{Binding Path=VrstaPretrage}">
                         <ComboBoxItem HorizontalAlignment="Stretch">Po ID-u proizvoda</ComboBoxItem>
                         <ComboBoxItem HorizontalAlignment="Stretch">Po nazivu</ComboBoxItem>
                         <ComboBoxItem HorizontalAlignment="Stretch">Po proizvodjacu</ComboBoxItem>
@@ -77,9 +77,10 @@
                     <Label Margin="5,35,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125">Pojam za pretragu:</Label>
                     <TextBox Width="200" Height="25"
                              HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                             Margin="140,0,0,5"></TextBox>
-                    <Button Width="100" Height="25" Margin="0,5,5,0" VerticalAlignment="Top" HorizontalAlignment="Right">Dodaj u korpu</Button>
-                    <Button Width="100" Height="25" Margin="0,35,5,0" VerticalAlignment="Top" HorizontalAlignment="Right">
+                             Margin="140,0,0,5"
+                             Text="{Binding Path=PojamZaPretragu}"></TextBox>
+                    <Button Width="100" Height="25" Margin="0,5,5,0" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding Path=DodajUKorpu}">Dodaj u korpu</Button>
+                    <Button Width="100" Height="25" Margin="0,35,5,0" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding Path=IzvrsiPretragu}">
                         <StackPanel>
                             <Image Width="100" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Center" Source="/it_shop;component/Resources/search.png"></Image>
                         </StackPanel>
@@ -94,7 +95,24 @@
                              ScrollViewer.VerticalScrollBarVisibility="Auto"
                              Grid.Column="0"
                              Grid.Row="1"
-                             Margin="5,0,5,5"></DataGrid>
+                             Margin="5,0,5,5"
+                             ItemsSource="{Binding ListaArtikala}"
+                             SelectedItem="{Binding OdabraniArtikal}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Naziv" Binding="{Binding Naziv}"/>
+                            <DataGridTextColumn Header="Kategorija" Binding="{Binding Kategorija}"/>
+                            <DataGridTextColumn Header="Godina proizvodnje" Binding="{Binding GodinaProizvodnje}"/>
+                            <DataGridTextColumn Header="Cijena" Binding="{Binding Cijena}"/>
+                            <DataGridTextColumn Header="Opis" Binding="{Binding Opis}"/>
+                            <DataGridTextColumn Header="Mjeseci garancije" Binding="{Binding MjeseciGarancije}"/>
+                            <DataGridTextColumn Header="Proizvodjac" Binding="{Binding Proizvodjac}"/>
+                            <DataGridTextColumn Header="Dodatna oprema" Binding="{Binding DodatnaOprema}"/>
+                            <DataGridTextColumn Header="Serijski broj" Binding="{Binding SerijskiBroj}"/>
+                            <DataGridTextColumn Header="Barkod" Binding="{Binding BarKod}"/>
+                            <DataGridTextColumn Header="Kolicina" Binding="{Binding Kolicina}"/>
+                            
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <DataGrid Name="tbox_korpa"
                              VerticalAlignment="Stretch"
                              Margin="5,0,5,5"
@@ -102,18 +120,20 @@
                              ScrollViewer.VerticalScrollBarVisibility="Auto"
                              Grid.Column="1"
                              Grid.Row="1"></DataGrid>
-                    <Button Width="100" Height="25"
+                    <Button Width="105" Height="25"
                             Grid.Column="1"
                             Grid.Row="0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
-                            Margin="0,0,115,5">Zahtjevaj isporuku</Button>
-                    <Button Width="100" Height="25"
+                            Margin="0,0,120,5"
+                            Command="{Binding Path=ZahtjevajIsporuku}">Zahtjevaj isporuku</Button>
+                    <Button Width="105" Height="25"
                             Grid.Column="1"
                             Grid.Row="0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
-                            Margin="0,0,5,5">Printaj racun</Button>
+                            Margin="0,0,5,5"
+                            Command="{Binding Path=PrintajRacun}">Printaj racun</Button>
                     <Label Name="lbl_cijena" Width="200" Height="25"
                            Grid.Column="1"
                            Grid.Row="0"

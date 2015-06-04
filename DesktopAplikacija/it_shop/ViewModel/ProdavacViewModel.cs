@@ -17,10 +17,37 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using it_shop.ViewModel;
 using System.IO;
+using it_shop.Model;
+using System.Collections.ObjectModel;
 
 namespace it_shop.ViewModel {
     public class ProdavacViewModel : INotifyPropertyChanged {
 
+       
+
+
+
+        
+        //tab korpa
+        private string vrstaPretrage;
+        private string pojamZaPretragu;
+        private ICommand dodajUKorpu;
+        private ICommand izvrsiPretragu;
+        private ICommand zahtjevajIsporuku;
+        private ICommand printajRacun;
+        private ObservableCollection<Artikal> listaArtikala = new ObservableCollection<Artikal>();
+        private Artikal odabraniArtikal;
+
+        public Artikal OdabraniArtikal {
+            get { return odabraniArtikal; }
+            set {
+                odabraniArtikal = value;
+                OnPropertyChanged("OdabraniArtikal");
+            }
+        }
+        
+
+        //tab za unos proizvoda
         private string idProizvoda;
         private string nazivProizvoda;
         private string kategorijaProizvoda;
@@ -30,13 +57,68 @@ namespace it_shop.ViewModel {
         private string proizvodjac;
         private string dodatnaOprema;
         private string kolicina;
+        private string putanja;
         private ICommand unesiButton;
         private ICommand ponistiButton;
         private ICommand izaberiSlikuButton;
         private BitmapImage ucitajSliku;
-        private string putanja;
 
-        #region Properties
+        public ProdavacViewModel ( ) {
+            UnesiButton = new RelayCommand(new Action(UnosNovogArtikla));
+            PonistiButton = new RelayCommand(new Action(PonistiIzmjene));
+            IzaberiSlikuButton = new RelayCommand(new Action(IzaberiSliku));
+            UcitajSlikuBinding = UcitajSliku(@"../../Resources/no_image.png");
+
+            IzvrsiPretragu = new RelayCommand(new Action(UcitajUposlenikeIzBaze));
+            
+        }
+
+        private MySqlDataReader UpitNaBazu(string upit, MySqlConnection con) {
+            con.Open();
+            MySqlCommand u = new MySqlCommand(upit, con);
+            return u.ExecuteReader();
+        }
+
+        #region Properties Korpa
+        public ObservableCollection<Artikal> ListaArtikala {
+            get {
+                return listaArtikala;
+            }
+            set {
+                listaArtikala = value;
+                OnPropertyChanged("ListaArtikala");
+            }
+        }
+        public string PojamZaPretragu {
+            get { return pojamZaPretragu; }
+            set {
+                pojamZaPretragu = value;
+                OnPropertyChanged("PojamZaPretragu");
+            }
+        }
+        public ICommand PrintajRacun {
+            get { return printajRacun; }
+            set { printajRacun = value; }
+        }
+        public ICommand ZahtjevajIsporuku {
+            get { return zahtjevajIsporuku; }
+            set { zahtjevajIsporuku = value; }
+        }
+        public ICommand IzvrsiPretragu {
+            get { return izvrsiPretragu; }
+            set { izvrsiPretragu = value; }
+        }
+        public ICommand DodajUKorpu {
+            get { return dodajUKorpu; }
+            set { dodajUKorpu = value; }
+        }
+        public string VrstaPretrage {
+            get { return vrstaPretrage; }
+            set { vrstaPretrage = value; }
+        }
+        #endregion
+
+        #region Properties Unos Proizvoda
         public BitmapImage UcitajSlikuBinding {
             get {
                 return ucitajSliku; 
@@ -121,7 +203,7 @@ namespace it_shop.ViewModel {
                 OnPropertyChanged("IdProizvoda");
             }
         }
-        #endregion Properties
+        #endregion Properties 
 
         #region INotify Implementation
         public event PropertyChangedEventHandler PropertyChanged;
@@ -137,13 +219,7 @@ namespace it_shop.ViewModel {
         }
         #endregion
 
-        public ProdavacViewModel ( ) {
-            UnesiButton = new RelayCommand(new Action(UnosNovogArtikla));
-            PonistiButton = new RelayCommand(new Action(PonistiIzmjene));
-            IzaberiSlikuButton = new RelayCommand(new Action(IzaberiSliku));
-            //UcitajSlikuBinding = UcitajSliku(@"/it_shop;component/Resources/no_image.png");
-            UcitajSlikuBinding = UcitajSliku(@"../../Resources/no_image.png");
-        }
+        #region Funkcije za unos proizvoda
         private BitmapImage UcitajSliku( string _putanja ) {
             BitmapImage b = new BitmapImage();
             b.BeginInit();
@@ -152,52 +228,9 @@ namespace it_shop.ViewModel {
             b.EndInit();
             return b;
         }
-        private void UpisiSliku ( ) {
-            MySqlConnection conn;
-            MySqlCommand cmd;
-
-            conn = new MySqlConnection();
-            cmd = new MySqlCommand();
-
-            string SQL;
-            int FileSize;
-            byte[] rawData;
-            FileStream fs;
-
-            conn.ConnectionString = "server=192.168.1.11;uid=root;pwd=root;database=it_shop;";
-
-            try {
-                fs = new FileStream(putanja, FileMode.Open, FileAccess.Read);
-                FileSize = Convert.ToInt32(fs.Length);
-
-                rawData = new byte[FileSize];
-                fs.Read(rawData, 0, FileSize);
-                fs.Close();
-
-                conn.Open();
-
-                SQL = "INSERT INTO slika VALUES(@FileName, @FileSize, @File)";
-
-                cmd.Connection = conn;
-                cmd.CommandText = SQL;
-                cmd.Parameters.AddWithValue("@FileName", "test");
-                cmd.Parameters.AddWithValue("@FileSize", FileSize);
-                cmd.Parameters.AddWithValue("@File", rawData);
-
-                cmd.ExecuteNonQuery();
-
-                MessageBox.Show("File Inserted into database successfully!",
-                    "Success!", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-                conn.Close();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException ex) {
-                MessageBox.Show("Error " + ex.Number + " has occurred: " + ex.Message,
-                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
         private void IzaberiSliku ( ) {
             Microsoft.Win32.OpenFileDialog openFileDialog1 = new Microsoft.Win32.OpenFileDialog();
-            openFileDialog1.Filter = "JPEG Files(.png)|*.jpg|All Files (*.*)|*.*";
+            openFileDialog1.Filter = "JPEG Files(*.png)|*.jpg|All Files (*.*)|*.*";
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.Multiselect = false;
             openFileDialog1.ShowDialog();
@@ -256,9 +289,60 @@ namespace it_shop.ViewModel {
             Proizvodjac = string.Empty;
             DodatnaOprema = string.Empty;
             Kolicina = string.Empty;
-            UcitajSlikuBinding = UcitajSliku(@"/it_shop;component/Resources/no_image.png");
+            UcitajSlikuBinding = UcitajSliku(@"../../Resources/no_image.png");
         }
+        #endregion
 
+        #region Funkcije za korpu
+        private void UcitajUposlenikeIzBaze () {
+            if (ListaArtikala.Count == 0) {
+                try {
+                    MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+                    MessageBox.Show(PojamZaPretragu);
+
+                    string _naziv, _kategoija, _opis, _proizvodjac, _dodatnaOprema, _serijskiBroj, _barkod;
+                    int _godina, _mjeseciGarancije, _kolicina;
+                    double _cijena;
+                    MessageBox.Show(VrstaPretrage);
+                    int tip = Int32.Parse(VrstaPretrage);
+                    MessageBox.Show(tip.ToString());
+                    string upitBaza = null;
+                    switch(tip) {
+                        case 0:
+                            upitBaza = "SELECT * FROM artikli WHERE id LIKE '" + PojamZaPretragu + "%';";
+                            break;
+                        case 1:
+                            upitBaza = "SELECT * FROM artikli WHERE naziv LIKE '" + PojamZaPretragu + "%';";
+                            break;
+                        case 2:
+                            upitBaza = "SELECT * FROM artikli WHERE proizvodjac LIKE '" + PojamZaPretragu + "%';";
+                            break;
+                    }
+                    MessageBox.Show(upitBaza);
+                    MySqlDataReader r = UpitNaBazu(upitBaza, connectionBaza);
+                    while (r.Read()) {
+                        _naziv = r.GetString("naziv");
+                        _kategoija = r.GetString("kategorija");
+                        _godina = r.GetInt32("godina_proizvodnje");
+                        _cijena = r.GetDouble("cijena");
+                        _opis = r.GetString("opis");
+                        _mjeseciGarancije = r.GetInt32("mjeseci_garancije");
+                        _proizvodjac = r.GetString("proizvodjac");
+                        _dodatnaOprema = r.GetString("dodatna_oprema");
+                        _serijskiBroj = r.GetString("serijski_broj");
+                        _barkod = r.GetString("barkod");
+                        _kolicina = r.GetInt32("kolicina");
+
+                        Artikal artikal = new Artikal(_naziv, _kategoija, _godina, _cijena, _opis, _mjeseciGarancije, _proizvodjac, _dodatnaOprema, _kolicina, _serijskiBroj, _barkod);
+                        ListaArtikala.Add(artikal);
+                    }
+
+                } catch (Exception ex) {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+        #endregion
 
     }
 }
