@@ -21,8 +21,10 @@ namespace it_shop.ViewModel
         {
             UcitajZahtjeve = new RelayCommand(new Action(UcitajZahjeveZaNabavkomIzBaze));
             ObrisiUposlenika = new RelayCommand(new Action(ObrisiUposlenikaIzBaze));
-            ObrisiUposlenika = new RelayCommand(new Action(UnosNovogKorisnikaUBazu));
             AzuzirajInfoUposlenika = new RelayCommand(new Action(AzurirajInformacijeKorisnika));
+            UnosUposlenika = new RelayCommand(new Action(UnesiNovogUposlenikaUBazu));
+            PonistiUnosUposlenika = new RelayCommand(new Action(OcistiFormuZaUnosKorisnika));
+           
         }
 
         private MySqlDataReader UpitNaBazu(string upit, MySqlConnection con)
@@ -38,6 +40,7 @@ namespace it_shop.ViewModel
             MySqlCommand u = new MySqlCommand(upit, con);
             u.ExecuteNonQuery();
         }
+
 
         #region Zahtjevi Za Nabavke - Tab 1
 
@@ -121,6 +124,7 @@ namespace it_shop.ViewModel
        
         #endregion
 
+        
         #region Pregled Zaposlenika - Tab 2
 
         #region Atributi
@@ -350,11 +354,6 @@ namespace it_shop.ViewModel
             //ListaUposlenika.Remove(uposlenik);
         }
 
-        private void UnosNovogKorisnikaUBazu()
-        {
-
-        }
-
         private void UcitajInformacijeZaposlenika()
         {
             ImeAzuriraj = OdabraniUposlenik.PunoIme;
@@ -416,6 +415,171 @@ namespace it_shop.ViewModel
         
         #endregion
 
+        
+        #region Unos Uposlenika - Tab 3
+
+        #region Atributi
+
+        private string imeUposlenika;
+        private string prezimeUposlenika;
+        private string adresaUposlenika;
+        private string brojTelefonaUposlenika;
+        private string spolUposlenika;
+        private string tipUposlenika;
+        private string datumZaposlenjaUposlenika;
+        private string plataUposlenika;
+        private string dodatakNaPlatuUposlenika;
+        private string daniGodisnjeUposlenika;
+        private string usernameUposlenika;
+        private string  passwordUposlenik;
+        private ICommand unosUposlenika;
+        private ICommand ponistiUnosUposlenika;
+
+        #endregion
+
+        #region Properties
+
+        public ICommand PonistiUnosUposlenika
+        {
+            get { return ponistiUnosUposlenika; }
+            set { ponistiUnosUposlenika = value; }
+        }
+
+        public ICommand UnosUposlenika
+        {
+            get { return unosUposlenika; }
+            set { unosUposlenika = value; }
+        }
+
+        public string  PasswordUposlenika
+        {
+            get { return passwordUposlenik; }
+            set { passwordUposlenik = value; OnPropertyChanged("PasswordUposlenika"); }
+        }
+        
+        public string UsernameUposlenika
+        {
+            get { return usernameUposlenika; }
+            set { usernameUposlenika = value; OnPropertyChanged("UsernameUposlenika"); }
+        }
+        
+        public string DaniGodisnjegUposlenika
+        {
+            get { return daniGodisnjeUposlenika; }
+            set { daniGodisnjeUposlenika = value; OnPropertyChanged("DaniGodisnjegUposlenika"); }
+        }
+        
+        public string DodatakNaPlatuUposlenika
+        {
+            get { return dodatakNaPlatuUposlenika; }
+            set { dodatakNaPlatuUposlenika = value; OnPropertyChanged("DodatakNaPlatuUposlenika"); }
+        }
+        
+        public string PlataUposlenika
+        {
+            get { return plataUposlenika; }
+            set { plataUposlenika = value; OnPropertyChanged("PlataUposlenika"); }
+        }
+        
+        public string DatumZaposlenjaUposlenika
+        {
+            get { return datumZaposlenjaUposlenika; }
+            set { datumZaposlenjaUposlenika = value; OnPropertyChanged("DatumZaposlenjaUposlenika"); }
+        }
+        
+        public string TipUposlenika
+        {
+            get { return tipUposlenika; }
+            set { tipUposlenika = value; OnPropertyChanged("TipUposlenika"); }
+        }
+        
+        public string SpolUposlenika
+        {
+            get { return spolUposlenika; }
+            set { spolUposlenika = value; OnPropertyChanged("SpolUposlenika"); }
+        }
+        
+        public string BrojTelefonaUposlenika
+        {
+            get { return brojTelefonaUposlenika; }
+            set { brojTelefonaUposlenika = value; OnPropertyChanged("BrojTelefonaUposlenika"); }
+        }
+        
+        public string AdresaUposlenika
+        {
+            get { return adresaUposlenika; }
+            set { adresaUposlenika = value; OnPropertyChanged("AdresaUposlenika"); }
+        }
+
+        public string PrezimeUposlenika
+        {
+            get { return prezimeUposlenika; }
+            set { prezimeUposlenika = value; OnPropertyChanged("PrezimeUposlenika"); }
+        }
+        
+        public string ImeUposlenika
+        {
+            get { return imeUposlenika; }
+            set { imeUposlenika = value; OnPropertyChanged("ImeUposlenika"); }
+        }
+
+
+        #endregion
+
+        #region Metode
+
+        private void UnesiNovogUposlenikaUBazu()
+        {
+
+            SpolUposlenika = SpolUposlenika.Substring(37);
+            TipUposlenika = TipUposlenika.Substring(37);
+
+            
+            DaniGodisnjegUposlenika = DaniGodisnjegUposlenika.Substring(37);
+            
+            try
+            {
+                string upit = "INSERT INTO uposlenici (ime_i_prezime, spol, broj_telefona, adresa, tip_uposlenika, datum_zaposlenja, plata, dodatak_na_platu, dani_godisnjeg_odmora, username, password) VALUES ('" +
+                ImeUposlenika + " " + PrezimeUposlenika + "','" + SpolUposlenika + "','" + BrojTelefonaUposlenika + "','" + AdresaUposlenika + "','" + TipUposlenika +
+                "', STR_TO_DATE('" + DateTime.Now.ToShortDateString() + "','%d.%m.%Y'), " + PlataUposlenika + "," + DodatakNaPlatuUposlenika + "," + DaniGodisnjegUposlenika + ",'" + UsernameUposlenika + "','" + PasswordUposlenika + "');";
+           
+                MessageBox.Show(upit);
+                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+                DMLUpitiNaBazu(upit, connectionBaza);
+                OcistiFormuZaUnosKorisnika();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
+
+        private void OcistiFormuZaUnosKorisnika()
+        {
+            ImeUposlenika = String.Empty;
+            PrezimeUposlenika = String.Empty;
+            SpolUposlenika = String.Empty;
+            BrojTelefonaUposlenika = String.Empty;
+            AdresaUposlenika = String.Empty;
+            TipUposlenika = String.Empty;
+            DatumZaposlenjaUposlenika = String.Empty;
+            PlataUposlenika = String.Empty;
+            DodatakNaPlatuUposlenika = String.Empty;
+            DaniGodisnjegUposlenika = String.Empty;
+            UsernameUposlenika = String.Empty;
+            PasswordUposlenika = String.Empty;
+
+        }
+
+
+
+        #endregion
+
+
+        #endregion
+
+        
         #region INotify Implementation
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)

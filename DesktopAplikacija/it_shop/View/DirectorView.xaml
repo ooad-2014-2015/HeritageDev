@@ -369,16 +369,19 @@
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top">Password</Label>
                                 <TextBox Margin="175,50,50,0"
+                                         Text="{Binding ImeUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
                                 <TextBox Margin="175,80,50,0"
+                                         Text="{Binding PrezimeUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
                                 <ComboBox Margin="175,110,50,0"
+                                          SelectedValue="{Binding Path=SpolUposlenika}"
                                           Height="25"
                                           Grid.Column="1"
                                           HorizontalAlignment="Stretch"
@@ -387,32 +390,37 @@
                                     <ComboBoxItem Content="Z" HorizontalAlignment="Stretch"/>
                                 </ComboBox>
                                 <TextBox Margin="175,140,50,0"
+                                         Text="{Binding BrojTelefonaUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
                                 <TextBox Margin="175,170,50,0"
+                                         Text="{Binding AdresaUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
                                 <ComboBox Margin="175,200,50,0"
-                                         Height="25"
+                                         SelectedValue="{Binding Path=TipUposlenika}"
+                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top">
-                                    <ComboBoxItem Content="Direktor" HorizontalAlignment="Stretch"/>
-                                    <ComboBoxItem Content="Supervizor" HorizontalAlignment="Stretch"/>
-                                    <ComboBoxItem Content="Prodavac" HorizontalAlignment="Stretch"/>
-                                    <ComboBoxItem Content="Serviser" HorizontalAlignment="Stretch"/>
-                                    <ComboBoxItem Content="Monter" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="DIREKTOR" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="SUPERVIZOR" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="PRODAVAC" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="SERVISER" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="MONTER" HorizontalAlignment="Stretch"/>
                                 </ComboBox>
                                 <TextBox Margin="175,230,50,0"
+                                         Text="{Binding DatumZaposlenjaUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
                                 <TextBox Margin="175,260,50,0"
+                                         Text="{Binding PlataUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
@@ -423,11 +431,13 @@
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
                                 <TextBox Margin="175,290,50,0"
+                                         Text="{Binding DodatakNaPlatuUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
                                 <ComboBox Margin="175,320,50,0"
+                                          SelectedValue="{Binding Path=DaniGodisnjegUposlenika}"
                                           Height="25"
                                           Grid.Column="1"
                                           HorizontalAlignment="Stretch"
@@ -440,21 +450,25 @@
                                     <ComboBoxItem Content="40" HorizontalAlignment="Stretch"/>
                                 </ComboBox>
                                 <TextBox Margin="175,350,50,0"
+                                         Text="{Binding UsernameUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
                                 <TextBox Margin="175,380,50,0"
+                                         Text="{Binding PasswordUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
                                 <Button Width="100" Height="25"
+                                        Command="{Binding UnosUposlenika}"
                                         Grid.Column="1"
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Left"
                                         Margin="175,415,0,0">Unesi</Button>
                                 <Button Width="100" Height="25"
+                                        Command="{Binding PonistiUnosUposlenika}"
                                         Grid.Column="1"
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Left"
