@@ -25,7 +25,7 @@
                             Width="100"
                             Height="25"
                             HorizontalAlignment="Center"
-                            VerticalAlignment="Bottom">Obrisi zahtjev</Button>
+                            VerticalAlignment="Bottom">Loadiraj zahtjeve</Button>
                     <Label Margin="5,5,5,5"
                            Width="200" Height="25"
                            HorizontalAlignment="Left"
@@ -36,11 +36,16 @@
                               VerticalAlignment="Stretch"
                               Grid.Column="1"
                               ScrollViewer.VerticalScrollBarVisibility="Auto"></ListView>
-                    <Button Margin="5,0,0,5"
+                    <Button Margin="0,0,105,5"
                             Width="100" Height="25"
                             HorizontalAlignment="Center"
                             Grid.Column="1"
                             VerticalAlignment="Bottom">Odobri zahtjev</Button>
+                    <Button Margin="105,0,0,5"
+                            Width="100" Height="25"
+                            HorizontalAlignment="Center"
+                            Grid.Column="1"
+                            VerticalAlignment="Bottom">Obrisi zahtjev</Button>
                 </Grid>
             </TabItem>
             <TabItem Header="Pregled zaposlenika">
