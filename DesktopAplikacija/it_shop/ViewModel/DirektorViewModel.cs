@@ -16,7 +16,7 @@ namespace it_shop.ViewModel
     public class DirektorViewModel : INotifyPropertyChanged
     {
         private int odabraniTab;
-        private string odabraniUposlenik;
+        private Uposlenik odabraniUposlenik;
         private List<Uposlenik> uposleniciArhiva = new List<Uposlenik>();
         private ObservableCollection<Uposlenik> listaUposlenika = new ObservableCollection<Uposlenik>();
         private ZahtjevZaNabavkom odabranizahtjev;
@@ -27,45 +27,102 @@ namespace it_shop.ViewModel
         private ICommand ucitajZahtjeve;
         private ICommand obrisiUposlenika;
         private ICommand azuzirajInfoUposlenika;
-        private string imeUposlenika;
-        private string prezimeUposlenika;
-        private string spolUposlenika;
-        //DOso si do BrojaTelefona
+
+        private string imeAzuriraj;
+        private string prezimeAzuriraj;
+        private string spolAzuriraj;
+        private string brojTelefonaAzuriraj;
+        private string adresaAzuriraj;
+        private string tipUposlenikaAzuriraj;
+        private string datumZaposlenjaAzuriraj;
+        private string plataAzuriraj;
+        private string dodatakNaPlatu;
+        private string daniGodisnjegAzuriraj;
+        private string usernameAzuriraj;
+        private string passwordAzuriraj;
+
+        #region Properties Azuriranje Uposlenika
+
+        public string PasswordAzuriraj
+        {
+            get { return passwordAzuriraj; }
+            set { passwordAzuriraj = value; OnPropertyChanged("PasswordAzuriraj"); }
+        }
+        
+
+        public string UsernameAzuriraj
+        {
+            get { return usernameAzuriraj; }
+            set { usernameAzuriraj = value; OnPropertyChanged("UsernameAzuriraj"); }
+        }
+        
 
 
+        public string DaniGodisnjegAzuriraj
+        {
+            get { return daniGodisnjegAzuriraj; }
+            set { daniGodisnjegAzuriraj = value; OnPropertyChanged("DaniGodisnjegOdmora"); }
+        }
+        
+        public string DodatakNaPlata
+        {
+            get { return dodatakNaPlatu; }
+            set { dodatakNaPlatu = value; OnPropertyChanged("DodatakNaPlatu"); }
+        }
+        
+        public string PlataAzuriraj
+        {
+            get { return plataAzuriraj; }
+            set { plataAzuriraj = value; OnPropertyChanged("PlataAzuriraj"); }
+        }
+        
+        public string DatumZaposlenjaAzuriraj
+        {
+            get { return datumZaposlenjaAzuriraj; }
+            set { datumZaposlenjaAzuriraj = value; OnPropertyChanged("DatumZaposlenjaAzuriraj"); }
+        }
+        
+        public string TipUposlenikaAzuriraj
+        {
+            get { return tipUposlenikaAzuriraj; }
+            set { tipUposlenikaAzuriraj = value; OnPropertyChanged("TipUposlenikaAzuriraj"); }
+        }
+        
+        public string AdresaAzuriraj
+        {
+            get { return adresaAzuriraj; }
+            set { adresaAzuriraj = value; OnPropertyChanged("AdresaAzuriraj"); }
+        }
+        
+
+        public string BrojTelefonaAzuriraj
+        {
+            get { return brojTelefonaAzuriraj; }
+            set { brojTelefonaAzuriraj = value; OnPropertyChanged("BrojTelefonaAzuriraj"); }
+        }
+        
+        public string SpolAzuriraj
+        {
+            get { return spolAzuriraj; }
+            set { spolAzuriraj = value; OnPropertyChanged("SpolAzuriraj"); }
+        }
+        
+        public string PrezimeAzuriraj
+        {
+            get { return prezimeAzuriraj; }
+            set { prezimeAzuriraj = value; OnPropertyChanged("PrezimeAzuriraj"); }
+        }
+        
+        public string ImeAzuriraj
+        {
+            get { return imeAzuriraj; }
+            set { imeAzuriraj = value; OnPropertyChanged("ImeAzuriraj"); }
+        }
+
+        #endregion
+        
         #region Properties
-        
-        
-        public string SpolUposlenika
-        {
-            get { return spolUposlenika; }
-            set 
-            { 
-                spolUposlenika = value;
-                OnPropertyChanged("SpolUposlenika");
-            }
-        }
-        
-        public string PrezimeUposlenika
-        {
-            get { return prezimeUposlenika; }
-            set
-            {
-                prezimeUposlenika = value;
-                OnPropertyChanged("PrezimeUposlenika");
-            }
-        }
-       
-        public string ImeUposlenika
-        {
-            get { return imeUposlenika; }
-            set 
-            { 
-                imeUposlenika = value;
-                OnPropertyChanged("ImeUposlenika");
-            }
-        }
-    
+
         public ICommand AzuzirajInfoUposlenika
         {
             get { return azuzirajInfoUposlenika; }
@@ -90,7 +147,7 @@ namespace it_shop.ViewModel
 
             }
         }
-     
+
         public ObservableCollection<string> ListaZahtjeva
         {
             get { return listaZahtjeva; }
@@ -123,12 +180,13 @@ namespace it_shop.ViewModel
             }
         }
 
-        public string OdabraniUposlenik
+        public Uposlenik OdabraniUposlenik
         {
             get { return odabraniUposlenik; }
             set
             {
                 odabraniUposlenik = value;
+                UcitajInformacijeZaposlenika();
                 OnPropertyChanged("OdabraniUposlenik");
             }
         }
@@ -180,14 +238,14 @@ namespace it_shop.ViewModel
             ObrisiUposlenika = new RelayCommand(new Action(UnosNovogKorisnikaUBazu));
         }
 
-    
+
         private MySqlDataReader UpitNaBazu(string upit, MySqlConnection con)
         {
             con.Open();
             MySqlCommand u = new MySqlCommand(upit, con);
             return u.ExecuteReader();
         }
-      
+
         private void DMLUpitiNaBazu(string upit, MySqlConnection con)
         {
             con.Open();
@@ -223,6 +281,7 @@ namespace it_shop.ViewModel
 
                     Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, DateTime.Now, spol, plata, dodatak, godisnji);
                     //listaUposlenika.Add(naziv + " " + spol + " " + adresa + " " + telefon);
+                    //ListaUposlenika.Add(tmp);
                 }
 
             }
@@ -243,9 +302,9 @@ namespace it_shop.ViewModel
                 string naziv, spol, telefon, adresa, datumZaposlenja;
                 double plata, dodatak;
                 int godisnji;
-                // DateTime zaposlenjeDatum;
-                
-                /*
+                DateTime zaposlenjeDatum;
+
+
                 try
                 {
                     MySqlDataReader r = UpitNaBazu(upitBaza, connectionBaza);
@@ -255,14 +314,15 @@ namespace it_shop.ViewModel
                         spol = r.GetString("spol");
                         adresa = r.GetString("adresa");
                         telefon = r.GetString("broj_telefona");
-                        //datumZaposlenja = r.GetString("datum_zaposlenja");
+                        datumZaposlenja = r.GetString("datum_zaposlenja");
                         plata = double.Parse(r.GetString("plata"), System.Globalization.CultureInfo.InvariantCulture);
                         dodatak = double.Parse(r.GetString("dodatak_na_platu"), System.Globalization.CultureInfo.InvariantCulture);
-                        // zaposlenjeDatum = DateTime.ParseExact("datumZapolenja", "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                        zaposlenjeDatum = DateTime.Parse(datumZaposlenja, new CultureInfo("en-CA"));
                         godisnji = Int32.Parse(r.GetString("dani_godisnjeg_odmora"));
 
-                        Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, DateTime.Now, spol, plata, dodatak, godisnji);
-                        listaUposlenika.Add(naziv);
+                        Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, zaposlenjeDatum, spol, plata, dodatak, godisnji);
+                        ListaUposlenika.Add(tmp);
+
 
                     }
 
@@ -270,16 +330,9 @@ namespace it_shop.ViewModel
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                }*/
-                Uposlenik tmp = new Uposlenik("Ademir", "Kuca", "0612545", DateTime.Now, "M", 1245, 0.12, 12);
+                }
 
-                Uposlenik tmp2 = new Uposlenik("Sale", "KucaSale", "061232545", DateTime.Now, "F", 1245, 0.12, 12);
 
-                Uposlenik tmp3 = new Uposlenik("Hodza", "KucaHodza", "061243445", DateTime.Now, "M", 1245, 0.12, 12);
-                
-                listaUposlenika.Add(tmp);
-                listaUposlenika.Add(tmp2);
-                listaUposlenika.Add(tmp3);
             }
 
 
@@ -288,15 +341,22 @@ namespace it_shop.ViewModel
         private void ObrisiUposlenikaIzBaze()
         {
             MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
-            string uposlenik = OdabraniUposlenik;
-            string upit = "DELETE FROM uposlenici WHERE ime_i_prezime = '" + uposlenik + "';";
+            Uposlenik uposlenik = OdabraniUposlenik;
+            string upit = "DELETE FROM uposlenici WHERE ime_i_prezime = '" + uposlenik.PunoIme + "';";
             DMLUpitiNaBazu(upit, connectionBaza);
             //ListaUposlenika.Remove(uposlenik);
         }
+       
         private void UnosNovogKorisnikaUBazu()
         {
-           
+
         }
+
+        private void UcitajInformacijeZaposlenika()
+        {
+
+        }
+
 
     }
 }

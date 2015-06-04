@@ -4,6 +4,7 @@
         Title="Direktor" Height="625" Width="925"
         WindowStartupLocation="CenterScreen"
         MinHeight="600" MinWidth="800" Icon="/it_shop;component/Resources/prodavac_icon.png">
+   
     <Grid>
         <TabControl Margin="0,20, 0, 22" SelectedIndex="{Binding OdabraniTab}">
             <TabItem Header="Zahtjevi za nabavke">
@@ -61,11 +62,23 @@
                                Height="25"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top">Lista zaposlenika:</Label>
-                        <DataGrid Margin="5,35,0,5"
-                                  AutoGenerateColumns="True"
+                        <DataGrid 
+                                  ItemsSource="{Binding ListaUposlenika}"
+                                  SelectedItem="{Binding OdabraniUposlenik}"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  Margin="5,35,0,5"
+                                  SelectionMode="Single"
+                                  SelectionUnit="FullRow"
                                   HorizontalAlignment="Stretch"
                                   VerticalAlignment="Stretch"
-                                  ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ListaUposlenika}" SelectedItem="{Binding OdabraniUposlenik, Mode=TwoWay}"></DataGrid>
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Naziv" Binding="{Binding PunoIme}" Width="1*"/>
+                                <DataGridTextColumn Header="Kontakt telefon" Binding="{Binding BrojTelefona}" Width="1*" />
+                            </DataGrid.Columns>
+
+                        </DataGrid>
                         <Button Command="{Binding Path=ObrisiUposlenika}"
                                 Margin="0,5,5,0"
                                 Width="100"
@@ -159,19 +172,19 @@
                                            Grid.Column="1"
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Top">Password</Label>
-                                    <TextBox Text="{Binding ImeUposlenika}"
+                                    <TextBox Text="{Binding ImeAzuriraj}"
                                              Margin="175,120,50,0"
                                              Height="25"
                                              Grid.Column="1"
                                              HorizontalAlignment="Stretch"
                                              VerticalAlignment="Top"></TextBox>
-                                    <TextBox Text="{Binding PrezimeUposlenika}"
+                                    <TextBox Text="{Binding PrezimeAzuriraj}"
                                              Margin="175,150,50,0"
                                              Height="25"
                                              Grid.Column="1"
                                              HorizontalAlignment="Stretch"
                                              VerticalAlignment="Top"></TextBox>
-                                    <ComboBox SelectedValue="{Binding Path=SpolUposlenika}"
+                                    <ComboBox SelectedValue="{Binding Path=SpolAzuriraj}"
                                               Margin="175,180,50,0"
                                               Height="25"
                                               Grid.Column="1"
@@ -180,17 +193,21 @@
                                         <ComboBoxItem Content="M" HorizontalAlignment="Stretch"/>
                                         <ComboBoxItem Content="Z" HorizontalAlignment="Stretch"/>
                                     </ComboBox>
-                                    <TextBox Margin="175,210,50,0"
+                                    <TextBox Text="{Binding BrojTelefonaAzuriraj}"
+                                             Margin="175,210,50,0"
                                              Height="25"
                                              Grid.Column="1"
                                              HorizontalAlignment="Stretch"
                                              VerticalAlignment="Top"></TextBox>
-                                    <TextBox Margin="175,240,50,0"
+                                    <TextBox
+                                            Text="{Binding AdresaAzuriraj}"
+                                            Margin="175,240,50,0"
                                              Height="25"
                                              Grid.Column="1"
                                              HorizontalAlignment="Stretch"
                                              VerticalAlignment="Top"></TextBox>
-                                    <ComboBox Margin="175,270,50,0"
+                                    <ComboBox SelectedValue="{Binding Path=TipUposlenikaAzuriraj}"
+                                              Margin="175,270,50,0"
                                               Height="25"
                                               Grid.Column="1"
                                               HorizontalAlignment="Stretch"
@@ -201,22 +218,29 @@
                                         <ComboBoxItem Content="Serviser" HorizontalAlignment="Stretch"/>
                                         <ComboBoxItem Content="Monter" HorizontalAlignment="Stretch"/>
                                     </ComboBox>
-                                    <TextBox Margin="175,300,50,0"
+                                    <TextBox
+                                            Text="{Binding DatumZaposlenjaAzuriraj}"
+                                            Margin="175,300,50,0"
                                              Height="25"
                                              Grid.Column="1"
                                              HorizontalAlignment="Stretch"
                                              VerticalAlignment="Top"></TextBox>
-                                    <TextBox Margin="175,330,50,0"
+                                    <TextBox Text="{Binding PlataAzuriraj}"
+                                             Margin="175,330,50,0"
                                              Height="25"
                                              Grid.Column="1"
                                              HorizontalAlignment="Stretch"
                                              VerticalAlignment="Top"></TextBox>
-                                    <TextBox Margin="175,360,50,0"
+                                    <TextBox
+                                            Text="{Binding DodatakNaPlatuAzuriraj}"
+                                            Margin="175,360,50,0"
                                              Height="25"
                                              Grid.Column="1"
                                              HorizontalAlignment="Stretch"
                                              VerticalAlignment="Top"></TextBox>
-                                    <ComboBox Margin="175,390,50,0"
+                                    <ComboBox
+                                            SelectedValue="{Binding Path=DaniGodisnjegAzuriraj}"
+                                            Margin="175,390,50,0"
                                               Height="25"
                                               Grid.Column="1"
                                               HorizontalAlignment="Stretch"
@@ -228,12 +252,16 @@
                                         <ComboBoxItem Content="30" HorizontalAlignment="Stretch"/>
                                         <ComboBoxItem Content="40" HorizontalAlignment="Stretch"/>
                                     </ComboBox>
-                                    <TextBox Margin="175,420,50,0"
+                                    <TextBox 
+                                            Text="{Binding UsernameAzuriraj}"
+                                            Margin="175,420,50,0"
                                              Height="25"
                                              Grid.Column="1"
                                              HorizontalAlignment="Stretch"
                                              VerticalAlignment="Top"></TextBox>
-                                    <TextBox Margin="175,450,50,0"
+                                    <TextBox 
+                                            Text="{Binding PasswordAzuriraj}"
+                                             Margin="175,450,50,0"
                                              Height="25"
                                              Grid.Column="1"
                                              HorizontalAlignment="Stretch"
