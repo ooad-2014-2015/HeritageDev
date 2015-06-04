@@ -19,9 +19,7 @@ namespace it_shop.ViewModel
         private ICommand odobriZahtjev;
         private ICommand ucitajZahtjeve;
         //private ICommand ucitajUposlenike;
-
-       
-        
+        private int odabraniTab;
 
         private Uposlenik odabraniUposlenik;
         private List<Uposlenik> uposleniciArhiva = new List<Uposlenik>();
@@ -32,6 +30,18 @@ namespace it_shop.ViewModel
 
         #region Properties
 
+        public int OdabraniTab
+        {
+            get { return odabraniTab; }
+            set
+            {
+                odabraniTab = value;
+                if (OdabraniTab == 1)
+                    UcitajUposlenikeIzBaze();
+
+
+            }
+        }
         public ObservableCollection<string> ListaZahtjeva
         {
             get { return listaZahtjeva; }
@@ -45,8 +55,8 @@ namespace it_shop.ViewModel
         public ZahtjevZaNabavkom OdabraniZahtjev
         {
             get { return odabranizahtjev; }
-            set 
-            { 
+            set
+            {
                 odabranizahtjev = value;
                 OnPropertyChanged("OdabraniZahtjev");
 
@@ -121,23 +131,27 @@ namespace it_shop.ViewModel
         }
 
 
-        
+        private MySqlDataReader UpitNaBazu(string upit, MySqlConnection con)
+        {
+            con.Open();
+            MySqlCommand u = new MySqlCommand(upit, con);
+            return u.ExecuteReader();
+        }
+
         private void UcitajZahjeveZaNabavkomIzBaze()
         {
-            MessageBox.Show("Test");
             MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+
             try
             {
+
                 string upitBaza = "SELECT * FROM uposlenici;";
                 string naziv, spol, telefon, adresa, datumZaposlenja;
                 double plata, dodatak;
                 int godisnji;
-                DateTime zaposlenjeDatum;
+                // DateTime zaposlenjeDatum;
 
-                connectionBaza.Open();
-                MySqlCommand sqlCommand = new MySqlCommand(upitBaza, connectionBaza);
-
-                MySqlDataReader r = sqlCommand.ExecuteReader();
+                MySqlDataReader r = UpitNaBazu(upitBaza, connectionBaza);
                 while (r.Read())
                 {
                     naziv = r.GetString("ime_i_prezime");
@@ -147,7 +161,7 @@ namespace it_shop.ViewModel
                     //datumZaposlenja = r.GetString("datum_zaposlenja");
                     plata = double.Parse(r.GetString("plata"), System.Globalization.CultureInfo.InvariantCulture);
                     dodatak = double.Parse(r.GetString("dodatak_na_platu"), System.Globalization.CultureInfo.InvariantCulture);
-                   // zaposlenjeDatum = DateTime.ParseExact("datumZapolenja", "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    // zaposlenjeDatum = DateTime.ParseExact("datumZapolenja", "dd/MM/yyyy", CultureInfo.InvariantCulture);
                     godisnji = Int32.Parse(r.GetString("dani_godisnjeg_odmora"));
 
                     Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, DateTime.Now, spol, plata, dodatak, godisnji);
@@ -161,5 +175,47 @@ namespace it_shop.ViewModel
             }
 
         }
+
+        private void UcitajUposlenikeIzBaze()
+        {
+            if (ListaUposlenika.Count == 0)
+            {
+                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+
+                string upitBaza = "SELECT * FROM uposlenici;";
+                string naziv, spol, telefon, adresa, datumZaposlenja;
+                double plata, dodatak;
+                int godisnji;
+                // DateTime zaposlenjeDatum;
+                try
+                {
+                    MySqlDataReader r = UpitNaBazu(upitBaza, connectionBaza);
+                    while (r.Read())
+                    {
+                        naziv = r.GetString("ime_i_prezime");
+                        spol = r.GetString("spol");
+                        adresa = r.GetString("adresa");
+                        telefon = r.GetString("broj_telefona");
+                        //datumZaposlenja = r.GetString("datum_zaposlenja");
+                        plata = double.Parse(r.GetString("plata"), System.Globalization.CultureInfo.InvariantCulture);
+                        dodatak = double.Parse(r.GetString("dodatak_na_platu"), System.Globalization.CultureInfo.InvariantCulture);
+                        // zaposlenjeDatum = DateTime.ParseExact("datumZapolenja", "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                        godisnji = Int32.Parse(r.GetString("dani_godisnjeg_odmora"));
+
+                        Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, DateTime.Now, spol, plata, dodatak, godisnji);
+                        listaUposlenika.Add(naziv);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+
+        }
+
+
+
     }
 }

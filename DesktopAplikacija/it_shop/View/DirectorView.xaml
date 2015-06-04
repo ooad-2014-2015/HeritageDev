@@ -5,7 +5,7 @@
         WindowStartupLocation="CenterScreen"
         MinHeight="600" MinWidth="800" Icon="/it_shop;component/Resources/prodavac_icon.png">
     <Grid>
-        <TabControl Margin="0,20, 0, 22">
+        <TabControl Margin="0,20, 0, 22" SelectedIndex="{Binding OdabraniTab}">
             <TabItem Header="Zahtjevi za nabavke">
                 <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
@@ -61,10 +61,10 @@
                                Height="25"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top">Lista zaposlenika:</Label>
-                        <ListView Margin="5,35,0,5"
+                        <ListBox Margin="5,35,0,5"
                                   HorizontalAlignment="Stretch"
                                   VerticalAlignment="Stretch"
-                                  ScrollViewer.VerticalScrollBarVisibility="Auto"></ListView>
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ListaUposlenika}" SelectedItem="{Binding OdabraniUposlenik, Mode=TwoWay}"></ListBox>
                         <Button Margin="0,5,5,0"
                                 Width="100"
                                 Height="25"
