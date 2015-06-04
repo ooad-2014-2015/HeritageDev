@@ -6,12 +6,10 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using it_shop_app.Resources;
+using PhoneApp.Resources;
 
-namespace it_shop_app
-{
-    public partial class App : Application
-    {
+namespace PhoneApp {
+    public partial class App : Application {
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -21,8 +19,7 @@ namespace it_shop_app
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
-        public App()
-        {
+        public App() {
             // Global handler for uncaught exceptions.
             UnhandledException += Application_UnhandledException;
 
@@ -36,8 +33,7 @@ namespace it_shop_app
             InitializeLanguage();
 
             // Show graphics profiling information while debugging.
-            if (Debugger.IsAttached)
-            {
+            if (Debugger.IsAttached) {
                 // Display the current frame rate counters.
                 Application.Current.Host.Settings.EnableFrameRateCounter = true;
 
@@ -59,43 +55,35 @@ namespace it_shop_app
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
-        private void Application_Launching(object sender, LaunchingEventArgs e)
-        {
+        private void Application_Launching(object sender, LaunchingEventArgs e) {
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
-        private void Application_Activated(object sender, ActivatedEventArgs e)
-        {
+        private void Application_Activated(object sender, ActivatedEventArgs e) {
         }
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
-        private void Application_Deactivated(object sender, DeactivatedEventArgs e)
-        {
+        private void Application_Deactivated(object sender, DeactivatedEventArgs e) {
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
-        private void Application_Closing(object sender, ClosingEventArgs e)
-        {
+        private void Application_Closing(object sender, ClosingEventArgs e) {
         }
 
         // Code to execute if a navigation fails
-        private void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
-        {
-            if (Debugger.IsAttached)
-            {
+        private void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e) {
+            if (Debugger.IsAttached) {
                 // A navigation has failed; break into the debugger
                 Debugger.Break();
             }
         }
 
         // Code to execute on Unhandled Exceptions
-        private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
-        {
-            if (Debugger.IsAttached)
-            {
+        private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e) {
+            if (Debugger.IsAttached) {
                 // An unhandled exception has occurred; break into the debugger
                 Debugger.Break();
             }
@@ -107,8 +95,7 @@ namespace it_shop_app
         private bool phoneApplicationInitialized = false;
 
         // Do not add any additional code to this method
-        private void InitializePhoneApplication()
-        {
+        private void InitializePhoneApplication() {
             if (phoneApplicationInitialized)
                 return;
 
@@ -128,8 +115,7 @@ namespace it_shop_app
         }
 
         // Do not add any additional code to this method
-        private void CompleteInitializePhoneApplication(object sender, NavigationEventArgs e)
-        {
+        private void CompleteInitializePhoneApplication(object sender, NavigationEventArgs e) {
             // Set the root visual to allow the application to render
             if (RootVisual != RootFrame)
                 RootVisual = RootFrame;
@@ -138,16 +124,14 @@ namespace it_shop_app
             RootFrame.Navigated -= CompleteInitializePhoneApplication;
         }
 
-        private void CheckForResetNavigation(object sender, NavigationEventArgs e)
-        {
+        private void CheckForResetNavigation(object sender, NavigationEventArgs e) {
             // If the app has received a 'reset' navigation, then we need to check
             // on the next navigation to see if the page stack should be reset
             if (e.NavigationMode == NavigationMode.Reset)
                 RootFrame.Navigated += ClearBackStackAfterReset;
         }
 
-        private void ClearBackStackAfterReset(object sender, NavigationEventArgs e)
-        {
+        private void ClearBackStackAfterReset(object sender, NavigationEventArgs e) {
             // Unregister the event so it doesn't get called again
             RootFrame.Navigated -= ClearBackStackAfterReset;
 
@@ -156,8 +140,7 @@ namespace it_shop_app
                 return;
 
             // For UI consistency, clear the entire page stack
-            while (RootFrame.RemoveBackEntry() != null)
-            {
+            while (RootFrame.RemoveBackEntry() != null) {
                 ; // do nothing
             }
         }
@@ -181,10 +164,8 @@ namespace it_shop_app
         //
         // For more info on localizing Windows Phone apps see http://go.microsoft.com/fwlink/?LinkId=262072.
         //
-        private void InitializeLanguage()
-        {
-            try
-            {
+        private void InitializeLanguage() {
+            try {
                 // Set the font to match the display language defined by the
                 // ResourceLanguage resource string for each supported language.
                 //
@@ -204,15 +185,13 @@ namespace it_shop_app
                 FlowDirection flow = (FlowDirection)Enum.Parse(typeof(FlowDirection), AppResources.ResourceFlowDirection);
                 RootFrame.FlowDirection = flow;
             }
-            catch
-            {
+            catch {
                 // If an exception is caught here it is most likely due to either
                 // ResourceLangauge not being correctly set to a supported language
                 // code or ResourceFlowDirection is set to a value other than LeftToRight
                 // or RightToLeft.
 
-                if (Debugger.IsAttached)
-                {
+                if (Debugger.IsAttached) {
                     Debugger.Break();
                 }
 

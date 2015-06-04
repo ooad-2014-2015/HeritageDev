@@ -2,7 +2,7 @@
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US"/>
-  <App xmlns="" ProductID="{0af59191-6443-46ab-9f31-4fd968804161}" Title="it_shop_app" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="it_shop_app author" Description="Sample description" Publisher="it_shop_app" PublisherID="{660be2a4-c2fa-422d-b567-862b29334f45}">
+  <App xmlns="" ProductID="{09bde901-2a9d-4957-9b74-707c07a1d116}" Title="PhoneApp" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="PhoneApp author" Description="Sample description" Publisher="PhoneApp" PublisherID="{154c187d-d09e-444f-b133-3e2708e5b4dc}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING"/>
@@ -15,12 +15,12 @@
       <DefaultTask  Name ="_default" NavigationPage="MainPage.xaml"/>
     </Tasks>
     <Tokens>
-      <PrimaryToken TokenID="it_shop_appToken" TaskName="_default">
+      <PrimaryToken TokenID="PhoneAppToken" TaskName="_default">
         <TemplateFlip>
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>it_shop_app</Title>
+          <Title>PhoneApp</Title>
           <BackContent></BackContent>
           <BackBackgroundImageURI></BackBackgroundImageURI>
           <BackTitle></BackTitle>

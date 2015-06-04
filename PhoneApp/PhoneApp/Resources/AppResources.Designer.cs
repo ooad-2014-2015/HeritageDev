@@ -8,8 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace it_shop_app.Resources
-{
+namespace PhoneApp.Resources {
     using System;
 
 
@@ -23,29 +22,24 @@ namespace it_shop_app.Resources
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AppResources
-    {
+    public class AppResources {
 
         private static global::System.Resources.ResourceManager resourceMan;
 
         private static global::System.Globalization.CultureInfo resourceCulture;
 
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AppResources()
-        {
+        internal AppResources() {
         }
 
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if (object.ReferenceEquals(resourceMan, null))
-                {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("it_shop_app.Resources.AppResources", typeof(AppResources).Assembly);
+        public static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PhoneApp.Resources.AppResources", typeof(AppResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,14 +51,11 @@ namespace it_shop_app.Resources
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        public static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
             }
         }
@@ -72,10 +63,8 @@ namespace it_shop_app.Resources
         /// <summary>
         ///   Looks up a localized string similar to LeftToRight.
         /// </summary>
-        public static string ResourceFlowDirection
-        {
-            get
-            {
+        public static string ResourceFlowDirection {
+            get {
                 return ResourceManager.GetString("ResourceFlowDirection", resourceCulture);
             }
         }
@@ -83,10 +72,8 @@ namespace it_shop_app.Resources
         /// <summary>
         ///   Looks up a localized string similar to us-EN.
         /// </summary>
-        public static string ResourceLanguage
-        {
-            get
-            {
+        public static string ResourceLanguage {
+            get {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
             }
         }
@@ -94,10 +81,8 @@ namespace it_shop_app.Resources
         /// <summary>
         ///   Looks up a localized string similar to MY APPLICATION.
         /// </summary>
-        public static string ApplicationTitle
-        {
-            get
-            {
+        public static string ApplicationTitle {
+            get {
                 return ResourceManager.GetString("ApplicationTitle", resourceCulture);
             }
         }
@@ -105,10 +90,8 @@ namespace it_shop_app.Resources
         /// <summary>
         ///   Looks up a localized string similar to button.
         /// </summary>
-        public static string AppBarButtonText
-        {
-            get
-            {
+        public static string AppBarButtonText {
+            get {
                 return ResourceManager.GetString("AppBarButtonText", resourceCulture);
             }
         }
@@ -116,10 +99,8 @@ namespace it_shop_app.Resources
         /// <summary>
         ///   Looks up a localized string similar to menu item.
         /// </summary>
-        public static string AppBarMenuItemText
-        {
-            get
-            {
+        public static string AppBarMenuItemText {
+            get {
                 return ResourceManager.GetString("AppBarMenuItemText", resourceCulture);
             }
         }

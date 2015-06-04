@@ -6,11 +6,11 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("it_shop_app")]
+[assembly: AssemblyTitle("PhoneApp")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("it_shop_app")]
+[assembly: AssemblyProduct("PhoneApp")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +21,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("54af0b5f-405a-4190-bedb-611d2515d41a")]
+[assembly: Guid("1e21bbb9-d037-48c5-958e-4ead2a6a09f2")]
 
 // Version information for an assembly consists of the following four values:
 //

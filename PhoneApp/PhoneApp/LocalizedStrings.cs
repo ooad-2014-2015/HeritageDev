@@ -1,12 +1,10 @@
-﻿using it_shop_app.Resources;
+﻿using PhoneApp.Resources;
 
-namespace it_shop_app
-{
+namespace PhoneApp {
     /// <summary>
     /// Provides access to string resources.
     /// </summary>
-    public class LocalizedStrings
-    {
+    public class LocalizedStrings {
         private static AppResources _localizedResources = new AppResources();
 
         public AppResources LocalizedResources { get { return _localizedResources; } }
