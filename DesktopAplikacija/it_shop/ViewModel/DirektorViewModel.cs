@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace it_shop.ViewModel
@@ -17,37 +18,42 @@ namespace it_shop.ViewModel
         private ICommand obrisiZahtjev;
         private ICommand odobriZahtjev;
         private ICommand ucitajZahtjeve;
+        //private ICommand ucitajUposlenike;
+
+       
+        
 
         private Uposlenik odabraniUposlenik;
-        private ObservableCollection<Uposlenik> listaUposlenika;
+        private List<Uposlenik> uposleniciArhiva = new List<Uposlenik>();
+        private ObservableCollection<string> listaUposlenika = new ObservableCollection<string>();
         private ZahtjevZaNabavkom odabranizahtjev;
-        private ObservableCollection<ZahtjevZaNabavkom> listaZahtjeva;
+        private ObservableCollection<string> listaZahtjeva;
 
 
         #region Properties
-       
-        public List<ZahtjevZaNabavkom> ListaZahtjeva
-	    {
-		    get { return listaZahtjeva;}
-		    set 
-            { 
+
+        public ObservableCollection<string> ListaZahtjeva
+        {
+            get { return listaZahtjeva; }
+            set
+            {
                 listaZahtjeva = value;
                 OnPropertyChanged("ListaZahtjeva");
             }
-	    }
-	
+        }
+
         public ZahtjevZaNabavkom OdabraniZahtjev
         {
             get { return odabranizahtjev; }
             set 
             { 
-                odabranizahtjev = value; 
-                OnPropertyChanged("OdabraniZahtjev")
+                odabranizahtjev = value;
+                OnPropertyChanged("OdabraniZahtjev");
 
             }
         }
-       
-        public ObservableCollection<Uposlenik> ListaUposlenika
+
+        public ObservableCollection<string> ListaUposlenika
         {
             get { return listaUposlenika; }
             set
@@ -57,7 +63,7 @@ namespace it_shop.ViewModel
 
             }
         }
-        
+
         public Uposlenik OdabraniUposlenik
         {
             get { return odabraniUposlenik; }
@@ -67,7 +73,7 @@ namespace it_shop.ViewModel
                 OnPropertyChanged("OdabraniUposlenik");
             }
         }
-      
+
         public ICommand UcitajZahtjeve
         {
             get { return ucitajZahtjeve; }
@@ -111,8 +117,11 @@ namespace it_shop.ViewModel
         public DirektorViewModel()
         {
             UcitajZahtjeve = new RelayCommand(new Action(UcitajZahjeveZaNabavkomIzBaze));
+
         }
 
+
+        
         private void UcitajZahjeveZaNabavkomIzBaze()
         {
             MessageBox.Show("Test");
@@ -127,74 +136,30 @@ namespace it_shop.ViewModel
 
                 connectionBaza.Open();
                 MySqlCommand sqlCommand = new MySqlCommand(upitBaza, connectionBaza);
-            
+
                 MySqlDataReader r = sqlCommand.ExecuteReader();
-                while(r.Read())
+                while (r.Read())
                 {
                     naziv = r.GetString("ime_i_prezime");
                     spol = r.GetString("spol");
                     adresa = r.GetString("adresa");
                     telefon = r.GetString("broj_telefona");
-                    datumZaposlenja = r.GetString("datum_zaposlenja");
+                    //datumZaposlenja = r.GetString("datum_zaposlenja");
                     plata = double.Parse(r.GetString("plata"), System.Globalization.CultureInfo.InvariantCulture);
                     dodatak = double.Parse(r.GetString("dodatak_na_platu"), System.Globalization.CultureInfo.InvariantCulture);
-                    zaposlenjeDatum = DateTime.ParseExact("datumZapolenja", "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                   // zaposlenjeDatum = DateTime.ParseExact("datumZapolenja", "dd/MM/yyyy", CultureInfo.InvariantCulture);
                     godisnji = Int32.Parse(r.GetString("dani_godisnjeg_odmora"));
-                    
-                    Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, zaposlenjeDatum, spol, plata, dodatak, godisnji);
-                    listaUposlenika.Add(tmp);
 
-
-                }
-                if (r.HasRows && r.Read())
-                {
-                    string tipuposlenika = r.GetString("tip_uposlenika");
-                    switch (tipuposlenika)
-                    {
-                        case "PRODAVAC":
-                            ProdavacView prodavac = new ProdavacView();
-                            prodavac.Show();
-                            loginForma.Close();
-                            break;
-                        case "DIREKTOR":
-                            DirectorView direktor = new DirectorView();
-                            direktor.Show();
-                            loginForma.Close();
-                            break;
-                        case "SERVISER":
-                        case "MONTER":
-                            MessageBox.Show("Tip uposlenika: " + tipuposlenika);
-                            break;
-                        default:
-                            MessageBox.Show("Nema uposlenog sa tim tipom.");
-                            break;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Pogresni podaci.");
-                    Username = String.Empty;
-                    Password = String.Empty;
+                    Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, DateTime.Now, spol, plata, dodatak, godisnji);
+                    listaUposlenika.Add(naziv + " " + spol + " " + adresa + " " + telefon);
                 }
 
             }
-            catch (System.AggregateException)
+            catch (Exception ex)
             {
-                MessageBox.Show("Neuspjela konekcija sa bazom podataka!\nPokušajte ponovo.");
-                Username = String.Empty;
-                Password = String.Empty;
+                MessageBox.Show(ex.ToString());
             }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Došlo je do greške!\nMolimo pokušajte ponovo ili kontaktirajte administratora!");
-                Username = String.Empty;
-                Password = String.Empty;
-            }
-            connectionBaza.Close();
-        }
-        }
 
-
-       
+        }
     }
 }
