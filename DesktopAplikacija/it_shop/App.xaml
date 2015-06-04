@@ -1,7 +1,7 @@
 ﻿<Application x:Class="it_shop.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="/View/DirectorView.xaml">
+             StartupUri="/View/LoginView.xaml">
     <Application.Resources>
          
     </Application.Resources>
