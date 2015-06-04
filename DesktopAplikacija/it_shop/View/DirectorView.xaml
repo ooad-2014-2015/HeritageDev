@@ -239,7 +239,8 @@
                                              HorizontalAlignment="Stretch"
                                              VerticalAlignment="Top"></TextBox>
                                     <ComboBox
-                                            SelectedValue="{Binding Path=DaniGodisnjegAzuriraj}"
+                                            SelectedValue="{Binding Path=DaniGodisnjegAzuriraj, Mode=TwoWay}"
+                                            ItemsSource="{Binding Path=DaniGodisnjegAzuriraj}"
                                             Margin="175,390,50,0"
                                               Height="25"
                                               Grid.Column="1"

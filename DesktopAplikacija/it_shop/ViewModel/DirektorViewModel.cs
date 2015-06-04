@@ -49,15 +49,12 @@ namespace it_shop.ViewModel
             set { passwordAzuriraj = value; OnPropertyChanged("PasswordAzuriraj"); }
         }
         
-
         public string UsernameAzuriraj
         {
             get { return usernameAzuriraj; }
             set { usernameAzuriraj = value; OnPropertyChanged("UsernameAzuriraj"); }
         }
         
-
-
         public string DaniGodisnjegAzuriraj
         {
             get { return daniGodisnjegAzuriraj; }
@@ -319,7 +316,8 @@ namespace it_shop.ViewModel
                         dodatak = double.Parse(r.GetString("dodatak_na_platu"), System.Globalization.CultureInfo.InvariantCulture);
                         zaposlenjeDatum = DateTime.Parse(datumZaposlenja, new CultureInfo("en-CA"));
                         godisnji = Int32.Parse(r.GetString("dani_godisnjeg_odmora"));
-
+                        
+                        //Tip Resolve
                         Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, zaposlenjeDatum, spol, plata, dodatak, godisnji);
                         ListaUposlenika.Add(tmp);
 
@@ -354,7 +352,18 @@ namespace it_shop.ViewModel
 
         private void UcitajInformacijeZaposlenika()
         {
-
+            ImeAzuriraj = OdabraniUposlenik.PunoIme;
+            PrezimeAzuriraj = OdabraniUposlenik.PunoIme;
+            AdresaAzuriraj = OdabraniUposlenik.Adresa;
+            BrojTelefonaAzuriraj = OdabraniUposlenik.BrojTelefona;
+            SpolAzuriraj = OdabraniUposlenik.Spol;
+            TipUposlenikaAzuriraj = "Manager";
+            DatumZaposlenjaAzuriraj = OdabraniUposlenik.DatumZaposlenja.ToShortDateString();
+            PlataAzuriraj = OdabraniUposlenik.Plata.ToString();
+            DodatakNaPlata = OdabraniUposlenik.DodatakNaPlatu.ToString();
+            DaniGodisnjegAzuriraj = OdabraniUposlenik.DaniGodisnjegOdmora.ToString();
+            UsernameAzuriraj = "Neko";
+            PasswordAzuriraj = "Neko";
         }
 
 
