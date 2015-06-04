@@ -4,7 +4,7 @@
         Title="Direktor" Height="625" Width="925"
         WindowStartupLocation="CenterScreen"
         MinHeight="600" MinWidth="800" Icon="/it_shop;component/Resources/prodavac_icon.png">
-   
+    
     <Grid>
         <TabControl Margin="0,20, 0, 22" SelectedIndex="{Binding OdabraniTab}">
             <TabItem Header="Zahtjevi za nabavke">
@@ -62,7 +62,7 @@
                                Height="25"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top">Lista zaposlenika:</Label>
-                        <DataGrid 
+                        <DataGrid IsReadOnly="True"
                                   ItemsSource="{Binding ListaUposlenika}"
                                   SelectedItem="{Binding OdabraniUposlenik}"
                                   AutoGenerateColumns="False"
@@ -173,6 +173,7 @@
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Top">Password</Label>
                                     <TextBox Text="{Binding ImeAzuriraj}"
+                                             
                                              Margin="175,120,50,0"
                                              Height="25"
                                              Grid.Column="1"
@@ -184,15 +185,11 @@
                                              Grid.Column="1"
                                              HorizontalAlignment="Stretch"
                                              VerticalAlignment="Top"></TextBox>
-                                    <ComboBox SelectedValue="{Binding Path=SpolAzuriraj}"
-                                              Margin="175,180,50,0"
-                                              Height="25"
-                                              Grid.Column="1"
-                                              HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Top">
-                                        <ComboBoxItem Content="M" HorizontalAlignment="Stretch"/>
-                                        <ComboBoxItem Content="Z" HorizontalAlignment="Stretch"/>
-                                    </ComboBox>
+                                    <TextBox Text="{Binding SpolAzuriraj}"
+                                             Margin="175,180,50,0"
+                                             Height="25"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Top"/>
                                     <TextBox Text="{Binding BrojTelefonaAzuriraj}"
                                              Margin="175,210,50,0"
                                              Height="25"
@@ -206,19 +203,15 @@
                                              Grid.Column="1"
                                              HorizontalAlignment="Stretch"
                                              VerticalAlignment="Top"></TextBox>
-                                    <ComboBox SelectedValue="{Binding Path=TipUposlenikaAzuriraj}"
-                                              Margin="175,270,50,0"
-                                              Height="25"
-                                              Grid.Column="1"
-                                              HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Top">
-                                        <ComboBoxItem Content="Direktor" HorizontalAlignment="Stretch"/>
-                                        <ComboBoxItem Content="Supervizor" HorizontalAlignment="Stretch"/>
-                                        <ComboBoxItem Content="Prodavac" HorizontalAlignment="Stretch"/>
-                                        <ComboBoxItem Content="Serviser" HorizontalAlignment="Stretch"/>
-                                        <ComboBoxItem Content="Monter" HorizontalAlignment="Stretch"/>
-                                    </ComboBox>
                                     <TextBox
+                                            Text="{Binding TipUposlenikaAzuriraj}"
+                                            Margin="175,270,50,0"
+                                             Height="25"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Top"/>
+                                    <TextBox
+                                            Foreground="Gray"
+                                            IsReadOnly="True"
                                             Text="{Binding DatumZaposlenjaAzuriraj}"
                                             Margin="175,300,50,0"
                                              Height="25"
@@ -238,21 +231,12 @@
                                              Grid.Column="1"
                                              HorizontalAlignment="Stretch"
                                              VerticalAlignment="Top"></TextBox>
-                                    <ComboBox
-                                            SelectedValue="{Binding Path=DaniGodisnjegAzuriraj, Mode=TwoWay}"
-                                            ItemsSource="{Binding Path=DaniGodisnjegAzuriraj}"
+                                    <TextBox
+                                            Text="{Binding DaniGodisnjegAzuriraj}"
                                             Margin="175,390,50,0"
-                                              Height="25"
-                                              Grid.Column="1"
-                                              HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Top">
-                                        <ComboBoxItem Content="18" HorizontalAlignment="Stretch"/>
-                                        <ComboBoxItem Content="21" HorizontalAlignment="Stretch"/>
-                                        <ComboBoxItem Content="24" HorizontalAlignment="Stretch"/>
-                                        <ComboBoxItem Content="27" HorizontalAlignment="Stretch"/>
-                                        <ComboBoxItem Content="30" HorizontalAlignment="Stretch"/>
-                                        <ComboBoxItem Content="40" HorizontalAlignment="Stretch"/>
-                                    </ComboBox>
+                                             Height="25"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Top"></TextBox>
                                     <TextBox 
                                             Text="{Binding UsernameAzuriraj}"
                                             Margin="175,420,50,0"
@@ -267,7 +251,8 @@
                                              Grid.Column="1"
                                              HorizontalAlignment="Stretch"
                                              VerticalAlignment="Top"></TextBox>
-                                    <Button Width="100" Height="25"
+                                    <Button Command="{Binding Path=AzuzirajInfoUposlenika}"
+                                            Width="100" Height="25"
                                             Grid.Column="1"
                                             VerticalAlignment="Top"
                                             HorizontalAlignment="Left"
