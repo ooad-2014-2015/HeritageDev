@@ -22,32 +22,25 @@ using System.Collections.ObjectModel;
 
 namespace it_shop.ViewModel {
     public class ProdavacViewModel : INotifyPropertyChanged {
-
-       
-
-
-
         
-        //tab korpa
+        #region Korpa
+        private int brojacArtikala = 0;
+        private double cijenaArtikala = 0;
+
         private string vrstaPretrage;
         private string pojamZaPretragu;
+        private string ukupnaCijena;
+        private string brojArtikala;
         private ICommand dodajUKorpu;
         private ICommand izvrsiPretragu;
         private ICommand zahtjevajIsporuku;
-        private ICommand printajRacun;
-        private ObservableCollection<Artikal> listaArtikala = new ObservableCollection<Artikal>();
+        private ICommand printaj;
         private Artikal odabraniArtikal;
+        private ObservableCollection<Artikal> listaArtikalaPretrage = new ObservableCollection<Artikal>();
+        private ObservableCollection<Artikal> listaArtikalaKorpa = new ObservableCollection<Artikal>();
+        #endregion
 
-        public Artikal OdabraniArtikal {
-            get { return odabraniArtikal; }
-            set {
-                odabraniArtikal = value;
-                OnPropertyChanged("OdabraniArtikal");
-            }
-        }
-        
-
-        //tab za unos proizvoda
+        #region Unos proizvoda
         private string idProizvoda;
         private string nazivProizvoda;
         private string kategorijaProizvoda;
@@ -62,31 +55,60 @@ namespace it_shop.ViewModel {
         private ICommand ponistiButton;
         private ICommand izaberiSlikuButton;
         private BitmapImage ucitajSliku;
+#endregion
 
         public ProdavacViewModel ( ) {
             UnesiButton = new RelayCommand(new Action(UnosNovogArtikla));
             PonistiButton = new RelayCommand(new Action(PonistiIzmjene));
             IzaberiSlikuButton = new RelayCommand(new Action(IzaberiSliku));
             UcitajSlikuBinding = UcitajSliku(@"../../Resources/no_image.png");
-
             IzvrsiPretragu = new RelayCommand(new Action(UcitajUposlenikeIzBaze));
-            
+            DodajUKorpu = new RelayCommand(new Action(DodajArtikalUKorpu));
+            Printaj = new RelayCommand(new Action(PrintajRacun));
         }
 
-        private MySqlDataReader UpitNaBazu(string upit, MySqlConnection con) {
-            con.Open();
-            MySqlCommand u = new MySqlCommand(upit, con);
-            return u.ExecuteReader();
-        }
+
 
         #region Properties Korpa
-        public ObservableCollection<Artikal> ListaArtikala {
+        public string BrojArtikala {
+            get { return brojArtikala; }
+            set { 
+                brojArtikala = value;
+                OnPropertyChanged("BrojArtikala");
+            }
+        }
+
+        public string UkupnaCijena {
+            get { return ukupnaCijena; }
+            set { 
+                ukupnaCijena = value;
+                OnPropertyChanged("UkupnaCijena");
+            }
+        }
+        
+        public Artikal OdabraniArtikal {
+            get { return odabraniArtikal; }
+            set {
+                odabraniArtikal = value;
+                OnPropertyChanged("OdabraniArtikal");
+            }
+        }
+        public ObservableCollection<Artikal> ListaArtikalaKorpa {
             get {
-                return listaArtikala;
+                return listaArtikalaKorpa;
             }
             set {
-                listaArtikala = value;
-                OnPropertyChanged("ListaArtikala");
+                listaArtikalaKorpa = value;
+                OnPropertyChanged("ListaArtikalaKorpa");
+            }
+        }
+        public ObservableCollection<Artikal> ListaArtikalaPretrage {
+            get {
+                return listaArtikalaPretrage;
+            }
+            set {
+                listaArtikalaPretrage = value;
+                OnPropertyChanged("ListaArtikalaPretrage");
             }
         }
         public string PojamZaPretragu {
@@ -96,9 +118,9 @@ namespace it_shop.ViewModel {
                 OnPropertyChanged("PojamZaPretragu");
             }
         }
-        public ICommand PrintajRacun {
-            get { return printajRacun; }
-            set { printajRacun = value; }
+        public ICommand Printaj {
+            get { return printaj; }
+            set { printaj = value; }
         }
         public ICommand ZahtjevajIsporuku {
             get { return zahtjevajIsporuku; }
@@ -294,55 +316,74 @@ namespace it_shop.ViewModel {
         #endregion
 
         #region Funkcije za korpu
+        private void PrintajRacun ( ) {
+            MessageBox.Show("Racun isprintan...", "Info");
+            ListaArtikalaKorpa.Clear();
+            cijenaArtikala = 0;
+            brojacArtikala = 0;
+            UkupnaCijena = cijenaArtikala.ToString();
+            BrojArtikala = brojacArtikala.ToString();
+        }
+        private void DodajArtikalUKorpu ( ) {
+            ListaArtikalaKorpa.Add(OdabraniArtikal);
+            cijenaArtikala += ListaArtikalaKorpa.First(U => U == OdabraniArtikal).Cijena;
+            brojacArtikala++;
+            UkupnaCijena = cijenaArtikala.ToString();
+            BrojArtikala = brojacArtikala.ToString();
+        }
         private void UcitajUposlenikeIzBaze () {
-            if (ListaArtikala.Count == 0) {
-                try {
-                    MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
-                    MessageBox.Show(PojamZaPretragu);
+            if (ListaArtikalaPretrage.Count != 0) {
+                ListaArtikalaPretrage.Clear();
+            }
 
-                    string _naziv, _kategoija, _opis, _proizvodjac, _dodatnaOprema, _serijskiBroj, _barkod;
-                    int _godina, _mjeseciGarancije, _kolicina;
-                    double _cijena;
-                    MessageBox.Show(VrstaPretrage);
-                    int tip = Int32.Parse(VrstaPretrage);
-                    MessageBox.Show(tip.ToString());
-                    string upitBaza = null;
-                    switch(tip) {
-                        case 0:
-                            upitBaza = "SELECT * FROM artikli WHERE id LIKE '" + PojamZaPretragu + "%';";
-                            break;
-                        case 1:
-                            upitBaza = "SELECT * FROM artikli WHERE naziv LIKE '" + PojamZaPretragu + "%';";
-                            break;
-                        case 2:
-                            upitBaza = "SELECT * FROM artikli WHERE proizvodjac LIKE '" + PojamZaPretragu + "%';";
-                            break;
-                    }
-                    MessageBox.Show(upitBaza);
-                    MySqlDataReader r = UpitNaBazu(upitBaza, connectionBaza);
-                    while (r.Read()) {
-                        _naziv = r.GetString("naziv");
-                        _kategoija = r.GetString("kategorija");
-                        _godina = r.GetInt32("godina_proizvodnje");
-                        _cijena = r.GetDouble("cijena");
-                        _opis = r.GetString("opis");
-                        _mjeseciGarancije = r.GetInt32("mjeseci_garancije");
-                        _proizvodjac = r.GetString("proizvodjac");
-                        _dodatnaOprema = r.GetString("dodatna_oprema");
-                        _serijskiBroj = r.GetString("serijski_broj");
-                        _barkod = r.GetString("barkod");
-                        _kolicina = r.GetInt32("kolicina");
-
-                        Artikal artikal = new Artikal(_naziv, _kategoija, _godina, _cijena, _opis, _mjeseciGarancije, _proizvodjac, _dodatnaOprema, _kolicina, _serijskiBroj, _barkod);
-                        ListaArtikala.Add(artikal);
-                    }
-
-                } catch (Exception ex) {
-                    MessageBox.Show(ex.ToString());
+            try {
+                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+                string _naziv, _kategoija, _opis, _proizvodjac, _dodatnaOprema, _serijskiBroj, _barkod;
+                int _godina, _mjeseciGarancije, _kolicina;
+                double _cijena;
+                int tip = Int32.Parse(VrstaPretrage);
+                string upitBaza = null;
+                switch(tip) {
+                    case 0:
+                        upitBaza = "SELECT * FROM artikli WHERE id LIKE '" + PojamZaPretragu + "%';";
+                        break;
+                    case 1:
+                        upitBaza = "SELECT * FROM artikli WHERE naziv LIKE '" + PojamZaPretragu + "%';";
+                        break;
+                    case 2:
+                        //upitBaza = "SELECT * FROM artikli WHERE proizvodjac LIKE '" + PojamZaPretragu + "%';";
+                        upitBaza = "SELECT * FROM artikli";
+                        break;
                 }
+                MessageBox.Show(upitBaza, "Upit");
+                MySqlDataReader r = UpitNaBazu(upitBaza, connectionBaza);
+                while (r.Read()) {
+                    _naziv = r.GetString("naziv");
+                    _kategoija = r.GetString("kategorija");
+                    _godina = r.GetInt32("godina_proizvodnje");
+                    _cijena = r.GetDouble("cijena");
+                    _opis = r.GetString("opis");
+                    _mjeseciGarancije = r.GetInt32("mjeseci_garancije");
+                    _proizvodjac = r.GetString("proizvodjac");
+                    _dodatnaOprema = r.GetString("dodatna_oprema");
+                    _serijskiBroj = r.GetString("serijski_broj");
+                    _barkod = r.GetString("barkod");
+                    _kolicina = r.GetInt32("kolicina");
+
+                    Artikal artikal = new Artikal(_naziv, _kategoija, _godina, _cijena, _opis, _mjeseciGarancije, _proizvodjac, _dodatnaOprema, _kolicina, _serijskiBroj, _barkod);
+                    ListaArtikalaPretrage.Add(artikal);
+                }
+            } catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
             }
         }
         #endregion
 
+
+        private MySqlDataReader UpitNaBazu ( string upit, MySqlConnection con ) {
+            con.Open();
+            MySqlCommand u = new MySqlCommand(upit, con);
+            return u.ExecuteReader();
+        }
     }
 }
