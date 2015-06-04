@@ -22,18 +22,20 @@
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Top"
                            Margin="5,5,5,0">Postojeci zahtjevi za placanje na rate:</Label>
-                    <ListView Margin="5,30,5,35"
+                    <DataGrid Margin="5,30,5,35"
                               HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch"></ListView>
+                              VerticalAlignment="Stretch"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"></DataGrid>
                     <Label Height="25"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Top"
                            Margin="5,5,5,0"
                            Grid.Column="1">Sadrzaj zahtjeva:</Label>
-                    <ListView Margin="5,30,5,35"
+                    <DataGrid Margin="5,30,5,35"
                               HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
-                              Grid.Column="1"></ListView>
+                              Grid.Column="1"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"></DataGrid>
                     <Button Width="100" Height="25"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
@@ -56,9 +58,10 @@
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Top"
                            Margin="5,5,5,0">Potrebni proizvodi</Label>
-                    <ListBox HorizontalAlignment="Stretch"
-                             VerticalAlignment="Stretch"
-                             Margin="5,30,5,5"></ListBox>
+                    <DataGrid HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Margin="5,30,5,5"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"></DataGrid>
                     <Label Margin="5,5,5,0"
                            Width="100"
                            VerticalAlignment="Top"
@@ -89,10 +92,11 @@
                            VerticalAlignment="Top"
                            HorizontalAlignment="Left"
                            Grid.Column="1">Stavke narudzbe:</Label>
-                    <ListBox Margin="5,95,5,5"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Stretch"
-                             Grid.Column="1"></ListBox>
+                    <DataGrid Margin="5,95,5,5"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Grid.Column="1"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"></DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -10,6 +10,7 @@ namespace it_shop.Model
     {
         private ServisniUredjaj servisniUredjaj;
         private DateTime datumPredaje;
+        private bool status;
 
         public ServisniPredracun(Kupac kupac, ServisniUredjaj serUredjaj, DateTime datumPredaje) 
             : base(kupac)
@@ -29,6 +30,12 @@ namespace it_shop.Model
         {
             get { return servisniUredjaj; }
             set { servisniUredjaj = value; }
+        }
+
+        public bool Status 
+        {
+            get { return status; }
+            set { status = value; }
         }
         #endregion
 

@@ -12,7 +12,7 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="4*" />
                     </Grid.ColumnDefinitions>
-                    <ListBox Name="txt_kategorije" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></ListBox>
+                    <DataGrid Name="txt_kategorije" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></DataGrid>
                     <ScrollViewer Grid.Column="1">
                         <StackPanel>
                             <Grid Name="grid_proizvodi" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Column="1" Margin="5,0,0,0">
@@ -88,20 +88,20 @@
                            Margin="5,0,0,5"
                            Grid.Column="1"
                            Grid.Row="0">Artikli u korpi:</Label>
-                    <ListBox Name="tbox_pretraga"
+                    <DataGrid Name="tbox_pretraga"
                              VerticalAlignment="Stretch" 
                              HorizontalAlignment="Stretch"
                              ScrollViewer.VerticalScrollBarVisibility="Auto"
                              Grid.Column="0"
                              Grid.Row="1"
-                             Margin="5,0,5,5"></ListBox>
-                    <ListBox Name="tbox_korpa"
+                             Margin="5,0,5,5"></DataGrid>
+                    <DataGrid Name="tbox_korpa"
                              VerticalAlignment="Stretch"
                              Margin="5,0,5,5"
                              HorizontalAlignment="Stretch"
                              ScrollViewer.VerticalScrollBarVisibility="Auto"
                              Grid.Column="1"
-                             Grid.Row="1"></ListBox>
+                             Grid.Row="1"></DataGrid>
                     <Button Name="btn_printajRacun"
                             Content="Printaj racun"
                             Width="100" Height="25"
@@ -139,6 +139,10 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
                             Command="{Binding Path=IzaberiSlikuButton}">Izaberi sliku</Button>
+                    <Button Width="100" Height="25"
+                                     Margin="0,385,0,0"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Top">Test</Button>
                     <Label Margin="20,50,0,0"
                            Width="150"
                            Height="25"
@@ -229,6 +233,7 @@
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Top"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto"
                              Text="{Binding Path=Opis}"></TextBox>
                     <ComboBox Margin="175,275,50,0"
                              Height="25"
@@ -256,6 +261,7 @@
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Top"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto"
                              Text ="{Binding Path=DodatnaOprema}"></TextBox>
                     <TextBox Margin="175,395,50,0"
                              Height="25"
