@@ -40,8 +40,10 @@ namespace it_shop.ViewModel {
         private string putanja;
         public Image UcitajSlikuBinding {
             get {
-                if(putanja != "") 
-                    ucitajSliku.Source = new BitmapImage(new Uri(putanja, UriKind.RelativeOrAbsolute));
+                if (putanja != "") {
+                    BitmapImage bitmap = new BitmapImage(new Uri(putanja, UriKind.RelativeOrAbsolute));
+                    ucitajSliku.Source = bitmap;
+                } 
                 return ucitajSliku; 
             }
             set { 
