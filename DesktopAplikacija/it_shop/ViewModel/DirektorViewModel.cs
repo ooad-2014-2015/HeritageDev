@@ -15,20 +15,68 @@ namespace it_shop.ViewModel
 {
     public class DirektorViewModel : INotifyPropertyChanged
     {
-        private ICommand obrisiZahtjev;
-        private ICommand odobriZahtjev;
-        private ICommand ucitajZahtjeve;
-        //private ICommand ucitajUposlenike;
         private int odabraniTab;
-
-        private Uposlenik odabraniUposlenik;
+        private string odabraniUposlenik;
         private List<Uposlenik> uposleniciArhiva = new List<Uposlenik>();
-        private ObservableCollection<string> listaUposlenika = new ObservableCollection<string>();
+        private ObservableCollection<Uposlenik> listaUposlenika = new ObservableCollection<Uposlenik>();
         private ZahtjevZaNabavkom odabranizahtjev;
         private ObservableCollection<string> listaZahtjeva;
 
+        private ICommand obrisiZahtjev;
+        private ICommand odobriZahtjev;
+        private ICommand ucitajZahtjeve;
+        private ICommand obrisiUposlenika;
+        private ICommand azuzirajInfoUposlenika;
+        private string imeUposlenika;
+        private string prezimeUposlenika;
+        private string spolUposlenika;
+        //DOso si do BrojaTelefona
+
 
         #region Properties
+        
+        
+        public string SpolUposlenika
+        {
+            get { return spolUposlenika; }
+            set 
+            { 
+                spolUposlenika = value;
+                OnPropertyChanged("SpolUposlenika");
+            }
+        }
+        
+        public string PrezimeUposlenika
+        {
+            get { return prezimeUposlenika; }
+            set
+            {
+                prezimeUposlenika = value;
+                OnPropertyChanged("PrezimeUposlenika");
+            }
+        }
+       
+        public string ImeUposlenika
+        {
+            get { return imeUposlenika; }
+            set 
+            { 
+                imeUposlenika = value;
+                OnPropertyChanged("ImeUposlenika");
+            }
+        }
+    
+        public ICommand AzuzirajInfoUposlenika
+        {
+            get { return azuzirajInfoUposlenika; }
+            set { azuzirajInfoUposlenika = value; }
+        }
+
+        public ICommand ObrisiUposlenika
+        {
+            get { return obrisiUposlenika; }
+            set { obrisiUposlenika = value; }
+        }
 
         public int OdabraniTab
         {
@@ -42,6 +90,7 @@ namespace it_shop.ViewModel
 
             }
         }
+     
         public ObservableCollection<string> ListaZahtjeva
         {
             get { return listaZahtjeva; }
@@ -63,7 +112,7 @@ namespace it_shop.ViewModel
             }
         }
 
-        public ObservableCollection<string> ListaUposlenika
+        public ObservableCollection<Uposlenik> ListaUposlenika
         {
             get { return listaUposlenika; }
             set
@@ -74,7 +123,7 @@ namespace it_shop.ViewModel
             }
         }
 
-        public Uposlenik OdabraniUposlenik
+        public string OdabraniUposlenik
         {
             get { return odabraniUposlenik; }
             set
@@ -127,15 +176,23 @@ namespace it_shop.ViewModel
         public DirektorViewModel()
         {
             UcitajZahtjeve = new RelayCommand(new Action(UcitajZahjeveZaNabavkomIzBaze));
-
+            ObrisiUposlenika = new RelayCommand(new Action(ObrisiUposlenikaIzBaze));
+            ObrisiUposlenika = new RelayCommand(new Action(UnosNovogKorisnikaUBazu));
         }
 
-
+    
         private MySqlDataReader UpitNaBazu(string upit, MySqlConnection con)
         {
             con.Open();
             MySqlCommand u = new MySqlCommand(upit, con);
             return u.ExecuteReader();
+        }
+      
+        private void DMLUpitiNaBazu(string upit, MySqlConnection con)
+        {
+            con.Open();
+            MySqlCommand u = new MySqlCommand(upit, con);
+            u.ExecuteNonQuery();
         }
 
         private void UcitajZahjeveZaNabavkomIzBaze()
@@ -165,7 +222,7 @@ namespace it_shop.ViewModel
                     godisnji = Int32.Parse(r.GetString("dani_godisnjeg_odmora"));
 
                     Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, DateTime.Now, spol, plata, dodatak, godisnji);
-                    listaUposlenika.Add(naziv + " " + spol + " " + adresa + " " + telefon);
+                    //listaUposlenika.Add(naziv + " " + spol + " " + adresa + " " + telefon);
                 }
 
             }
@@ -187,6 +244,8 @@ namespace it_shop.ViewModel
                 double plata, dodatak;
                 int godisnji;
                 // DateTime zaposlenjeDatum;
+                
+                /*
                 try
                 {
                     MySqlDataReader r = UpitNaBazu(upitBaza, connectionBaza);
@@ -204,18 +263,40 @@ namespace it_shop.ViewModel
 
                         Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, DateTime.Now, spol, plata, dodatak, godisnji);
                         listaUposlenika.Add(naziv);
+
                     }
 
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                }
+                }*/
+                Uposlenik tmp = new Uposlenik("Ademir", "Kuca", "0612545", DateTime.Now, "M", 1245, 0.12, 12);
+
+                Uposlenik tmp2 = new Uposlenik("Sale", "KucaSale", "061232545", DateTime.Now, "F", 1245, 0.12, 12);
+
+                Uposlenik tmp3 = new Uposlenik("Hodza", "KucaHodza", "061243445", DateTime.Now, "M", 1245, 0.12, 12);
+                
+                listaUposlenika.Add(tmp);
+                listaUposlenika.Add(tmp2);
+                listaUposlenika.Add(tmp3);
             }
+
 
         }
 
-
+        private void ObrisiUposlenikaIzBaze()
+        {
+            MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+            string uposlenik = OdabraniUposlenik;
+            string upit = "DELETE FROM uposlenici WHERE ime_i_prezime = '" + uposlenik + "';";
+            DMLUpitiNaBazu(upit, connectionBaza);
+            //ListaUposlenika.Remove(uposlenik);
+        }
+        private void UnosNovogKorisnikaUBazu()
+        {
+           
+        }
 
     }
 }

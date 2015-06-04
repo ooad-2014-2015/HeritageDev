@@ -8,15 +8,37 @@ namespace it_shop.Model
 {
     public abstract class Osoba
     {
-        private string PunoIme;
+        private string punoIme;
         private string adresa;
         private string brojTelefona;
+
+        #region Properties
+
+        public string PunoIme
+        {
+            get { return punoIme; }
+            set { punoIme = value; }
+        }
+        public string Adresa
+        {
+            get { return adresa; }
+            set { adresa = value; }
+        }
+        public string BrojTelefona
+        {
+            get { return brojTelefona; }
+            set { brojTelefona = value; }
+        }
+
+        #endregion
 
         public Osoba(string ime, string adr, string brojTel)
         {
             PunoIme = ime;
-            adresa = adr;
-            brojTelefona = brojTel;
+            Adresa = adr;
+            BrojTelefona = brojTel;
         }
+
+      
     }
 }
