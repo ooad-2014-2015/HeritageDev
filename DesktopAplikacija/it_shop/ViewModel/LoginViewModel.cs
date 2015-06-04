@@ -102,7 +102,9 @@ namespace it_shop.ViewModel
                             loginForma.Close();
                             break;
                         case "MONTER":
-                            MessageBox.Show("Tip uposlenika: " + tipuposlenika);
+                            MonterView monter = new MonterView();
+                            monter.Show();
+                            loginForma.Close();
                             break;
                         default:
                             MessageBox.Show("Nema uposlenog sa tim tipom.");
