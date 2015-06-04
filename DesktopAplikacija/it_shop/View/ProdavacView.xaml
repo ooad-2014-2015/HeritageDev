@@ -235,7 +235,7 @@
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Top" 
-                             SelectedValue="{Binding Path=MjeseciGarancije}">                        
+                             SelectedValue="{Binding Path=MjeseciGarancije}">   
                         <ComboBoxItem Content="1" HorizontalAlignment="Stretch"/>
                         <ComboBoxItem Content="2" HorizontalAlignment="Stretch"/>
                         <ComboBoxItem Content="3" HorizontalAlignment="Stretch"/>

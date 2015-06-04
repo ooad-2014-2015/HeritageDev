@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace it_shop.ViewModel {
     public class ProdavacViewModel : INotifyPropertyChanged {
@@ -108,11 +109,48 @@ namespace it_shop.ViewModel {
         }
 
         private void UnosArtikla ( ) {
-            MessageBox.Show(MjeseciGarancije.ToString());
+            
+            MySqlConnection con = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+            try {
+                string _mjeseciGarancije = MjeseciGarancije.Substring(37);
+
+                string _kategorijaProizvoda = KategorijaProizvoda.Substring(37);
+                MessageBox.Show(_kategorijaProizvoda);
+                MessageBox.Show(_mjeseciGarancije);
 
 
+                string upit = "INSERT INTO artikli VALUES (" + IdProizvoda + ", '" + NazivProizvoda + "', '" + _kategorijaProizvoda + "', " + Cijena + ", '" + Opis + "', " + _mjeseciGarancije + ", '" + Proizvodjac + "', '" + DodatnaOprema + "', " + Kolicina + ", null)";
+
+                MessageBox.Show(upit);
+
+                //Task<MySqlDataReader> nit = Task<MySqlDataReader>.Factory.StartNew(( ) => UpitNaBazu(upit, con));
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand(upit, con);
+                cmd.ExecuteNonQuery();
+
+
+            } catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            //} catch (System.AggregateException) {
+            //    MessageBox.Show("Neuspjela konekcija sa bazom podataka!\nPokušajte ponovo.");
+            //} catch (Exception ex) {
+            //    MessageBox.Show("Došlo je do greške!\nMolimo pokušajte ponovo ili kontaktirajte administratora!");
+            }
+            con.Close();
 
         }
+
+        //public void KreirajNit ( ) {
+        //    Thread nit = new Thread(( ) => ValidirajLogin()) { IsBackground = true };
+        //    nit.Join();
+        //}
+
+        private MySqlDataReader UpitNaBazu ( string upit, MySqlConnection con ) {
+            con.Open();
+            MySqlCommand u = new MySqlCommand(upit, con);
+            return u.ExecuteReader();
+        }
+
 
         private void PonistiIzmjene ( ) {
             IdProizvoda = string.Empty;

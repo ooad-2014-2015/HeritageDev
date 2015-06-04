@@ -91,7 +91,11 @@ namespace it_shop.ViewModel
                             direktor.Show();
                             loginForma.Close();
                             break;
-                        case "SERVISER":
+                        case "SUPERVIZOR":
+                            SupervizorView supervizor = new SupervizorView();
+                            supervizor.Show();
+                            loginForma.Close();
+                            break;
                         case "MONTER":
                             MessageBox.Show("Tip uposlenika: " + tipuposlenika);
                             break;
