@@ -107,6 +107,9 @@
     <Compile Include="View\ProdavacView.xaml.cs">
       <DependentUpon>ProdavacView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SupervizorView.xaml.cs">
+      <DependentUpon>SupervizorView.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\DirectorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -118,6 +121,10 @@
     <Page Include="View\ProdavacView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SupervizorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
