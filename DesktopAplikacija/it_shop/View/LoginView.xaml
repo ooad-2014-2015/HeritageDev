@@ -20,7 +20,7 @@
             <RowDefinition Height="226*"/>
             <RowDefinition Height="193*"/> 
         </Grid.RowDefinitions>
-        <Image Source="/Resources/login_screen.jpg" Stretch="Fill" Grid.Row="0" Height="216" VerticalAlignment="Top"/>
+        <Image Source="/Resources/computing.png" Stretch="Fill" Grid.Row="0" Height="216" VerticalAlignment="Top"/>
         <Label Content="Username:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="73,5,0,0" Grid.Row="1" Height="23" Width="66" />
         <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="73,58,0,0" Grid.Row="1" Height="23" Width="63"/>
         <TextBox Name="txt_username"  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Margin="73,33,0,0" Grid.Row="1" FontSize="14" Text="{Binding Username}"/>
