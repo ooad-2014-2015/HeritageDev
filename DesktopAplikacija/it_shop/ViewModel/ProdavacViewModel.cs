@@ -141,13 +141,14 @@ namespace it_shop.ViewModel {
             UnesiButton = new RelayCommand(new Action(UnosNovogArtikla));
             PonistiButton = new RelayCommand(new Action(PonistiIzmjene));
             IzaberiSlikuButton = new RelayCommand(new Action(IzaberiSliku));
-            UcitajSlikuBinding = UcitajSliku(@"/it_shop;component/Resources/no_image.png");
+            //UcitajSlikuBinding = UcitajSliku(@"/it_shop;component/Resources/no_image.png");
+            UcitajSlikuBinding = UcitajSliku(@"../../Resources/no_image.png");
         }
         private BitmapImage UcitajSliku( string _putanja ) {
             BitmapImage b = new BitmapImage();
             b.BeginInit();
             //b.UriSource = new Uri(System.IO.Path.GetFullPath(@"../../Resources/no_image.png"), UriKind.RelativeOrAbsolute);
-            b.UriSource = new Uri(_putanja, UriKind.RelativeOrAbsolute);
+            b.UriSource = new Uri(System.IO.Path.GetFullPath(_putanja), UriKind.RelativeOrAbsolute);
             b.EndInit();
             return b;
         }
