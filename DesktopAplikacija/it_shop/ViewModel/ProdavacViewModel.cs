@@ -9,8 +9,6 @@ using System.Windows.Input;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-
-
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -35,15 +33,11 @@ namespace it_shop.ViewModel {
         private ICommand unesiButton;
         private ICommand ponistiButton;
         private ICommand izaberiSlikuButton;
-        private Image ucitajSliku;
+        private BitmapImage ucitajSliku;
 
         private string putanja;
-        public Image UcitajSlikuBinding {
+        public BitmapImage UcitajSlikuBinding {
             get {
-                if (putanja != "") {
-                    BitmapImage bitmap = new BitmapImage(new Uri(putanja, UriKind.RelativeOrAbsolute));
-                    ucitajSliku.Source = bitmap;
-                } 
                 return ucitajSliku; 
             }
             set { 
@@ -54,8 +48,8 @@ namespace it_shop.ViewModel {
        
         #region Properties
         public ICommand IzaberiSlikuButton {
-            get { return ucitajsliku; }
-            set { ucitajsliku = value; }
+            get { return izaberiSlikuButton; }
+            set { izaberiSlikuButton = value; }
         }
         public ICommand PonistiButton {
             get { return ponistiButton; }
@@ -134,11 +128,7 @@ namespace it_shop.ViewModel {
             UnesiButton = new RelayCommand(new Action(UnosArtikla));
             PonistiButton = new RelayCommand(new Action(PonistiIzmjene));
             IzaberiSlikuButton = new RelayCommand(new Action(IzaberiSliku));
-            //UcitajSlikuBinding = new RelayCommand(new Action(UcitajSliku));
-            putanja = "";
         }
-
-
 
         private void IzaberiSliku ( ) {
             Microsoft.Win32.OpenFileDialog openFileDialog1 = new Microsoft.Win32.OpenFileDialog();
@@ -149,25 +139,22 @@ namespace it_shop.ViewModel {
             putanja = openFileDialog1.FileName;
             if (putanja == string.Empty) {
                 MessageBox.Show("Niste odabrali datoteku.");
+            } else {
+                BitmapImage b = new BitmapImage();
+                b.BeginInit();
+                b.UriSource = new Uri(putanja, UriKind.RelativeOrAbsolute);
+                b.EndInit();
+                UcitajSlikuBinding = b;
             }
-            //slika.Source = new BitmapImage(new Uri(putanja, UriKind.RelativeOrAbsolute));
-            //MessageBox.Show(putanja);
         }
 
         private void UnosArtikla ( ) {
-            
             MySqlConnection con = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+
             try {
                 string _mjeseciGarancije = MjeseciGarancije.Substring(37);
-
                 string _kategorijaProizvoda = KategorijaProizvoda.Substring(37);
-                MessageBox.Show(_kategorijaProizvoda);
-                MessageBox.Show(_mjeseciGarancije);
-
-
                 string upit = "INSERT INTO artikli VALUES (" + IdProizvoda + ", '" + NazivProizvoda + "', '" + _kategorijaProizvoda + "', " + Cijena + ", '" + Opis + "', " + _mjeseciGarancije + ", '" + Proizvodjac + "', '" + DodatnaOprema + "', " + Kolicina + ", null)";
-
-                MessageBox.Show(upit);
 
                 //Task<MySqlDataReader> nit = Task<MySqlDataReader>.Factory.StartNew(( ) => UpitNaBazu(upit, con));
                 con.Open();

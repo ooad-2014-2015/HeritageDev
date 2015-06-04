@@ -124,12 +124,14 @@
                         <ColumnDefinition Width="350"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0"
+                    <Image Name="slika"
+                        Grid.Column="0"
                            Width="300" Height="300"
                            Margin="25,50,0,0"
                            VerticalAlignment="Top"
                            HorizontalAlignment="Left"
-                           Source="{Binding Path=UcitajSlikuBinding}"></Image>
+                           Source="{Binding Path=UcitajSlikuBinding}">
+                    </Image>
                     <Button Name="btn_izaberiSliku"
                             Width="100"
                             Height="25"
