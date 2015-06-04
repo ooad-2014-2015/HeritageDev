@@ -156,7 +156,7 @@ namespace it_shop.ViewModel {
 
         private void UnosArtikla ( ) {
             
-            MySqlConnection con = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
+            MySqlConnection con = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
             try {
                 string _mjeseciGarancije = MjeseciGarancije.Substring(37);
 
