@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+
+
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using it_shop.ViewModel;
+using System.IO;
 
 namespace it_shop.ViewModel {
     public class ProdavacViewModel : INotifyPropertyChanged {
@@ -27,9 +34,32 @@ namespace it_shop.ViewModel {
         private string kolicina;
         private ICommand unesiButton;
         private ICommand ponistiButton;
+        private ICommand izaberiSlikuButton;
+        private Image ucitajSliku;
+
+        private string putanja;
+        public Image UcitajSlikuBinding {
+            get {
+                if (putanja != "") {
+                    BitmapImage bitmap = new BitmapImage(new Uri(putanja, UriKind.RelativeOrAbsolute));
+                    ucitajSliku.Source = bitmap;
+                } 
+                return ucitajSliku; 
+            }
+            set { 
+                ucitajSliku = value;
+                OnPropertyChanged("UcitajSlikuBinding");
+            }
+        }
+        
+        
         //dodati sliku
 
         #region Properties
+        public ICommand IzaberiSlikuButton {
+            get { return ucitajsliku; }
+            set { ucitajsliku = value; }
+        }
         public ICommand PonistiButton {
             get { return ponistiButton; }
             set { ponistiButton = value; }
@@ -106,6 +136,25 @@ namespace it_shop.ViewModel {
         public ProdavacViewModel ( ) {
             UnesiButton = new RelayCommand(new Action(UnosArtikla));
             PonistiButton = new RelayCommand(new Action(PonistiIzmjene));
+            IzaberiSlikuButton = new RelayCommand(new Action(IzaberiSliku));
+            //UcitajSlikuBinding = new RelayCommand(new Action(UcitajSliku));
+            putanja = "";
+        }
+
+
+
+        private void IzaberiSliku ( ) {
+            Microsoft.Win32.OpenFileDialog openFileDialog1 = new Microsoft.Win32.OpenFileDialog();
+            openFileDialog1.Filter = "JPEG Files(.png)|*.jpg|All Files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.Multiselect = false;
+            openFileDialog1.ShowDialog();
+            putanja = openFileDialog1.FileName;
+            if (putanja == string.Empty) {
+                MessageBox.Show("Niste odabrali datoteku.");
+            }
+            //slika.Source = new BitmapImage(new Uri(putanja, UriKind.RelativeOrAbsolute));
+            //MessageBox.Show(putanja);
         }
 
         private void UnosArtikla ( ) {
@@ -175,5 +224,7 @@ namespace it_shop.ViewModel {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        public ICommand ucitajsliku { get; set; }
     }
 }
