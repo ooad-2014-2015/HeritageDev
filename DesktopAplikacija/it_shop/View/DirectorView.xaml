@@ -20,8 +20,9 @@
                     <ListBox Margin="5,30,0,35"
                               HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
-                              ScrollViewer.VerticalScrollBarVisibility="Auto"></ListBox>
-                    <Button Margin="5,0,0,5"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ListaUposlenika}" SelectedItem="{Binding OdabraniUposlenik, Mode=TwoWay}" ></ListBox>
+                    <Button Command="{Binding Path=UcitajZahtjeve}"
+                            Margin="5,0,0,5"
                             Width="100"
                             Height="25"
                             HorizontalAlignment="Center"

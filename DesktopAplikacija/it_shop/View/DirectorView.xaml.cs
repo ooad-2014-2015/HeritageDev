@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using it_shop.ViewModel;
 
 namespace it_shop.View {
     /// <summary>
@@ -19,6 +20,7 @@ namespace it_shop.View {
     public partial class DirectorView : Window {
         public DirectorView() {
             InitializeComponent();
+            this.DataContext = new DirektorViewModel();
         }
     }
 }

@@ -25,6 +25,7 @@ namespace it_shop.ViewModel
 
 
         #region Properties
+       
         public List<ZahtjevZaNabavkom> ListaZahtjeva
 	    {
 		    get { return listaZahtjeva;}
@@ -45,6 +46,7 @@ namespace it_shop.ViewModel
 
             }
         }
+       
         public ObservableCollection<Uposlenik> ListaUposlenika
         {
             get { return listaUposlenika; }
@@ -55,6 +57,7 @@ namespace it_shop.ViewModel
 
             }
         }
+        
         public Uposlenik OdabraniUposlenik
         {
             get { return odabraniUposlenik; }
@@ -64,6 +67,7 @@ namespace it_shop.ViewModel
                 OnPropertyChanged("OdabraniUposlenik");
             }
         }
+      
         public ICommand UcitajZahtjeve
         {
             get { return ucitajZahtjeve; }
@@ -75,7 +79,6 @@ namespace it_shop.ViewModel
             get { return odobriZahtjev; }
             set { odobriZahtjev = value; }
         }
-
 
         public ICommand ObrisiZahtjev
         {
@@ -107,11 +110,12 @@ namespace it_shop.ViewModel
 
         public DirektorViewModel()
         {
-            ucitajZahtjeve = new RelayCommand(new Action(UcitajZahjeveZaNabavkomIzBaze));
+            UcitajZahtjeve = new RelayCommand(new Action(UcitajZahjeveZaNabavkomIzBaze));
         }
 
         private void UcitajZahjeveZaNabavkomIzBaze()
         {
+            MessageBox.Show("Test");
             MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
             try
             {
