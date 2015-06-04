@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -17,6 +18,7 @@ namespace it_shop.ViewModel
     public class DirektorViewModel : INotifyPropertyChanged
     {
        
+      
         public DirektorViewModel()
         {
             UcitajZahtjeve = new RelayCommand(new Action(UcitajZahjeveZaNabavkomIzBaze));
@@ -24,7 +26,7 @@ namespace it_shop.ViewModel
             AzuzirajInfoUposlenika = new RelayCommand(new Action(AzurirajInformacijeKorisnika));
             UnosUposlenika = new RelayCommand(new Action(UnesiNovogUposlenikaUBazu));
             PonistiUnosUposlenika = new RelayCommand(new Action(OcistiFormuZaUnosKorisnika));
-           
+            PonistiInfoUposlenika = new RelayCommand(new Action(OcistiFormuZaAzuriranjeInformacijaUposlenih));
         }
 
         private MySqlDataReader UpitNaBazu(string upit, MySqlConnection con)
@@ -135,6 +137,7 @@ namespace it_shop.ViewModel
         private ObservableCollection<Uposlenik> listaUposlenika = new ObservableCollection<Uposlenik>();
         private ICommand obrisiUposlenika;
         private ICommand azuzirajInfoUposlenika;
+        private ICommand ponistiInfoUposlenika;
         private string imeAzuriraj;
         private string prezimeAzuriraj;
         private string spolAzuriraj;
@@ -164,7 +167,11 @@ namespace it_shop.ViewModel
             get { return obrisiUposlenika; }
             set { obrisiUposlenika = value; }
         }
-       
+        public ICommand PonistiInfoUposlenika
+        {
+            get { return ponistiInfoUposlenika; }
+            set { ponistiInfoUposlenika = value; }
+        }
         public int OdabraniTab
         {
             get { return odabraniTab; }
@@ -173,8 +180,6 @@ namespace it_shop.ViewModel
                 odabraniTab = value;
                 if (OdabraniTab == 1)
                     UcitajUposlenikeIzBaze();
-
-
             }
         }
 
@@ -298,14 +303,16 @@ namespace it_shop.ViewModel
 
 
         #region Metode
+      
         private void UcitajUposlenikeIzBaze()
         {
+
             if (ListaUposlenika.Count == 0)
             {
                 MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
 
                 string upitBaza = "SELECT * FROM uposlenici;";
-                string naziv, spol, telefon, adresa, datumZaposlenja;
+                string naziv, spol, telefon, adresa;
                 double plata, dodatak;
                 int godisnji;
                 DateTime zaposlenjeDatum;
@@ -313,19 +320,20 @@ namespace it_shop.ViewModel
 
                 try
                 {
-                    MySqlDataReader r = UpitNaBazu(upitBaza, connectionBaza);
+                    Task<MySqlDataReader> nit = Task<MySqlDataReader>.Factory.StartNew(() => UpitNaBazu(upitBaza, connectionBaza));
+                    
+                    MySqlDataReader r = nit.Result;
                     while (r.Read())
                     {
                         naziv = r.GetString("ime_i_prezime");
                         spol = r.GetString("spol");
                         adresa = r.GetString("adresa");
                         telefon = r.GetString("broj_telefona");
-                        datumZaposlenja = r.GetString("datum_zaposlenja");
                         plata = double.Parse(r.GetString("plata"), System.Globalization.CultureInfo.InvariantCulture);
                         dodatak = double.Parse(r.GetString("dodatak_na_platu"), System.Globalization.CultureInfo.InvariantCulture);
-                        zaposlenjeDatum = DateTime.Parse(datumZaposlenja, new CultureInfo("en-CA"));
+                        zaposlenjeDatum = r.GetDateTime("datum_zaposlenja"); 
                         godisnji = Int32.Parse(r.GetString("dani_godisnjeg_odmora"));
-
+                        
                         //Tip Resolve
                         Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, zaposlenjeDatum, spol, plata, dodatak, godisnji);
                         ListaUposlenika.Add(tmp);
@@ -349,11 +357,15 @@ namespace it_shop.ViewModel
         {
             MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
             Uposlenik uposlenik = OdabraniUposlenik;
+      
             string upit = "DELETE FROM uposlenici WHERE ime_i_prezime = '" + uposlenik.PunoIme + "';";
             DMLUpitiNaBazu(upit, connectionBaza);
-            //ListaUposlenika.Remove(uposlenik);
+
+            ListaUposlenika.Clear();
+            UcitajUposlenikeIzBaze();
         }
 
+        //Username i Tip treba jos citat i azurirat
         private void UcitajInformacijeZaposlenika()
         {
             ImeAzuriraj = OdabraniUposlenik.PunoIme;
@@ -409,7 +421,7 @@ namespace it_shop.ViewModel
             UsernameAzuriraj = String.Empty;
             PasswordAzuriraj = String.Empty;
         }
-        
+
         #endregion
        
         
@@ -531,8 +543,8 @@ namespace it_shop.ViewModel
         private void UnesiNovogUposlenikaUBazu()
         {
 
-            SpolUposlenika = SpolUposlenika.Substring(37);
-            TipUposlenika = TipUposlenika.Substring(37);
+            SpolUposlenika = SpolUposlenika.Substring(38);
+            TipUposlenika = TipUposlenika.Substring(38);
 
             
             DaniGodisnjegUposlenika = DaniGodisnjegUposlenika.Substring(37);
@@ -552,6 +564,8 @@ namespace it_shop.ViewModel
             {
                 MessageBox.Show(ex.ToString());
             }
+            ListaUposlenika.Clear();
+            UcitajUposlenikeIzBaze();
 
         }
 

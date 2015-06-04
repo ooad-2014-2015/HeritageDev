@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace it_shop.Model
 {
@@ -18,7 +19,7 @@ namespace it_shop.Model
         public Uposlenik(string ime, string adresa, string telefon, DateTime datumZasposlenja, string spol, double plata, double dodatak, int godisnji)
             : base(ime, adresa, telefon)
         {
-            DatumZaposlenja = datumZaposlenja;
+            DatumZaposlenja = datumZasposlenja;
             Spol = spol;
             Plata = plata;
             DodatakNaPlatu = dodatak;

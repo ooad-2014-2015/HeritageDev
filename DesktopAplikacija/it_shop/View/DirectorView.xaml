@@ -141,7 +141,7 @@
                                            Height="25"
                                            Grid.Column="1"
                                            HorizontalAlignment="Left"
-                                           VerticalAlignment="Top">Datum zaspolenja</Label>
+                                           VerticalAlignment="Top">Datum zaposlenja</Label>
                                     <Label Margin="20,330,0,0"
                                            Width="150"
                                            Height="25"
@@ -258,6 +258,7 @@
                                             HorizontalAlignment="Left"
                                             Margin="175,485,0,0">Unesi</Button>
                                     <Button Width="100" Height="25"
+                                            Command="{Binding Path=PonistiInfoUposlenika}"
                                             Grid.Column="1"
                                             VerticalAlignment="Top"
                                             HorizontalAlignment="Left"
