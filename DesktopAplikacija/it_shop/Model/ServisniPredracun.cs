@@ -8,13 +8,13 @@ namespace it_shop.Model
 {
     public class ServisniPredracun : Racun
     {
-        private List<ServisniUredjaj> listaServisnihUredjaj;
+        private ServisniUredjaj servisniUredjaj;
         private DateTime datumPredaje;
 
-        public ServisniPredracun(Kupac kupac, List<ServisniUredjaj> lista, DateTime datumPredaje) 
+        public ServisniPredracun(Kupac kupac, ServisniUredjaj serUredjaj, DateTime datumPredaje) 
             : base(kupac)
         {
-            ListaServisnihUredjaj = listaServisnihUredjaj;
+            ServisniUredjaj = serUredjaj;
             DatumPredaje = datumPredaje;
         }
 
@@ -24,11 +24,11 @@ namespace it_shop.Model
             get { return datumPredaje; }
             set { datumPredaje = value; }
         }
-        
-        public List<ServisniUredjaj> ListaServisnihUredjaj
+
+        public ServisniUredjaj ServisniUredjaj
         {
-            get { return listaServisnihUredjaj; }
-            set { listaServisnihUredjaj = value; }
+            get { return servisniUredjaj; }
+            set { servisniUredjaj = value; }
         }
         #endregion
 
