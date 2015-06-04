@@ -9,8 +9,92 @@
         <StatusBar Margin="0" VerticalAlignment="Bottom" RenderTransformOrigin="0.9,4.6" Grid.ColumnSpan="2" Height="22">
             <StatusBarItem Content="StatusBarItem" VerticalAlignment="Bottom"/>
         </StatusBar>
-        <Grid>
+        <TabControl Margin="0,20,0,22"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+            <TabItem Header="Zahtjevi za placanje na rate">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Height="25"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Top"
+                           Margin="5,5,5,0">Postojeci zahtjevi za placanje na rate:</Label>
+                    <ListView Margin="5,30,5,35"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"></ListView>
+                    <Label Height="25"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Top"
+                           Margin="5,5,5,0"
+                           Grid.Column="1">Sadrzaj zahtjeva:</Label>
+                    <ListView Margin="5,30,5,35"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Grid.Column="1"></ListView>
+                    <Button Width="100" Height="25"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Margin="0,0,5,5">Obrisi zahtjev</Button>
+                    <Button Width="100" Height="25"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Margin="5,0,0,5"
+                            Grid.Column="1">Odobri zahtjev</Button>
+                </Grid>
+            </TabItem>
             
-        </Grid>
+            <TabItem Header="Napravi zahtjev za nabavkom">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Height="25"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Top"
+                           Margin="5,5,5,0">Potrebni proizvodi</Label>
+                    <ListBox HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                             Margin="5,30,5,5"></ListBox>
+                    <Label Margin="5,5,5,0"
+                           Width="100"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left"
+                           Grid.Column="1">Proizvod:</Label>
+                    <TextBox Margin="110,5,5,0"
+                             Height="25"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Stretch"
+                             Grid.Column="1"></TextBox>
+                    <Label Margin="5,35,5,0"
+                           Width="100"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left"
+                           Grid.Column="1">Kolicina:</Label>
+                    <TextBox Margin="110,35,110,0"
+                             Height="25"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Stretch"
+                             Grid.Column="1"></TextBox>
+                    <Button Margin="0,35,5,0"
+                            Width="100" Height="25"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Right"
+                            Grid.Column="1">Dodaj</Button>
+                    <Label Margin="5,65,0,0"
+                           Height="25"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left"
+                           Grid.Column="1">Stavke narudzbe:</Label>
+                    <ListBox Margin="5,95,5,5"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                             Grid.Column="1"></ListBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
