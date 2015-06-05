@@ -191,167 +191,150 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
                             Command="{Binding Path=IzaberiSlikuButton}">Izaberi sliku</Button>
-                    <Label Margin="20,50,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Naziv proizvoda</Label>
-                    <Label Margin="20,80,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Kategorija proizvoda</Label>
-                    <Label Margin="20,110,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Godina proizvodnje</Label>
-                    <Label Margin="20,140,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Cijena</Label>
-                    <Label Margin="20,170,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Opis</Label>
-                    <Label Margin="20,275,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Mjeseci garancije</Label>
-                    <Label Margin="20,305,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Proizvodjac</Label>
-                    <Label Margin="20,335,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Dodatna oprema</Label>
-                    <Label Margin="20,390,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Serijski broj</Label>
-                    <Label Margin="20,420,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Bar kod</Label>
-                    <Label Margin="20,450,0,0"
-                           Width="150"
-                           Height="25"
-                           Grid.Column="1"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Kolicina</Label>
-                    <TextBox Margin="175,50,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"
-                             Text ="{Binding Path = NazivProizvoda}"></TextBox>
-                    <ComboBox Margin="175,80,50,0"
-                              Height="25"
-                              Grid.Column="1"
-                              HorizontalAlignment="Stretch"
-                              VerticalAlignment="Top"
-                              SelectedValue="{Binding Path=KategorijaProizvoda}">
-                        <ComboBoxItem Content="Laptop" HorizontalAlignment="Stretch" />
-                        <ComboBoxItem Content="Racunar" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="Mobitel" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="Mrezna oprema" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="Softver" HorizontalAlignment="Stretch"/>
-                    </ComboBox>
-                    <TextBox Margin="175,110,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"
-                             Text="{Binding Path=GodinaProizvodnje}"></TextBox>
-                    <TextBox Margin="175,140,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"
-                             Text="{Binding Path=Cijena}"></TextBox>
-                    <TextBox Margin="175,170,50,0"
-                             Height="100"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"
-                             ScrollViewer.VerticalScrollBarVisibility="Auto"
-                             Text="{Binding Path=Opis}"></TextBox>
-                    <ComboBox Margin="175,275,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top" 
-                             SelectedValue="{Binding Path=MjeseciGarancije}">
-                        <ComboBoxItem  Content="1" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="2" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="3" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="6" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="12" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="24" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="36" HorizontalAlignment="Stretch"/>
-                        <ComboBoxItem Content="48" HorizontalAlignment="Stretch"/>
-                    </ComboBox>
-                    <TextBox Margin="175,305,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"
-                             Text="{Binding Path=Proizvodjac}"></TextBox>
-                    <TextBox Margin="175,335,50,0"
-                             Height="50"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"
-                             ScrollViewer.VerticalScrollBarVisibility="Auto"
-                             Text ="{Binding Path=DodatnaOprema}"></TextBox>
-                    <TextBox Margin="175,390,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"
-                             Text="{Binding Path=SerijskiBroj}"></TextBox>
-                    <TextBox Margin="175,420,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"
-                             Text="{Binding Path=BarKod}"></TextBox>
-                    <TextBox Margin="175,450,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"
-                             Text="{Binding Path=Kolicina}"></TextBox>
-                    <Button Width="100" Height="25"
-                            Grid.Column="1"
-                            VerticalAlignment="Top"
-                            HorizontalAlignment="Left"
-                            Margin="175,485,0,0"
-                            Command="{Binding Path=UnesiButton}">Unesi</Button>
-                    <Button Width="100" Height="25"
-                            Grid.Column="1"
-                            VerticalAlignment="Top"
-                            HorizontalAlignment="Left"
-                            Margin="285,485,0,0"
-                            Command="{Binding Path=PonistiButton}">Ponisti</Button>
+                    <ScrollViewer Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <Grid>
+                                <Label Margin="20,50,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Naziv proizvoda</Label>
+                                <Label Margin="20,80,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Kategorija proizvoda</Label>
+                                <Label Margin="20,110,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Godina proizvodnje</Label>
+                                <Label Margin="20,140,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Cijena</Label>
+                                <Label Margin="20,170,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Opis</Label>
+                                <Label Margin="20,275,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Mjeseci garancije</Label>
+                                <Label Margin="20,305,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Proizvodjac</Label>
+                                <Label Margin="20,335,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Dodatna oprema</Label>
+                                <Label Margin="20,390,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Serijski broj</Label>
+                                <Label Margin="20,420,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Bar kod</Label>
+                                <Label Margin="20,450,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">Kolicina</Label>
+                                <TextBox Margin="175,50,50,0"
+                                         Height="25"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"
+                                         Text ="{Binding Path = NazivProizvoda}"></TextBox>
+                                <ComboBox Margin="175,80,50,0"
+                                          Height="25"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Top"
+                                          SelectedValue="{Binding Path=KategorijaProizvoda}">
+                                    <ComboBoxItem Content="Laptop" HorizontalAlignment="Stretch" />
+                                    <ComboBoxItem Content="Racunar" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="Mobitel" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="Mrezna oprema" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="Softver" HorizontalAlignment="Stretch"/>
+                                </ComboBox>
+                                <TextBox Margin="175,110,50,0"
+                                         Height="25"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"
+                                         Text="{Binding Path=GodinaProizvodnje}"></TextBox>
+                                <TextBox Margin="175,140,50,0"
+                                         Height="25"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"
+                                         Text="{Binding Path=Cijena}"></TextBox>
+                                <TextBox Margin="175,170,50,0"
+                                         Height="100"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"
+                                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                         Text="{Binding Path=Opis}"></TextBox>
+                                <ComboBox Margin="175,275,50,0"
+                                          Height="25"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Top" 
+                                          SelectedValue="{Binding Path=MjeseciGarancije}">
+                                    <ComboBoxItem  Content="1" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="2" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="3" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="6" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="12" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="24" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="36" HorizontalAlignment="Stretch"/>
+                                    <ComboBoxItem Content="48" HorizontalAlignment="Stretch"/>
+                                </ComboBox>
+                                <TextBox Margin="175,305,50,0"
+                                         Height="25"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"
+                                         Text="{Binding Path=Proizvodjac}"></TextBox>
+                                <TextBox Margin="175,335,50,0"
+                                         Height="50"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"
+                                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                         Text ="{Binding Path=DodatnaOprema}"></TextBox>
+                                <TextBox Margin="175,390,50,0"
+                                         Height="25"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"
+                                         Text="{Binding Path=SerijskiBroj}"></TextBox>
+                                <TextBox Margin="175,420,50,0"
+                                         Height="25"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"
+                                         Text="{Binding Path=BarKod}"></TextBox>
+                                <TextBox Margin="175,450,50,0"
+                                         Height="25"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Top"
+                                         Text="{Binding Path=Kolicina}"></TextBox>
+                                <Button Width="100" Height="25"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Left"
+                                        Margin="175,485,0,0"
+                                        Command="{Binding Path=UnesiButton}">Unesi</Button>
+                                <Button Width="100" Height="25"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Left"
+                                        Margin="285,485,0,0"
+                                        Command="{Binding Path=PonistiButton}">Ponisti</Button>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                    
                 </Grid>
             </TabItem>
         </TabControl>
