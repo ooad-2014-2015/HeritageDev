@@ -22,6 +22,7 @@
                               IsReadOnly="True"
                               HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
+                              AutoGenerateColumns="False"
                               ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ListaZahtjeva}" SelectedItem="{Binding OdabraniZahtjev}" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Datum zahtjeva" Binding="{Binding DatumZahtjeva}" Width="1*"/>
@@ -39,12 +40,14 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
                            Grid.Column="1">Stavke zahtjeva</Label>
-                    <DataGrid Margin="5,30,5,35"
+                    <DataGrid IsReadOnly="True"
+                              Margin="5,30,5,35"
                               HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
                               Grid.Column="1"
-                              ScrollViewer.VerticalScrollBarVisibility="Auto">
-                              ItemsSource="{Binding ListaArtikalaZahtjeva}"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              AutoGenerateColumns="False"
+                              ItemsSource="{Binding ListaArtikalaZahtjeva}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Naziv" Binding="{Binding Naziv}" Width="1*"/>
                             <DataGridTextColumn Header="Opis" Binding="{Binding Opis}" Width="1*"/>
@@ -81,19 +84,18 @@
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top">Lista zaposlenika:</Label>
                         <DataGrid IsReadOnly="True"
-                                  ItemsSource="{Binding ListaUposlenika}"
-                                  SelectedItem="{Binding OdabraniUposlenik}"
                                   AutoGenerateColumns="False"
-                                  CanUserAddRows="False"
                                   Margin="5,35,0,5"
                                   SelectionMode="Single"
                                   SelectionUnit="FullRow"
                                   HorizontalAlignment="Stretch"
                                   VerticalAlignment="Stretch"
+                                  ItemsSource="{Binding ListaUposlenika}"
+                                  SelectedItem="{Binding OdabraniUposlenik}"
                                   ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Naziv" Binding="{Binding PunoIme}" Width="1*"/>
-                                <DataGridTextColumn Header="Kontakt telefon" Binding="{Binding BrojTelefona}" Width="1*" />
+                                <DataGridTextColumn Header="Naziv" Binding="{Binding PunoIme}"/>
+                                <DataGridTextColumn Header="Kontakt telefon" Binding="{Binding BrojTelefona}"/>
                             </DataGrid.Columns>
 
                         </DataGrid>
@@ -319,89 +321,72 @@
                             <Grid>
                                 <Label Margin="20,50,0,0"
                                        Width="150"
-                                       Height="25"
                                        Grid.Column="1"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top">Ime</Label>
                                 <Label Margin="20,80,0,0"
                                        Width="150"
-                                       Height="25"
                                        Grid.Column="1"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top">Prezime</Label>
                                 <Label Margin="20,110,0,0"
                                        Width="150"
-                                       Height="25"
                                        Grid.Column="1"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top">Spol</Label>
                                 <Label Margin="20,140,0,0"
                                        Width="150"
-                                       Height="25"
                                        Grid.Column="1"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top">Broj telefona</Label>
                                 <Label Margin="20,170,0,0"
                                        Width="150"
-                                       Height="25"
                                        Grid.Column="1"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top">Adresa</Label>
                                 <Label Margin="20,200,0,0"
                                        Width="150"
-                                       Height="25"
                                        Grid.Column="1"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top">Tip uposlenika</Label>
                                 <Label Margin="20,230,0,0"
                                        Width="150"
-                                       Height="25"
-                                       Grid.Column="1"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Top">Datum zaspolenja</Label>
-                                <Label Margin="20,260,0,0"
-                                       Width="150"
-                                       Height="25"
                                        Grid.Column="1"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top">Plata</Label>
-                                <Label Margin="20,290,0,0"
+                                <Label Margin="20,260,0,0"
                                        Width="150"
-                                       Height="25"
                                        Grid.Column="1"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top">Dodatak na platu</Label>
-                                <Label Margin="20,320,0,0"
+                                <Label Margin="20,290,0,0"
                                        Width="150"
-                                       Height="25"
                                        Grid.Column="1"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top">Dani godisnjeg odmora</Label>
-                                <Label Margin="20,350,0,0"
+                                <Label Margin="20,320,0,0"
                                        Width="150"
-                                       Height="25"
                                        Grid.Column="1"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top">Username</Label>
-                                <Label Margin="20,380,0,0"
+                                <Label Margin="20,350,0,0"
                                        Width="150"
-                                       Height="25"
                                        Grid.Column="1"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top">Password</Label>
-                                <TextBox Margin="175,50,50,0"
+                                <TextBox Margin="175,50,25,0"
                                          Text="{Binding ImeUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
-                                <TextBox Margin="175,80,50,0"
+                                <TextBox Margin="175,80,25,0"
                                          Text="{Binding PrezimeUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
-                                <ComboBox Margin="175,110,50,0"
+                                <ComboBox Margin="175,110,25,0"
                                           SelectedValue="{Binding Path=SpolUposlenika}"
                                           Height="25"
                                           Grid.Column="1"
@@ -410,19 +395,19 @@
                                     <ComboBoxItem Content="M" HorizontalAlignment="Stretch"/>
                                     <ComboBoxItem Content="Z" HorizontalAlignment="Stretch"/>
                                 </ComboBox>
-                                <TextBox Margin="175,140,50,0"
+                                <TextBox Margin="175,140,25,0"
                                          Text="{Binding BrojTelefonaUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
-                                <TextBox Margin="175,170,50,0"
+                                <TextBox Margin="175,170,25,0"
                                          Text="{Binding AdresaUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
-                                <ComboBox Margin="175,200,50,0"
+                                <ComboBox Margin="175,200,25,0"
                                          SelectedValue="{Binding Path=TipUposlenika}"
                                           Height="25"
                                          Grid.Column="1"
@@ -434,30 +419,19 @@
                                     <ComboBoxItem Content="SERVISER" HorizontalAlignment="Stretch"/>
                                     <ComboBoxItem Content="MONTER" HorizontalAlignment="Stretch"/>
                                 </ComboBox>
-                                <TextBox Margin="175,230,50,0"
-                                         Text="{Binding DatumZaposlenjaUposlenika}"
-                                         Height="25"
-                                         Grid.Column="1"
-                                         HorizontalAlignment="Stretch"
-                                         VerticalAlignment="Top"></TextBox>
-                                <TextBox Margin="175,260,50,0"
+                                <TextBox Margin="175,230,25,0"
                                          Text="{Binding PlataUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
-                                <TextBox Margin="175,290,50,0"
-                                         Height="25"
-                                         Grid.Column="1"
-                                         HorizontalAlignment="Stretch"
-                                         VerticalAlignment="Top"></TextBox>
-                                <TextBox Margin="175,290,50,0"
+                                <TextBox Margin="175,260,25,0"
                                          Text="{Binding DodatakNaPlatuUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
-                                <ComboBox Margin="175,320,50,0"
+                                <ComboBox Margin="175,290,25,0"
                                           SelectedValue="{Binding Path=DaniGodisnjegUposlenika}"
                                           Height="25"
                                           Grid.Column="1"
@@ -470,13 +444,13 @@
                                     <ComboBoxItem Content="30" HorizontalAlignment="Stretch"/>
                                     <ComboBoxItem Content="40" HorizontalAlignment="Stretch"/>
                                 </ComboBox>
-                                <TextBox Margin="175,350,50,0"
+                                <TextBox Margin="175,320,25,0"
                                          Text="{Binding UsernameUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"></TextBox>
-                                <TextBox Margin="175,380,50,0"
+                                <TextBox Margin="175,350,25,0"
                                          Text="{Binding PasswordUposlenika}"
                                          Height="25"
                                          Grid.Column="1"
@@ -486,14 +460,14 @@
                                         Command="{Binding UnosUposlenika}"
                                         Grid.Column="1"
                                         VerticalAlignment="Top"
-                                        HorizontalAlignment="Left"
-                                        Margin="175,415,0,0">Unesi</Button>
+                                        HorizontalAlignment="Right"
+                                        Margin="175,385,135,0">Unesi</Button>
                                 <Button Width="100" Height="25"
                                         Command="{Binding PonistiUnosUposlenika}"
                                         Grid.Column="1"
                                         VerticalAlignment="Top"
-                                        HorizontalAlignment="Left"
-                                        Margin="285,415,0,0">Ponisti</Button>
+                                        HorizontalAlignment="Right"
+                                        Margin="285,385,25,0">Ponisti</Button>
                             </Grid>
                         </StackPanel>
                     </ScrollViewer>
