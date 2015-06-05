@@ -18,10 +18,16 @@
                            Height="25"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top">Lista zahtjeva:</Label>
-                    <ListBox Margin="5,30,0,35"
+                    <DataGrid Margin="5,30,0,35"
+                              IsReadOnly="True"
                               HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
-                              ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ListaUposlenika}" SelectedItem="{Binding OdabraniUposlenik, Mode=TwoWay}" ></ListBox>
+                              ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ListaZahtjeva}" SelectedItem="{Binding OdabraniZahtjev}" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Datum zahtjeva" Binding="{Binding DatumZahtjeva}" Width="1*"/>
+                            <DataGridTextColumn Header="Zahtjev odobren" Binding="{Binding Odobren}" Width="1*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Button Command="{Binding Path=UcitajZahtjeve}"
                             Margin="5,0,0,5"
                             Width="100"
@@ -33,17 +39,29 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
                            Grid.Column="1">Stavke zahtjeva</Label>
-                    <ListView Margin="5,30,5,35"
+                    <DataGrid Margin="5,30,5,35"
                               HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
                               Grid.Column="1"
-                              ScrollViewer.VerticalScrollBarVisibility="Auto"></ListView>
-                    <Button Margin="0,0,105,5"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto">
+                              ItemsSource="{Binding ListaArtikalaZahtjeva}"
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Naziv" Binding="{Binding Naziv}" Width="1*"/>
+                            <DataGridTextColumn Header="Opis" Binding="{Binding Opis}" Width="1*"/>
+                            <DataGridTextColumn Header="Godina proizvodnje" Binding="{Binding GodinaProizvodnje}" Width="1*"/>
+                            <DataGridTextColumn Header="Kategorija" Binding="{Binding Kategorija}" Width="1*"/>
+                            <DataGridTextColumn Header="Cijena" Binding="{Binding Cijena}" Width="1*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button 
+                            Command="{Binding Path=OdobriZahtjev}"
+                            Margin="0,0,105,5"
                             Width="100" Height="25"
                             HorizontalAlignment="Center"
                             Grid.Column="1"
                             VerticalAlignment="Bottom">Odobri zahtjev</Button>
-                    <Button Margin="105,0,0,5"
+                    <Button Command="{Binding Path=ObrisiZahtjev}"
+                            Margin="105,0,0,5"
                             Width="100" Height="25"
                             HorizontalAlignment="Center"
                             Grid.Column="1"

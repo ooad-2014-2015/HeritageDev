@@ -11,15 +11,32 @@ namespace it_shop.Model
         
         private List<Artikal> listaArtikala;
         private bool zahtjevOdobren;
+        private string  datumZahtjeva;
+        private string id;
+
+       
 
         public ZahtjevZaNabavkom(List<Artikal> lista, bool odobren)
         {
             ZahtjevOdobren = odobren;
             ListaArtikala = lista;
+            DatumZahtjeva = DateTime.Now.ToShortDateString();
+
         }
 
 
         #region Properties
+        public string Id 
+        {
+            get { return id; }
+            set { id = value; }
+        }
+        public string DatumZahtjeva
+        {
+            get { return datumZahtjeva; }
+            set { datumZahtjeva = value; }
+        }
+        
         public bool ZahtjevOdobren
         {
             get { return zahtjevOdobren; }

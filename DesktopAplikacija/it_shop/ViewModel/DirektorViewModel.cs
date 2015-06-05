@@ -29,6 +29,9 @@ namespace it_shop.ViewModel
             PonistiUnosUposlenika = new RelayCommand(new Action(OcistiFormuZaUnosKorisnika));
             UcitajSlikuBinding = UcitajSliku(@"../../Resources/no_image.png");
             IzaberiSliku = new RelayCommand(new Action(IzaberiSliku1));
+            OdobriZahtjev = new RelayCommand(new Action(OdobriZahtjevZaNabavkom));
+            ObrisiZahtjev = new RelayCommand(new Action(ObrisiZahtjevZaNabavkom));
+            
         }
 
         private MySqlDataReader UpitNaBazu(string upit, MySqlConnection con)
@@ -49,9 +52,11 @@ namespace it_shop.ViewModel
         #region Zahtjevi Za Nabavke - Tab 1
 
         #region Atributi
-      
-        private ZahtjevZaNabavkom odabranizahtjev;
-        private ObservableCollection<string> listaZahtjeva;
+
+        private ZahtjevZaNabavkom odabraniZahtjev = null;
+        private ObservableCollection<ZahtjevZaNabavkom> listaZahtjeva;
+        private ObservableCollection<Artikal> listaArtikalaZahtjeva = new ObservableCollection<Artikal>();
+        
         private ICommand obrisiZahtjev;
         private ICommand odobriZahtjev;
         private ICommand ucitajZahtjeve;
@@ -60,7 +65,32 @@ namespace it_shop.ViewModel
 
       
         #region Properties
-       
+
+        public ObservableCollection<Artikal> ListaArtikalaZahtjeva
+        {
+            get { return listaArtikalaZahtjeva; }
+            set { listaArtikalaZahtjeva = value; OnPropertyChanged("ListaArtikalaZahtjeva"); }
+        }
+        public ObservableCollection<ZahtjevZaNabavkom> ListaZahtjeva
+        {
+            get { return listaZahtjeva; }
+            set
+            {
+                listaZahtjeva = value;
+                OnPropertyChanged("ListaZahtjeva");
+            }
+        }
+        public ZahtjevZaNabavkom OdabraniZahtjev
+        {
+            get { return odabraniZahtjev; }
+            set
+            {
+                odabraniZahtjev = value;
+                PrikaziDetaljeZahtjevaZaNabavkom();
+                OnPropertyChanged("OdabraniZahtjev");
+
+            }
+        }
         public ICommand UcitajZahtjeve
         {
             get { return ucitajZahtjeve; }
@@ -84,7 +114,7 @@ namespace it_shop.ViewModel
         
         #region Metode
        
-        //Zahtjeve ucitava trenutno ucitava uposlenike
+        
         private void UcitajZahjeveZaNabavkomIzBaze()
         {
             MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
@@ -92,28 +122,48 @@ namespace it_shop.ViewModel
             try
             {
 
-                string upitBaza = "SELECT * FROM uposlenici;";
-                string naziv, spol, telefon, adresa, datumZaposlenja;
-                double plata, dodatak;
-                int godisnji;
-                // DateTime zaposlenjeDatum;
-
+                string upitBaza = "SELECT * FROM zahtjevi_nabavke zn, artikli a WHERE a.id_nabavka = zn.id;";
+                string datum;
+                string odobren;
+                bool odobrenZah;
+                string idZahtjeva;
+                string _naziv, _kategoija, _opis, _proizvodjac, _dodatnaOprema, _serijskiBroj, _barkod;
+                int _godina, _mjeseciGarancije, _kolicina;
+                double _cijena;
+                List<Artikal> lista = new List<Artikal>();
                 MySqlDataReader r = UpitNaBazu(upitBaza, connectionBaza);
                 while (r.Read())
                 {
-                    naziv = r.GetString("ime_i_prezime");
-                    spol = r.GetString("spol");
-                    adresa = r.GetString("adresa");
-                    telefon = r.GetString("broj_telefona");
-                    //datumZaposlenja = r.GetString("datum_zaposlenja");
-                    plata = double.Parse(r.GetString("plata"), System.Globalization.CultureInfo.InvariantCulture);
-                    dodatak = double.Parse(r.GetString("dodatak_na_platu"), System.Globalization.CultureInfo.InvariantCulture);
-                    // zaposlenjeDatum = DateTime.ParseExact("datumZapolenja", "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                    godisnji = Int32.Parse(r.GetString("dani_godisnjeg_odmora"));
+                    //Zahtjev
+                    datum = r.GetString("datum_zahtjeva");
+                    odobren = r.GetString("odobren");
+                    idZahtjeva = r.GetString("id");
 
-                    Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, DateTime.Now, spol, plata, dodatak, godisnji);
+                    //Proizvod
+                    _naziv = r.GetString("naziv");
+                    _kategoija = r.GetString("kategorija");
+                    _godina = r.GetInt32("godina_proizvodnje");
+                    _cijena = r.GetDouble("cijena");
+                    _opis = r.GetString("opis");
+                    _mjeseciGarancije = r.GetInt32("mjeseci_garancije");
+                    _proizvodjac = r.GetString("proizvodjac");
+                    _dodatnaOprema = r.GetString("dodatna_oprema");
+                    _serijskiBroj = r.GetString("serijski_broj");
+                    _barkod = r.GetString("barkod");
+                    _kolicina = r.GetInt32("kolicina");
+
+                    Artikal artikal = new Artikal(_naziv, _kategoija, _godina, _cijena, _opis, _mjeseciGarancije, _proizvodjac, _dodatnaOprema, _kolicina, _serijskiBroj, _barkod);
+                    lista.Add(artikal);
+                    if(odobren == "1")
+                        odobrenZah = true;
+                    else
+                        odobrenZah = false;
+                    ZahtjevZaNabavkom tmp = new ZahtjevZaNabavkom(lista, odobrenZah);
+                    tmp.Id = idZahtjeva;
                     //listaUposlenika.Add(naziv + " " + spol + " " + adresa + " " + telefon);
                     //ListaUposlenika.Add(tmp);
+                    ListaZahtjeva.Add(tmp);
+
                 }
 
             }
@@ -123,7 +173,58 @@ namespace it_shop.ViewModel
             }
 
         }
+        private void PrikaziDetaljeZahtjevaZaNabavkom() 
+        {
+            ObservableCollection<Artikal> tmpLista = new ObservableCollection<Artikal>(OdabraniZahtjev.ListaArtikala);
+            ListaArtikalaZahtjeva = tmpLista;
         
+        }
+        private void OdobriZahtjevZaNabavkom()
+        {
+            if (OdabraniZahtjev != null)
+            {
+                try
+                {
+                    MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+                    string upitBaza = "UPDATE zahtjevi_nabavke SET odobren = true WHERE id = " + OdabraniZahtjev.Id + ";";
+
+                    DMLUpitiNaBazu(upitBaza, connectionBaza);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nije odabran zahtjev!\nOdaberite zahtjev za brisanje iz Liste zahtjeva.");
+            }
+        }
+        private void ObrisiZahtjevZaNabavkom()
+        {
+            if (OdabraniZahtjev != null)
+            {
+                try
+                {
+                    MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+                    string upitBaza = "DELETE FROM zahtjevi_nabavke WHERE id = " + OdabraniZahtjev.Id + ";";
+                    DMLUpitiNaBazu(upitBaza, connectionBaza);
+                    ListaZahtjeva.Remove(OdabraniZahtjev);
+                    ListaArtikalaZahtjeva.Clear();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nije odabran zahtjev!\nOdaberite zahtjev za brisanje iz Liste zahtjeva.");
+            }
+
+        }
+
         #endregion
        
         #endregion
@@ -187,27 +288,6 @@ namespace it_shop.ViewModel
                 if (OdabraniTab == 1)
                     UcitajUposlenikeIzBaze();
 
-
-            }
-        }
-
-        public ObservableCollection<string> ListaZahtjeva
-        {
-            get { return listaZahtjeva; }
-            set
-            {
-                listaZahtjeva = value;
-                OnPropertyChanged("ListaZahtjeva");
-            }
-        }
-
-        public ZahtjevZaNabavkom OdabraniZahtjev
-        {
-            get { return odabranizahtjev; }
-            set
-            {
-                odabranizahtjev = value;
-                OnPropertyChanged("OdabraniZahtjev");
 
             }
         }
@@ -371,9 +451,9 @@ namespace it_shop.ViewModel
         {
             MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
             Uposlenik uposlenik = OdabraniUposlenik;
-            string upit = "DELETE FROM uposlenici WHERE ime_i_prezime = '" + uposlenik.PunoIme + "';";
+            string upit = "DELETE FROM uposlenici WHERE ime_i_prezime = '" + uposlenik.PunoIme + "' AND broj_telefona = '" + uposlenik.BrojTelefona + "';";
             DMLUpitiNaBazu(upit, connectionBaza);
-            //ListaUposlenika.Remove(uposlenik);
+            ListaUposlenika.Remove(uposlenik);
         }
 
         private void UcitajInformacijeZaposlenika()
@@ -399,7 +479,8 @@ namespace it_shop.ViewModel
             {
                 string upit = "UPDATE uposlenici SET ime_i_prezime = '" + ImeAzuriraj + " " + PrezimeAzuriraj + "', spol = '" + SpolAzuriraj + "', adresa = '" +
                                 AdresaAzuriraj + "', broj_telefona = '" + BrojTelefonaAzuriraj + "', tip_uposlenika = '" + TipUposlenikaAzuriraj + "', plata = " + PlataAzuriraj + ", dodatak_na_platu = " + DodatakNaPlatuAzuriraj + ", dani_godisnjeg_odmora = " +
-                                DaniGodisnjegAzuriraj + ", username = '" + UsernameAzuriraj + "', password = '" + PasswordAzuriraj + "' WHERE id = 1;";
+                                DaniGodisnjegAzuriraj + ", username = '" + UsernameAzuriraj + "', password = '" + PasswordAzuriraj + "' WHERE ime_i_prezime = '" +
+                                OdabraniUposlenik.PunoIme + "' AND broj_telefona = '" + OdabraniUposlenik.BrojTelefona + "';";
                 MessageBox.Show(upit);
 
                 MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
@@ -407,6 +488,7 @@ namespace it_shop.ViewModel
                 OcistiFormuZaAzuriranjeInformacijaUposlenih();
                 ListaUposlenika.Clear();
                 UcitajUposlenikeIzBaze();
+
 
             }
             catch (Exception ex)
