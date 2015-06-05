@@ -13,7 +13,8 @@ namespace PhoneApp.Pages {
         public Kontakt() {
             InitializeComponent();
             txt_kontakt.Items.Add("Aplikaciju radili:\nAdnan Hrnjic\nAdemir Havic\nSalem Suljkanovic\n\n");
-            txt_kontakt.Items.Add("HERITAGE DEV TEAM");
+            txt_kontakt.Items.Add("HeritageDev Team");
+            txt_kontakt.Items.Add("heritagedev@gmail.com");
         }
     }
 }
