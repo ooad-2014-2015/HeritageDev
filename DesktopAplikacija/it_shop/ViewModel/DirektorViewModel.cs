@@ -514,10 +514,12 @@ namespace it_shop.ViewModel
 
         private void AzurirajInformacijeKorisnika()
         {
-            ValidacijaPodataka("azuriranje", ImeAzuriraj, PrezimeAzuriraj, SpolAzuriraj, BrojTelefonaAzuriraj, AdresaAzuriraj, TipUposlenikaAzuriraj, PlataAzuriraj,
-                                  DodatakNaPlatuAzuriraj, DaniGodisnjegAzuriraj, UsernameAzuriraj, PasswordAzuriraj);
+            
             try
             {
+                ValidacijaPodataka("azuriranje", ImeAzuriraj, PrezimeAzuriraj, SpolAzuriraj, BrojTelefonaAzuriraj, AdresaAzuriraj, TipUposlenikaAzuriraj, PlataAzuriraj,
+                                  DodatakNaPlatuAzuriraj, DaniGodisnjegAzuriraj, UsernameAzuriraj, PasswordAzuriraj);
+
                 string upit = "UPDATE uposlenici SET ime_i_prezime = '" + ImeAzuriraj + " " + PrezimeAzuriraj + "', spol = '" + SpolAzuriraj + "', adresa = '" +
                                 AdresaAzuriraj + "', broj_telefona = '" + BrojTelefonaAzuriraj + "', tip_uposlenika = '" + TipUposlenikaAzuriraj + "', plata = " + PlataAzuriraj + ", dodatak_na_platu = " + DodatakNaPlatuAzuriraj + ", dani_godisnjeg_odmora = " +
                                 DaniGodisnjegAzuriraj + ", username = '" + UsernameAzuriraj + "', password = '" + PasswordAzuriraj + "' WHERE ime_i_prezime = '" +
@@ -680,6 +682,7 @@ namespace it_shop.ViewModel
         #endregion
 
         #region Metode
+       
         private void IzaberiSliku1()
         {
             Microsoft.Win32.OpenFileDialog openFileDialog1 = new Microsoft.Win32.OpenFileDialog();
@@ -787,7 +790,6 @@ namespace it_shop.ViewModel
             PasswordUposlenika = String.Empty;
             UcitajSlikuBinding = UcitajSliku(@"../../Resources/no_image.png");
         }
-
 
 
         #endregion
