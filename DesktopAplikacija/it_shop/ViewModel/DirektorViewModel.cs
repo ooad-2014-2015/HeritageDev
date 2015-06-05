@@ -31,7 +31,7 @@ namespace it_shop.ViewModel
             IzaberiSliku = new RelayCommand(new Action(IzaberiSliku1));
             OdobriZahtjev = new RelayCommand(new Action(OdobriZahtjevZaNabavkom));
             ObrisiZahtjev = new RelayCommand(new Action(ObrisiZahtjevZaNabavkom));
-
+            hardcodedTipoviUposlenika.AddRange(new string[] {"DIREKTOR", "SUPERVIZOR", "PRODAVAC", "SERVISER", "MONTER"});
         }
 
         private MySqlDataReader UpitNaBazu(string upit, MySqlConnection con)
@@ -252,6 +252,7 @@ namespace it_shop.ViewModel
         private string usernameAzuriraj;
         private string passwordAzuriraj;
         private BitmapImage slikaAzuriraj;
+        private List<string> hardcodedTipoviUposlenika = new List<string>();
 
 
 
@@ -461,35 +462,48 @@ namespace it_shop.ViewModel
             DodatakNaPlatuAzuriraj = OdabraniUposlenik.DodatakNaPlatu.ToString();
             DaniGodisnjegAzuriraj = OdabraniUposlenik.DaniGodisnjegOdmora.ToString();
             SlikaAzuriraj = UcitajSliku(@"../../Resources/tmp/" + OdabraniUposlenik.PunoIme + OdabraniUposlenik.BrojTelefona + ".png");
-            UsernameAzuriraj = "Neko";
-            PasswordAzuriraj = "Neko";
+
+            MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+            string upitBaza = "SELECT username, password FROM uposlenici WHERE ime_i_prezime='" + ImeAzuriraj + " " + PrezimeAzuriraj 
+                            + "' and broj_telefona='" + BrojTelefonaAzuriraj + "';";
+            MySqlDataReader reader = UpitNaBazu(upitBaza, connectionBaza);
+
+            UsernameAzuriraj = reader.GetString("username");
+            PasswordAzuriraj = reader.GetString("password");
         }
 
-        private void ValidacijaPodataka()
+        private void ValidacijaPodataka(string tip, string s1, string s2, string s3, string s4, string s5, string s6, string s7, string s8, string s9, string s10, string s11)
         {
+            if (tip != "azuriranje" && tip != "unos")
+                return;
             string poruka = string.Empty;
-            if (!Regex.IsMatch(ImeAzuriraj, @"^[a-zA-Z]+$"))
+            if (!Regex.IsMatch(s1, @"^[a-zA-Z]+$"))
                 poruka = "Ime sadrzi ilegalne znakove!";
-            else if (!Regex.IsMatch(PrezimeAzuriraj, @"^[a-zA-Z]+$"))
+            else if (!Regex.IsMatch(s2, @"^[a-zA-Z]+$"))
                 poruka = "Prezime sadrzi ilegalne znakove!";
-            else if (!Regex.IsMatch(AdresaAzuriraj, @"^[a-zA-Z0-9]+$"))
-                poruka = "Adresa sadrzi ilegalne znakove!";
-            else if (!Regex.IsMatch(BrojTelefonaAzuriraj, @"^[0-9]+$"))
+            else if (tip == "azuriranje" && !Regex.IsMatch(s3, @"^[MZ]+$"))
+                poruka = "Spol sadrzi ilegalne znakove!";
+            else if (!Regex.IsMatch(s4, @"^[0-9]+$"))
                 poruka = "Broj telefona sadrzi ilegalne znakove!";
-            else if (string.IsNullOrEmpty(TipUposlenikaAzuriraj))
-                poruka = "Tip uposlenika nije odabran!";
-            else if (!Regex.IsMatch(PlataAzuriraj, @"^[0-9]+$"))
+            else if (!Regex.IsMatch(s5, @"^[a-zA-Z0-9]+$"))
+                poruka = "Adresa sadrzi ilegalne znakove!";
+            else if (tip == "azuriranje") {
+                if (string.IsNullOrEmpty(s6))
+                    poruka = "Tip uposlenika nije odabran!";
+                else if (hardcodedTipoviUposlenika.IndexOf(s6) == -1)
+                    poruka = "Tip uposlenika ne postoji!";
+            }
+            else if (!Regex.IsMatch(s7, @"^[0-9]+$"))
                 poruka = "Plata sadrzi ilegalne znakove";
-            else if (!Regex.IsMatch(DodatakNaPlatuAzuriraj, @"(?<=^| )\d+(\.\d+)?(?=$| )"))
+            else if (!Regex.IsMatch(s8, @"(?<=^| )\d+(\.\d+)?(?=$| )"))
                 poruka = "Dodatak na platu sadrzi ilegalne znakove";
-            else if (!Regex.IsMatch(DaniGodisnjegAzuriraj, @"^[0-9]+$"))
+            else if (tip == "azuriranje" && !Regex.IsMatch(s9, @"^[0-9]+$"))
                 poruka = "Dani godisnjeg odmora sadrzi ilegalne znakove";
-            else if (!Regex.IsMatch(UsernameAzuriraj, @"^[a-zA-Z0-9]+$"))
+            else if (!Regex.IsMatch(s10, @"^[a-zA-Z0-9]+$"))
                 poruka = "Username sadrzi ilegalne znakove!";
-            else if (string.IsNullOrEmpty(PasswordAzuriraj))
+            else if (string.IsNullOrEmpty(s11))
                 poruka = "Password ne smije biti prazan!";
-            else
-            {
+            else {
                 MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
                 string upitBaza = "SELECT 1 FROM uposlenici WHERE USERNAME='" + UsernameAzuriraj + "';";
                 MySqlDataReader reader = UpitNaBazu(upitBaza, connectionBaza);
@@ -500,7 +514,8 @@ namespace it_shop.ViewModel
 
         private void AzurirajInformacijeKorisnika()
         {
-            ValidacijaPodataka();
+            ValidacijaPodataka("azuriranje", ImeAzuriraj, PrezimeAzuriraj, SpolAzuriraj, BrojTelefonaAzuriraj, AdresaAzuriraj, TipUposlenikaAzuriraj, PlataAzuriraj,
+                                  DodatakNaPlatuAzuriraj, DaniGodisnjegAzuriraj, UsernameAzuriraj, PasswordAzuriraj);
             try
             {
                 string upit = "UPDATE uposlenici SET ime_i_prezime = '" + ImeAzuriraj + " " + PrezimeAzuriraj + "', spol = '" + SpolAzuriraj + "', adresa = '" +
@@ -704,13 +719,16 @@ namespace it_shop.ViewModel
         }
         private void UnesiNovogUposlenikaUBazu()
         {
-
+            
             try
             {
 
                 SpolUposlenika = SpolUposlenika.Substring(38);
                 imeUposlenika = TipUposlenika.Substring(38);
                 DaniGodisnjegUposlenika = DaniGodisnjegUposlenika.Substring(38);
+
+                ValidacijaPodataka("unos", ImeUposlenika, PrezimeUposlenika, SpolUposlenika, BrojTelefonaUposlenika, AdresaUposlenika, TipUposlenika, PlataUposlenika,
+                                  DodatakNaPlatuUposlenika, DaniGodisnjegUposlenika, UsernameUposlenika, PasswordUposlenika);
 
                 MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
                 MySqlCommand cmd = new MySqlCommand();
