@@ -5,7 +5,7 @@
         Title="Prodavac" Height="625" Width="925"
         WindowStartupLocation="CenterScreen"
         MinHeight="600" MinWidth="800" Icon="/it_shop;component/Resources/prodavac_icon.png">
-    
+
     <Grid>
         <TabControl Name="tabovi" Margin="0,20, 5, 22">
             <TabItem Header="Katalog">
@@ -196,19 +196,19 @@
                            Height="25"
                            Grid.Column="1"
                            HorizontalAlignment="Left"
-                           VerticalAlignment="Top">ID proizvoda</Label>
+                           VerticalAlignment="Top">Naziv proizvoda</Label>
                     <Label Margin="20,80,0,0"
                            Width="150"
                            Height="25"
                            Grid.Column="1"
                            HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Naziv proizvoda</Label>
+                           VerticalAlignment="Top">Kategorija proizvoda</Label>
                     <Label Margin="20,110,0,0"
                            Width="150"
                            Height="25"
                            Grid.Column="1"
                            HorizontalAlignment="Left"
-                           VerticalAlignment="Top">Kategorija proizvoda</Label>
+                           VerticalAlignment="Top">Godina proizvodnje</Label>
                     <Label Margin="20,140,0,0"
                            Width="150"
                            Height="25"
@@ -239,7 +239,19 @@
                            Grid.Column="1"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top">Dodatna oprema</Label>
-                    <Label Margin="20,395,0,0"
+                    <Label Margin="20,390,0,0"
+                           Width="150"
+                           Height="25"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Serijski broj</Label>
+                    <Label Margin="20,420,0,0"
+                           Width="150"
+                           Height="25"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">Bar kod</Label>
+                    <Label Margin="20,450,0,0"
                            Width="150"
                            Height="25"
                            Grid.Column="1"
@@ -249,16 +261,9 @@
                              Height="25"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top" 
-                             Text ="{Binding Path = IdProizvoda}">
-                    </TextBox>
-                    <TextBox Margin="175,80,50,0"
-                             Height="25"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
                              VerticalAlignment="Top"
                              Text ="{Binding Path = NazivProizvoda}"></TextBox>
-                    <ComboBox Margin="175,110,50,0"
+                    <ComboBox Margin="175,80,50,0"
                               Height="25"
                               Grid.Column="1"
                               HorizontalAlignment="Stretch"
@@ -270,6 +275,11 @@
                         <ComboBoxItem Content="Mrezna oprema" HorizontalAlignment="Stretch"/>
                         <ComboBoxItem Content="Softver" HorizontalAlignment="Stretch"/>
                     </ComboBox>
+                    <TextBox Margin="175,110,50,0"
+                             Height="25"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"></TextBox>
                     <TextBox Margin="175,140,50,0"
                              Height="25"
                              Grid.Column="1"
@@ -311,7 +321,17 @@
                              VerticalAlignment="Top"
                              ScrollViewer.VerticalScrollBarVisibility="Auto"
                              Text ="{Binding Path=DodatnaOprema}"></TextBox>
-                    <TextBox Margin="175,395,50,0"
+                    <TextBox Margin="175,390,50,0"
+                             Height="25"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"></TextBox>
+                    <TextBox Margin="175,420,50,0"
+                             Height="25"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"></TextBox>
+                    <TextBox Margin="175,450,50,0"
                              Height="25"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
@@ -321,13 +341,13 @@
                             Grid.Column="1"
                             VerticalAlignment="Top"
                             HorizontalAlignment="Left"
-                            Margin="175,430,0,0"
+                            Margin="175,485,0,0"
                             Command="{Binding Path=UnesiButton}">Unesi</Button>
                     <Button Width="100" Height="25"
                             Grid.Column="1"
                             VerticalAlignment="Top"
                             HorizontalAlignment="Left"
-                            Margin="285,430,0,0"
+                            Margin="285,485,0,0"
                             Command="{Binding Path=PonistiButton}">Ponisti</Button>
                 </Grid>
             </TabItem>
