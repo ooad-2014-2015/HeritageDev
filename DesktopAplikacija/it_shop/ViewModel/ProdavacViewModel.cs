@@ -243,7 +243,7 @@ namespace it_shop.ViewModel {
                 ProizvodjacKatalog = OdabraniArtikalKatalog.Proizvodjac;
                 DodatnaOpremaKatalog = OdabraniArtikalKatalog.DodatnaOprema;
                 SerijskiBrojKatalog = OdabraniArtikalKatalog.SerijskiBroj;
-                BarKodKatalog = OdabraniArtikalKatalog.BarKod;
+               
                 KolicinaKatalog = OdabraniArtikalKatalog.Kolicina.ToString();
                 SlikaKatalog = UcitajSliku(@"../../Resources/tmp/artikal_" + SerijskiBrojKatalog + ".png");
             }
@@ -283,7 +283,7 @@ namespace it_shop.ViewModel {
                     fs = new FileStream(@"../../Resources/tmp/artikal_" + _serijskiBroj + ".png", FileMode.OpenOrCreate, FileAccess.ReadWrite);
                     fs.Write(rawData, 0, (int)velicinaSlike);
                     fs.Close();
-                    Artikal artikal = new Artikal(_naziv, _kategoija, _godina, _cijena, _opis, _mjeseciGarancije, _proizvodjac, _dodatnaOprema, _kolicina, _serijskiBroj, _barkod);
+                    Artikal artikal = new Artikal(_naziv, _kategoija, _godina, _cijena, _opis, _mjeseciGarancije, _proizvodjac, _dodatnaOprema, _kolicina, _serijskiBroj);
                     listaArtikalaKatalog.Add(artikal);
                 }
             } catch (Exception ex) {
@@ -485,7 +485,7 @@ namespace it_shop.ViewModel {
                     _serijskiBroj = r.GetString("serijski_broj");
                     _barkod = r.GetString("barkod");
                     _kolicina = r.GetInt32("kolicina");
-                    Artikal artikal = new Artikal(_naziv, _kategoija, _godina, _cijena, _opis, _mjeseciGarancije, _proizvodjac, _dodatnaOprema, _kolicina, _serijskiBroj, _barkod);
+                    Artikal artikal = new Artikal(_naziv, _kategoija, _godina, _cijena, _opis, _mjeseciGarancije, _proizvodjac, _dodatnaOprema, _kolicina, _serijskiBroj);
                     ListaArtikalaPretrage.Add(artikal);
                 }
             } catch (Exception ex) {

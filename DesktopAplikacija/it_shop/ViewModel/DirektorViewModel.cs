@@ -46,6 +46,7 @@ namespace it_shop.ViewModel
             con.Open();
             MySqlCommand u = new MySqlCommand(upit, con);
             u.ExecuteNonQuery();
+            con.Close();
         }
 
 
@@ -122,8 +123,10 @@ namespace it_shop.ViewModel
             try
             {
 
-                string upitBaza = "SELECT * FROM zahtjevi_nabavke zn, artikli a, zahtjevi_proizvoda zp  " +
-                                  "WHERE zn.zahtjev_nabavke_id = zp.zahtjev_nabavke_id AND zp.artikal_id = a.artikal_id;";
+                string upitBaza = "SELECT zn.zahtjev_nabavke_id, zn.datum, zn.odobren, zn.zahtjev_nabavke_id, a.naziv, a.kategorija, a.godina_proizvodnje, a.cijena, a.opis, a.dodatna_oprema, " +
+                                     "a.proizvodjac, a.garancija, a.artikal_id, zp.kolicina " + 
+                                    "FROM zahtjevi_nabavke zn, artikli a, zahtjevi_proizvoda zp  " +
+                                    "WHERE zn.zahtjev_nabavke_id = zp.zahtjev_nabavke_id AND zp.artikal_id = a.artikal_id;";
                 string datum;
                 string odobren;
                 bool odobrenZah;
@@ -139,9 +142,10 @@ namespace it_shop.ViewModel
                     datum = r.GetString("datum");
                     odobren = r.GetString("odobren");
                     idZahtjeva = r.GetString("zahtjev_nabavke_id");
-
+                    //MessageBox.Show(datum);
                     //Proizvod
                     _naziv = r.GetString("naziv");
+                    //MessageBox.Show(_naziv);
                     _kategoija = r.GetString("kategorija");
                     _godina = r.GetInt32("godina_proizvodnje");
                     _cijena = r.GetDouble("cijena");
@@ -163,6 +167,7 @@ namespace it_shop.ViewModel
 
                     Artikal artikal = new Artikal(_naziv, _kategoija, _godina, _cijena, _opis, _mjeseciGarancije, _proizvodjac, _dodatnaOprema, _kolicina, _serijskiBroj);
                     lista.Add(artikal);
+                    //MessageBox.Show(artikal.Naziv);
                     if (odobren == "1")
                         odobrenZah = true;
                     else
@@ -195,9 +200,11 @@ namespace it_shop.ViewModel
                 try
                 {
                     MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
-                    string upitBaza = "UPDATE zahtjevi_nabavke SET odobren = true WHERE id = " + OdabraniZahtjev.Id + ";";
+                    string upitBaza = "UPDATE zahtjevi_nabavke SET odobren = true WHERE zahtjev_nabavke_id = " + OdabraniZahtjev.Id + ";";
 
                     DMLUpitiNaBazu(upitBaza, connectionBaza);
+                    ListaZahtjeva.Clear();
+                    UcitajZahjeveZaNabavkomIzBaze();
                 }
                 catch (Exception ex)
                 {
@@ -216,8 +223,11 @@ namespace it_shop.ViewModel
                 try
                 {
                     MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
-                    string upitBaza = "DELETE FROM zahtjevi_nabavke WHERE id = " + OdabraniZahtjev.Id + ";";
+                    string upit = "DELETE FROM zahtjevi_proizvoda WHERE zahtjev_nabavke_id = " + OdabraniZahtjev.Id + ";";
+                    DMLUpitiNaBazu(upit, connectionBaza);
+                    string upitBaza = "DELETE FROM zahtjevi_nabavke WHERE zahtjev_nabavke_id = " + OdabraniZahtjev.Id + ";";
                     DMLUpitiNaBazu(upitBaza, connectionBaza);
+                    
                     ListaZahtjeva.Remove(OdabraniZahtjev);
                     ListaArtikalaZahtjeva.Clear();
 
@@ -409,7 +419,7 @@ namespace it_shop.ViewModel
             {
                 MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
 
-                string upitBaza = "SELECT * FROM _uposlenici;";
+                string upitBaza = "SELECT * FROM uposlenici;";
                 string naziv, spol, telefon, adresa, datumZaposlenja;
                 double plata, dodatak;
                 int godisnji;
@@ -464,7 +474,7 @@ namespace it_shop.ViewModel
         {
             MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
             Uposlenik uposlenik = OdabraniUposlenik;
-            string upit = "DELETE FROM uposlenici WHERE ime_i_prezime = '" + uposlenik.PunoIme + "' AND broj_telefona = '" + uposlenik.BrojTelefona + "';";
+            string upit = "DELETE FROM uposlenici WHERE ime_prezime = '" + uposlenik.PunoIme + "' AND broj_telefona = '" + uposlenik.BrojTelefona + "';";
             DMLUpitiNaBazu(upit, connectionBaza);
             ListaUposlenika.Remove(uposlenik);
         }
@@ -540,9 +550,9 @@ namespace it_shop.ViewModel
                 ValidacijaPodataka("azuriranje", ImeAzuriraj, PrezimeAzuriraj, SpolAzuriraj, BrojTelefonaAzuriraj, AdresaAzuriraj, TipUposlenikaAzuriraj, PlataAzuriraj,
                                   DodatakNaPlatuAzuriraj, DaniGodisnjegAzuriraj, UsernameAzuriraj, PasswordAzuriraj);
 
-                string upit = "UPDATE uposlenici SET ime_i_prezime = '" + ImeAzuriraj + " " + PrezimeAzuriraj + "', spol = '" + SpolAzuriraj + "', adresa = '" +
+                string upit = "UPDATE uposlenici SET ime_prezime = '" + ImeAzuriraj + " " + PrezimeAzuriraj + "', spol = '" + SpolAzuriraj + "', adresa = '" +
                                 AdresaAzuriraj + "', broj_telefona = '" + BrojTelefonaAzuriraj + "', tip_uposlenika = '" + TipUposlenikaAzuriraj + "', plata = " + PlataAzuriraj + ", dodatak_na_platu = " + DodatakNaPlatuAzuriraj + ", dani_godisnjeg_odmora = " +
-                                DaniGodisnjegAzuriraj + ", username = '" + UsernameAzuriraj + "', password = '" + PasswordAzuriraj + "' WHERE ime_i_prezime = '" +
+                                DaniGodisnjegAzuriraj + ", username = '" + UsernameAzuriraj + "', password = '" + PasswordAzuriraj + "' WHERE ime_prezime = '" +
                                 OdabraniUposlenik.PunoIme + "' AND broj_telefona = '" + OdabraniUposlenik.BrojTelefona + "';";
                 MessageBox.Show(upit);
 
@@ -759,7 +769,7 @@ namespace it_shop.ViewModel
                 byte[] rawData;
                 FileStream fs;
 
-                string upit = "INSERT INTO uposlenici (ime_i_prezime, spol, broj_telefona, adresa, tip_uposlenika, datum_zaposlenja, plata, dodatak_na_platu, dani_godisnjeg_odmora, username, password, slika, velicina_slike) VALUES ('" +
+                string upit = "INSERT INTO uposlenici (ime_prezime, spol, broj_telefona, adresa, tip_uposlenika, datum_zaposlenja, plata, dodatak_na_platu, dani_godisnjeg_odmora, username, password, slika, velicina_slike) VALUES ('" +
                 ImeUposlenika + " " + PrezimeUposlenika + "','" + SpolUposlenika + "','" + BrojTelefonaUposlenika + "','" + AdresaUposlenika + "','" + TipUposlenika +
                 "', STR_TO_DATE('" + DateTime.Now.ToShortDateString() + "','%d.%m.%Y'), " + PlataUposlenika + "," + DodatakNaPlatuUposlenika + "," + DaniGodisnjegUposlenika + ",'" + UsernameUposlenika + "','" + PasswordUposlenika + "', ";
 

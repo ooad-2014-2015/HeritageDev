@@ -26,8 +26,8 @@
                             <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,430,0,0">Cijena popravke:</Label>
                             <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,460,0,0">Datum predaje:</Label>
                             <TextBox Text="{Binding NazivKupca}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,10,30,0"></TextBox>
-                            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,40,30,0"></TextBox>
-                            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,70,30,0"></TextBox>
+                            <TextBox Text="{Binding AdresaKupca}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,40,30,0"></TextBox>
+                            <TextBox Text="{Binding BrojTelefonaKupca}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,70,30,0"></TextBox>
                             <TextBox Text="{Binding NazivProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,100,30,0"></TextBox>
                             <TextBox Text="{Binding GodinaProizvodnjeProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,130,30,0"></TextBox>
                             <TextBox Text="{Binding ProizvodjacProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,160,30,0"></TextBox>
