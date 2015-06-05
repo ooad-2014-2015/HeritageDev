@@ -9,7 +9,7 @@ namespace it_shop.Model
 {
     public class Uposlenik : Osoba
     {
-        private static int jib;
+        private static int id;
         private DateTime datumZaposlenja;
         private string spol;
         private double plata;
@@ -60,10 +60,10 @@ namespace it_shop.Model
             set { datumZaposlenja = value; }
         }
         
-        public static int JIB
+        public static int ID
         {
-            get { return jib; }
-            set { jib = value; }
+            get { return id; }
+            set { id = value; }
         }
 
         #endregion
