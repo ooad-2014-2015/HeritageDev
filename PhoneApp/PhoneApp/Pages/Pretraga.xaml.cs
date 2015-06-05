@@ -11,8 +11,12 @@ using System.Windows.Media.Imaging;
 
 namespace PhoneApp.Pages {
     public partial class Pretraga : PhoneApplicationPage {
+        List<string> slike;
+        List<string> opisi;
         public Pretraga() {
             InitializeComponent();
+            slike = new List<string>();
+            opisi = new List<string>();
         }
 
         private void btn_trazi_Tap(object sender, System.Windows.Input.GestureEventArgs e) {
@@ -25,31 +29,55 @@ namespace PhoneApp.Pages {
             popuni(s);
         }
 
+        private void ucitaj() {
+            slike.Add("/Resources/001.jpg");
+            slike.Add("/Resources/002.jpg");
+            slike.Add("/Resources/003.png");
+            slike.Add("/Resources/001.jpg");
+            slike.Add("/Resources/002.jpg");
+            slike.Add("/Resources/003.png");
+            slike.Add("/Resources/001.jpg");
+            slike.Add("/Resources/002.jpg");
+            slike.Add("/Resources/003.png");
+            slike.Add("/Resources/001.jpg");
+            slike.Add("/Resources/002.jpg");
+            slike.Add("/Resources/003.png");
+            slike.Add("/Resources/001.jpg");
+            slike.Add("/Resources/002.jpg");
+            slike.Add("/Resources/003.png");
+            slike.Add("/Resources/001.jpg");
+            slike.Add("/Resources/002.jpg");
+            slike.Add("/Resources/003.png");
+            slike.Add("/Resources/001.jpg");
+            slike.Add("/Resources/002.jpg");
+            slike.Add("/Resources/003.png");
+            opisi.Add("OS: Android OS, v4.4.2 (KitKat); CPU: Quad-core 1.2 GHz; Display: 800 x 1280 pixels, 10.1''; RAM: 1.5 GB");
+            opisi.Add("Dijagonala 32incha/81cm. Rezolucija 1366x768. HyperReal Engine. Mega dinamički kontrast");
+            opisi.Add("OS: SuSE Linux; CPU: Intel Core i5-4210U, 1.7/2.7GHz; Display: 15.6'' HD LED; RAM: 4GB; HDD: 1TB; VGA: AMD Radeon R5 M255 2GB;");
+            opisi.Add("OS: Android OS, v4.4.2 (KitKat); CPU: Quad-core 1.2 GHz; Display: 800 x 1280 pixels, 10.1''; RAM: 1.5 GB");
+            opisi.Add("Dijagonala 32incha/81cm. Rezolucija 1366x768. HyperReal Engine. Mega dinamički kontrast");
+            opisi.Add("OS: SuSE Linux; CPU: Intel Core i5-4210U, 1.7/2.7GHz; Display: 15.6'' HD LED; RAM: 4GB; HDD: 1TB; VGA: AMD Radeon R5 M255 2GB;");
+            opisi.Add("OS: Android OS, v4.4.2 (KitKat); CPU: Quad-core 1.2 GHz; Display: 800 x 1280 pixels, 10.1''; RAM: 1.5 GB");
+            opisi.Add("Dijagonala 32incha/81cm. Rezolucija 1366x768. HyperReal Engine. Mega dinamički kontrast");
+            opisi.Add("OS: SuSE Linux; CPU: Intel Core i5-4210U, 1.7/2.7GHz; Display: 15.6'' HD LED; RAM: 4GB; HDD: 1TB; VGA: AMD Radeon R5 M255 2GB;");
+            opisi.Add("OS: Android OS, v4.4.2 (KitKat); CPU: Quad-core 1.2 GHz; Display: 800 x 1280 pixels, 10.1''; RAM: 1.5 GB");
+            opisi.Add("Dijagonala 32incha/81cm. Rezolucija 1366x768. HyperReal Engine. Mega dinamički kontrast");
+            opisi.Add("OS: SuSE Linux; CPU: Intel Core i5-4210U, 1.7/2.7GHz; Display: 15.6'' HD LED; RAM: 4GB; HDD: 1TB; VGA: AMD Radeon R5 M255 2GB;");
+            opisi.Add("OS: Android OS, v4.4.2 (KitKat); CPU: Quad-core 1.2 GHz; Display: 800 x 1280 pixels, 10.1''; RAM: 1.5 GB");
+            opisi.Add("Dijagonala 32incha/81cm. Rezolucija 1366x768. HyperReal Engine. Mega dinamički kontrast");
+            opisi.Add("OS: SuSE Linux; CPU: Intel Core i5-4210U, 1.7/2.7GHz; Display: 15.6'' HD LED; RAM: 4GB; HDD: 1TB; VGA: AMD Radeon R5 M255 2GB;");
+            opisi.Add("OS: Android OS, v4.4.2 (KitKat); CPU: Quad-core 1.2 GHz; Display: 800 x 1280 pixels, 10.1''; RAM: 1.5 GB");
+            opisi.Add("Dijagonala 32incha/81cm. Rezolucija 1366x768. HyperReal Engine. Mega dinamički kontrast");
+            opisi.Add("OS: SuSE Linux; CPU: Intel Core i5-4210U, 1.7/2.7GHz; Display: 15.6'' HD LED; RAM: 4GB; HDD: 1TB; VGA: AMD Radeon R5 M255 2GB;");
+            opisi.Add("OS: Android OS, v4.4.2 (KitKat); CPU: Quad-core 1.2 GHz; Display: 800 x 1280 pixels, 10.1''; RAM: 1.5 GB");
+            opisi.Add("Dijagonala 32incha/81cm. Rezolucija 1366x768. HyperReal Engine. Mega dinamički kontrast");
+            opisi.Add("OS: SuSE Linux; CPU: Intel Core i5-4210U, 1.7/2.7GHz; Display: 15.6'' HD LED; RAM: 4GB; HDD: 1TB; VGA: AMD Radeon R5 M255 2GB;");
+        }
+
         private void popuni(string s) {
             pobrisi();
-            List<string> slike = new List<string>();
-            List<string> opisi = new List<string>();
             int index = 0;
-            slike.Add("/Resources/001.jpg");
-            slike.Add("/Resources/002.jpg");
-            slike.Add("/Resources/003.png");
-            slike.Add("/Resources/001.jpg");
-            slike.Add("/Resources/002.jpg");
-            slike.Add("/Resources/003.png");
-            slike.Add("/Resources/001.jpg");
-            slike.Add("/Resources/002.jpg");
-            slike.Add("/Resources/003.png");
-            slike.Add("/Resources/001.jpg");
-            opisi.Add("OS: Android OS, v4.4.2 (KitKat); CPU: Quad-core 1.2 GHz; Display: 800 x 1280 pixels, 10.1''; RAM: 1.5 GB");
-            opisi.Add("OS: SuSE Linux; CPU: Intel Core i5-4210U, 1.7/2.7GHz; Display: 15.6'' HD LED; RAM: 4GB; HDD: 1TB; VGA: AMD Radeon R5 M255 2GB;");
-            opisi.Add("Dijagonala 32incha/81cm. Rezolucija 1366x768. HyperReal Engine. Mega dinamički kontrast");
-            opisi.Add("OS: Android OS, v4.4.2 (KitKat); CPU: Quad-core 1.2 GHz; Display: 800 x 1280 pixels, 10.1''; RAM: 1.5 GB");
-            opisi.Add("OS: SuSE Linux; CPU: Intel Core i5-4210U, 1.7/2.7GHz; Display: 15.6'' HD LED; RAM: 4GB; HDD: 1TB; VGA: AMD Radeon R5 M255 2GB;");
-            opisi.Add("Dijagonala 32incha/81cm. Rezolucija 1366x768. HyperReal Engine. Mega dinamički kontrast");
-            opisi.Add("OS: Android OS, v4.4.2 (KitKat); CPU: Quad-core 1.2 GHz; Display: 800 x 1280 pixels, 10.1''; RAM: 1.5 GB");
-            opisi.Add("OS: SuSE Linux; CPU: Intel Core i5-4210U, 1.7/2.7GHz; Display: 15.6'' HD LED; RAM: 4GB; HDD: 1TB; VGA: AMD Radeon R5 M255 2GB;");
-            opisi.Add("Dijagonala 32incha/81cm. Rezolucija 1366x768. HyperReal Engine. Mega dinamički kontrast");
-            opisi.Add("OS: Android OS, v4.4.2 (KitKat); CPU: Quad-core 1.2 GHz; Display: 800 x 1280 pixels, 10.1''; RAM: 1.5 GB");
+            ucitaj();
 
             for (int i = 0; i < 10; i++) {
                 string temp = opisi[i].ToLower();
@@ -100,9 +128,10 @@ namespace PhoneApp.Pages {
         }
 
         private void txt_trazi_LostFocus(object sender, RoutedEventArgs e) {
-            if (txt_trazi.Text == string.Empty)
+            if (txt_trazi.Text == string.Empty) {
                 txt_trazi.Text = "Unesite pojam za pretragu";
-            txt_trazi.FontStyle = FontStyles.Italic;
+                txt_trazi.FontStyle = FontStyles.Italic;
+            }
         }
     }
 }
