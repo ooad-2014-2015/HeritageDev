@@ -151,12 +151,21 @@ namespace it_shop.ViewModel
         private string daniGodisnjegAzuriraj;
         private string usernameAzuriraj;
         private string passwordAzuriraj;
+        private BitmapImage slikaAzuriraj;
+
+        
+        
 
         #endregion
 
      
         #region Properties Azuriranje Uposlenika
 
+        public BitmapImage SlikaAzuriraj
+        {
+            get { return slikaAzuriraj; }
+            set { slikaAzuriraj = value; OnPropertyChanged("SlikaAzuriraj"); }
+        }
         public ICommand AzuzirajInfoUposlenika
         {
             get { return azuzirajInfoUposlenika; }
@@ -313,6 +322,9 @@ namespace it_shop.ViewModel
                 double plata, dodatak;
                 int godisnji;
                 DateTime zaposlenjeDatum;
+                UInt32 velicinaSlike;
+                byte[] rawData;
+                FileStream fs;
 
 
                 try
@@ -329,6 +341,12 @@ namespace it_shop.ViewModel
                         dodatak = double.Parse(r.GetString("dodatak_na_platu"), System.Globalization.CultureInfo.InvariantCulture);
                         zaposlenjeDatum = DateTime.Parse(datumZaposlenja, new CultureInfo("en-CA"));
                         godisnji = Int32.Parse(r.GetString("dani_godisnjeg_odmora"));
+                        velicinaSlike = r.GetUInt32(r.GetOrdinal("velicina_slike"));
+                        rawData = new byte[velicinaSlike];
+                        r.GetBytes(r.GetOrdinal("slika"), 0, rawData, 0, (int)velicinaSlike);
+                        fs = new FileStream(@"../../Resources/tmp/" + naziv + telefon + ".png", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                        fs.Write(rawData, 0, (int)velicinaSlike);
+                        fs.Close();
 
                         //Tip Resolve
                         Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, zaposlenjeDatum, spol, plata, dodatak, godisnji);
@@ -370,6 +388,7 @@ namespace it_shop.ViewModel
             PlataAzuriraj = OdabraniUposlenik.Plata.ToString();
             DodatakNaPlatuAzuriraj = OdabraniUposlenik.DodatakNaPlatu.ToString();
             DaniGodisnjegAzuriraj = OdabraniUposlenik.DaniGodisnjegOdmora.ToString();
+            SlikaAzuriraj = UcitajSliku(@"../../Resources/tmp/" + OdabraniUposlenik.PunoIme + OdabraniUposlenik.BrojTelefona + ".png");
             UsernameAzuriraj = "Neko";
             PasswordAzuriraj = "Neko";
         }
