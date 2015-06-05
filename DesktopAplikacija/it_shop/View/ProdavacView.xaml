@@ -262,17 +262,12 @@
                                        Height="25"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top">Dodatna oprema</Label>
+                                <Label Margin="20,20,0,0"
+                                       Width="150"
+                                       Height="25"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">ID proizvoda</Label>
                                 <Label Margin="20,390,0,0"
-                                       Width="150"
-                                       Height="25"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Top">Serijski broj</Label>
-                                <Label Margin="20,420,0,0"
-                                       Width="150"
-                                       Height="25"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Top">Bar kod</Label>
-                                <Label Margin="20,450,0,0"
                                        Width="150"
                                        Height="25"
                                        HorizontalAlignment="Left"
@@ -334,17 +329,12 @@
                                          VerticalAlignment="Top"
                                          ScrollViewer.VerticalScrollBarVisibility="Auto"
                                          Text ="{Binding Path=DodatnaOprema}"></TextBox>
-                                <TextBox Margin="150,390,25,0"
+                                <TextBox Margin="150,20,25,0"
                                          Height="25"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"
                                          Text="{Binding Path=SerijskiBroj}"></TextBox>
-                                <TextBox Margin="150,420,25,0"
-                                         Height="25"
-                                         HorizontalAlignment="Stretch"
-                                         VerticalAlignment="Top"
-                                         Text="{Binding Path=BarKod}"></TextBox>
-                                <TextBox Margin="150,450,25,0"
+                                <TextBox Margin="150,390,25,0"
                                          Height="25"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"
@@ -352,21 +342,21 @@
                                 <Button Width="100" Height="25"
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Right"
-                                        Margin="150,485,135,0"
+                                        Margin="150,420,135,0"
                                         Command="{Binding Path=UnesiButton}">Unesi</Button>
                                 <Button Width="100" Height="25"
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Right"
-                                        Margin="260,485,25,0"
+                                        Margin="260,420,25,0"
                                         Command="{Binding Path=PonistiButton}">Ponisti</Button>
                             </Grid>
                         </StackPanel>
                     </ScrollViewer>
-                    
+
                 </Grid>
             </TabItem>
         </TabControl>
-        <Menu Grid.ColumnSpan="2" Height="20" VerticalAlignment="Top" Margin="0,0,-3,0"/>
+        <Menu Grid.ColumnSpan="2" Height="20" VerticalAlignment="Top" Margin="0,0,0,0"/>
         <StatusBar Margin="0" VerticalAlignment="Bottom" RenderTransformOrigin="0.9,4.6" Grid.ColumnSpan="2" Height="22">
             <StatusBarItem Content="{Binding Path=ProdavacStatusBar}" VerticalAlignment="Bottom"/>
         </StatusBar>
