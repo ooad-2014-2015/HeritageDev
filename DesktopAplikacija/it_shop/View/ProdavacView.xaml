@@ -11,16 +11,45 @@
             <TabItem Header="Katalog">
                 <Grid Name="grid_katalog">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="250" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <DataGrid Name="txt_kategorije" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></DataGrid>
-                    <ScrollViewer Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                            <DataGrid VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                     Margin="5,5,5,0" Height="176"></DataGrid>
-                            <Image Width="200" Height="200" Margin="10,0,0,10"
-                            	VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="300"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DataGrid Name="txt_kategorije" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              Margin="5,5,0,5" Grid.RowSpan="2"></DataGrid>
+                    <DataGrid Grid.Column="1" Height="260"
+                              VerticalAlignment="Top" Margin="5,5,5,5"></DataGrid>
+                    <Button Width="100" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                            Grid.Column="1" Margin="5,5,5,5">Dodaj u korpu</Button>
+                    <ScrollViewer Grid.Column="1" Grid.Row="1">
+                        <StackPanel>
+                            <Grid>
+                                <Image Width="150" Height="150"
+                                       VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,0,0"></Image>
+                                <Label Margin="160,5,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top">Naziv proizvoda</Label>
+                                <Label Margin="160,35,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top">Kategorija</Label>
+                                <Label Margin="160,65,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top">Godina proizvodnje</Label>
+                                <Label Margin="160,95,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top">Cijena</Label>
+                                <Label Margin="160,125,5,0" Height="100" HorizontalAlignment="Stretch" VerticalAlignment="Top">Opis</Label>
+                                <Label Margin="160,230,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top">Mjeseci garancije</Label>
+                                <Label Margin="160,260,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top">Proizvodjac</Label>
+                                <Label Margin="160,290,5,0" Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Top">Dodatna oprema</Label>
+                                <Label Margin="160,345,5,5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top">Serijski broj</Label>
+                                <Label Margin="160,375,5,0" Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Top">Bar kod</Label>
+                                <TextBox Margin="300,5,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="300,35,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="300,65,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="300,95,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="300,125,5,0" Height="100" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="300,230,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="300,260,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="300,290,5,0" Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="300,345,5,5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="300,375,5,5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
+                            </Grid>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
@@ -37,18 +66,18 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Margin="5,5,0,0" Width="125" VerticalAlignment="Top" HorizontalAlignment="Left">Pretraga po:</Label>
-                    <ComboBox Name="cbox_pretraga" Text="Pretraga po:" Width="200" Height="25"
-                              HorizontalAlignment="Left" VerticalAlignment="Top"
-                              Margin="140,5,0,0"
+                    <ComboBox Name="cbox_pretraga" Text="Pretraga po:" Height="25"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                              Margin="140,5,110,0"
                               SelectedIndex="{Binding Path=VrstaPretrage}">
                         <ComboBoxItem HorizontalAlignment="Stretch">Po ID-u proizvoda</ComboBoxItem>
                         <ComboBoxItem HorizontalAlignment="Stretch">Po nazivu</ComboBoxItem>
                         <ComboBoxItem HorizontalAlignment="Stretch">Po proizvodjacu</ComboBoxItem>
                     </ComboBox>
                     <Label Margin="5,35,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125">Pojam za pretragu:</Label>
-                    <TextBox Width="200" Height="25"
-                             HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                             Margin="140,0,0,5"
+                    <TextBox Height="25"
+                             HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                             Margin="140,0,110,5"
                              Text="{Binding Path=PojamZaPretragu}"></TextBox>
                     <Button Width="100" Height="25" Margin="0,5,5,0" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding Path=DodajUKorpu}">Dodaj u korpu</Button>
                     <Button Width="100" Height="25" Margin="0,35,5,0" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding Path=IzvrsiPretragu}">
@@ -217,12 +246,12 @@
                                        Height="25"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top">Kolicina</Label>
-                                <TextBox Margin="175,50,50,0"
+                                <TextBox Margin="150,50,25,0"
                                          Height="25"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"
                                          Text ="{Binding Path = NazivProizvoda}"></TextBox>
-                                <ComboBox Margin="175,80,50,0"
+                                <ComboBox Margin="150,80,25,0"
                                           Height="25"
                                           HorizontalAlignment="Stretch"
                                           VerticalAlignment="Top"
@@ -233,23 +262,23 @@
                                     <ComboBoxItem Content="Mrezna oprema" HorizontalAlignment="Stretch"/>
                                     <ComboBoxItem Content="Softver" HorizontalAlignment="Stretch"/>
                                 </ComboBox>
-                                <TextBox Margin="175,110,50,0"
+                                <TextBox Margin="150,110,25,0"
                                          Height="25"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"
                                          Text="{Binding Path=GodinaProizvodnje}"></TextBox>
-                                <TextBox Margin="175,140,50,0"
+                                <TextBox Margin="150,140,25,0"
                                          Height="25"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"
                                          Text="{Binding Path=Cijena}"></TextBox>
-                                <TextBox Margin="175,170,50,0"
+                                <TextBox Margin="150,170,25,0"
                                          Height="100"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"
                                          ScrollViewer.VerticalScrollBarVisibility="Auto"
                                          Text="{Binding Path=Opis}"></TextBox>
-                                <ComboBox Margin="175,275,50,0"
+                                <ComboBox Margin="150,275,25,0"
                                           Height="25"
                                           HorizontalAlignment="Stretch"
                                           VerticalAlignment="Top" 
@@ -263,41 +292,41 @@
                                     <ComboBoxItem Content="36" HorizontalAlignment="Stretch"/>
                                     <ComboBoxItem Content="48" HorizontalAlignment="Stretch"/>
                                 </ComboBox>
-                                <TextBox Margin="175,305,50,0"
+                                <TextBox Margin="150,305,25,0"
                                          Height="25"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"
                                          Text="{Binding Path=Proizvodjac}"></TextBox>
-                                <TextBox Margin="175,335,50,0"
+                                <TextBox Margin="150,335,25,0"
                                          Height="50"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"
                                          ScrollViewer.VerticalScrollBarVisibility="Auto"
                                          Text ="{Binding Path=DodatnaOprema}"></TextBox>
-                                <TextBox Margin="175,390,50,0"
+                                <TextBox Margin="150,390,25,0"
                                          Height="25"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"
                                          Text="{Binding Path=SerijskiBroj}"></TextBox>
-                                <TextBox Margin="175,420,50,0"
+                                <TextBox Margin="150,420,25,0"
                                          Height="25"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"
                                          Text="{Binding Path=BarKod}"></TextBox>
-                                <TextBox Margin="175,450,50,0"
+                                <TextBox Margin="150,450,25,0"
                                          Height="25"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Top"
                                          Text="{Binding Path=Kolicina}"></TextBox>
                                 <Button Width="100" Height="25"
                                         VerticalAlignment="Top"
-                                        HorizontalAlignment="Left"
-                                        Margin="175,485,0,0"
+                                        HorizontalAlignment="Right"
+                                        Margin="150,485,135,0"
                                         Command="{Binding Path=UnesiButton}">Unesi</Button>
                                 <Button Width="100" Height="25"
                                         VerticalAlignment="Top"
-                                        HorizontalAlignment="Left"
-                                        Margin="285,485,0,0"
+                                        HorizontalAlignment="Right"
+                                        Margin="260,485,25,0"
                                         Command="{Binding Path=PonistiButton}">Ponisti</Button>
                             </Grid>
                         </StackPanel>
