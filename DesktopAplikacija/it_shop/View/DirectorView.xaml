@@ -94,8 +94,8 @@
                                   SelectedItem="{Binding OdabraniUposlenik}"
                                   ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Naziv" Binding="{Binding PunoIme}"/>
-                                <DataGridTextColumn Header="Kontakt telefon" Binding="{Binding BrojTelefona}"/>
+                                <DataGridTextColumn Header="Naziv" Binding="{Binding PunoIme}" Width="1*"/>
+                                <DataGridTextColumn Header="Kontakt telefon" Binding="{Binding BrojTelefona}" Width="1*" />
                             </DataGrid.Columns>
 
                         </DataGrid>
