@@ -41,7 +41,6 @@ namespace it_shop.ViewModel {
         #endregion
 
         #region Unos proizvoda
-        private string idProizvoda;
         private string nazivProizvoda;
         private string kategorijaProizvoda;
         private string opis;
@@ -85,7 +84,7 @@ namespace it_shop.ViewModel {
                 OnPropertyChanged("SerijskiBroj");
             }
         }
-        public string GodinaPRoizvodnje {
+        public string GodinaProizvodnje {
             get { return godinaProizvodnje; }
             set { 
                 godinaProizvodnje = value;
@@ -240,13 +239,6 @@ namespace it_shop.ViewModel {
                 OnPropertyChanged("NazivProizvoda");
             }
         }
-        public string IdProizvoda {
-            get { return idProizvoda; }
-            set { 
-                idProizvoda = value;
-                OnPropertyChanged("IdProizvoda");
-            }
-        }
         #endregion Properties 
 
         #region INotify Implementation
@@ -292,10 +284,10 @@ namespace it_shop.ViewModel {
             FileStream fs;
 
             try {
-                string _mjeseciGarancije = MjeseciGarancije.Substring(37);
-                string _kategorijaProizvoda = KategorijaProizvoda.Substring(37);
-                string upit = "INSERT INTO artikli (naziv, kategorija, godina_proizvodnje, cijena, opis, mjeseci_garancije, proizvodjac, serijski_broj, barkod, dodatna_oprema, kolicina, slika, velicina_slike)" + 
-                + "VALUES (" + IdProizvoda + ", '" + NazivProizvoda + "', '" + _kategorijaProizvoda + "', " + Cijena + ", '" + Opis + "', " + _mjeseciGarancije + ", '" + Proizvodjac + "', '" + DodatnaOprema + "', " + Kolicina + ", ";
+                string _mjeseciGarancije = MjeseciGarancije.Substring(38);
+                string _kategorijaProizvoda = KategorijaProizvoda.Substring(38);
+                string upit = "INSERT INTO artikli (naziv, kategorija, godina_proizvodnje, cijena, opis, mjeseci_garancije, proizvodjac, serijski_broj, barkod, dodatna_oprema, kolicina, slika, velicina_slike)" +
+                 " VALUES (" + NazivProizvoda + ", '" + _kategorijaProizvoda + "', " + GodinaProizvodnje + ", " + Cijena + ", '" + Opis + "', " + _mjeseciGarancije + ", '" + Proizvodjac + "', '" + SerijskiBroj + "', '" + BarKod +"', '" + DodatnaOprema + "', " + Kolicina + ", ";
 
                 fs = new FileStream(putanja, FileMode.Open, FileAccess.Read);
                 FileSize = Convert.ToInt32(fs.Length);
@@ -308,7 +300,9 @@ namespace it_shop.ViewModel {
                 upit += "@File, @FileSize);";
                 con.Open();
                 cmd.Connection = con;
-                cmd.CommandText = upit;                
+                cmd.CommandText = upit;
+
+                MessageBox.Show(upit);
 
                 cmd.ExecuteNonQuery();
 
@@ -324,7 +318,6 @@ namespace it_shop.ViewModel {
 
         }
         private void PonistiIzmjene ( ) {
-            IdProizvoda = string.Empty;
             NazivProizvoda = string.Empty;
             KategorijaProizvoda = string.Empty;
             Cijena = string.Empty;
@@ -333,7 +326,7 @@ namespace it_shop.ViewModel {
             Proizvodjac = string.Empty;
             DodatnaOprema = string.Empty;
             Kolicina = string.Empty;
-            GodinaPRoizvodnje = string.Empty;
+            GodinaProizvodnje = string.Empty;
             SerijskiBroj = string.Empty;
             BarKod = string.Empty;
             UcitajSlikuBinding = UcitajSliku(@"../../Resources/no_image.png");
