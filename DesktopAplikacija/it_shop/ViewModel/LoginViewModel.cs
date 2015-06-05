@@ -71,7 +71,7 @@ namespace it_shop.ViewModel
             MySqlConnection con = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
             try
             {
-                string upit = "SELECT * FROM uposlenici WHERE username = '" + Username + "' AND password = '" + Password + "';";
+                string upit = "SELECT * FROM _uposlenici WHERE username = '" + Username + "' AND password = '" + Password + "';";
 
                 Task<MySqlDataReader> nit = Task<MySqlDataReader>.Factory.StartNew(() => UpitNaBazu(upit, con));
 

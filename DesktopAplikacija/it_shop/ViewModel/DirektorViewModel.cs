@@ -169,7 +169,7 @@ namespace it_shop.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                StatusBarError = ex.Message;
             }
 
         }
@@ -192,7 +192,7 @@ namespace it_shop.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
+                    StatusBarError = ex.Message;
                 }
             }
             else
@@ -215,7 +215,7 @@ namespace it_shop.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
+                    StatusBarError = ex.Message;
                 }
             }
             else
@@ -251,6 +251,7 @@ namespace it_shop.ViewModel
         private string daniGodisnjegAzuriraj;
         private string usernameAzuriraj;
         private string passwordAzuriraj;
+        private string statusBarError;
         private BitmapImage slikaAzuriraj;
         private List<string> hardcodedTipoviUposlenika = new List<string>();
 
@@ -285,6 +286,7 @@ namespace it_shop.ViewModel
             set
             {
                 odabraniTab = value;
+                StatusBarError = string.Empty;
                 if (OdabraniTab == 1)
                     UcitajUposlenikeIzBaze();
 
@@ -381,12 +383,19 @@ namespace it_shop.ViewModel
             set { imeAzuriraj = value; OnPropertyChanged("ImeAzuriraj"); }
         }
 
+        public string StatusBarError 
+        {
+            get { return statusBarError; }
+            set { statusBarError = value; OnPropertyChanged("StatusBarError"); }
+        }
+
         #endregion
 
 
         #region Metode
         private void UcitajUposlenikeIzBaze()
         {
+            StatusBarError = string.Empty;
             if (ListaUposlenika.Count == 0)
             {
                 MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
@@ -432,7 +441,7 @@ namespace it_shop.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
+                    StatusBarError = ex.Message;
                 }
 
 
@@ -476,40 +485,41 @@ namespace it_shop.ViewModel
         {
             if (tip != "azuriranje" && tip != "unos")
                 return;
-            string poruka = string.Empty;
+            //string throw new Exception(string.Empty;
             if (!Regex.IsMatch(s1, @"^[a-zA-Z]+$"))
-                poruka = "Ime sadrzi ilegalne znakove!";
+                throw new Exception("Ime sadrzi ilegalne znakove!");
             else if (!Regex.IsMatch(s2, @"^[a-zA-Z]+$"))
-                poruka = "Prezime sadrzi ilegalne znakove!";
+                throw new Exception("Prezime sadrzi ilegalne znakove!");
             else if (tip == "azuriranje" && !Regex.IsMatch(s3, @"^[MZ]+$"))
-                poruka = "Spol sadrzi ilegalne znakove!";
+                throw new Exception("Spol sadrzi ilegalne znakove!");
             else if (!Regex.IsMatch(s4, @"^[0-9]+$"))
-                poruka = "Broj telefona sadrzi ilegalne znakove!";
+                throw new Exception("Broj telefona sadrzi ilegalne znakove!");
             else if (!Regex.IsMatch(s5, @"^[a-zA-Z0-9]+$"))
-                poruka = "Adresa sadrzi ilegalne znakove!";
+                throw new Exception("Adresa sadrzi ilegalne znakove!");
             else if (tip == "azuriranje") {
                 if (string.IsNullOrEmpty(s6))
-                    poruka = "Tip uposlenika nije odabran!";
+                    throw new Exception("Tip uposlenika nije odabran!");
                 else if (hardcodedTipoviUposlenika.IndexOf(s6) == -1)
-                    poruka = "Tip uposlenika ne postoji!";
+                    throw new Exception("Tip uposlenika ne postoji!");
             }
             else if (!Regex.IsMatch(s7, @"^[0-9]+$"))
-                poruka = "Plata sadrzi ilegalne znakove";
+                throw new Exception("Plata sadrzi ilegalne znakove");
             else if (!Regex.IsMatch(s8, @"(?<=^| )\d+(\.\d+)?(?=$| )"))
-                poruka = "Dodatak na platu sadrzi ilegalne znakove";
+                throw new Exception("Dodatak na platu sadrzi ilegalne znakove");
             else if (tip == "azuriranje" && !Regex.IsMatch(s9, @"^[0-9]+$"))
-                poruka = "Dani godisnjeg odmora sadrzi ilegalne znakove";
+                throw new Exception("Dani godisnjeg odmora sadrzi ilegalne znakove");
             else if (!Regex.IsMatch(s10, @"^[a-zA-Z0-9]+$"))
-                poruka = "Username sadrzi ilegalne znakove!";
+                throw new Exception("Username sadrzi ilegalne znakove!");
             else if (string.IsNullOrEmpty(s11))
-                poruka = "Password ne smije biti prazan!";
+                throw new Exception("Password ne smije biti prazan!");
             else {
                 MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
                 string upitBaza = "SELECT 1 FROM uposlenici WHERE USERNAME='" + UsernameAzuriraj + "';";
                 MySqlDataReader reader = UpitNaBazu(upitBaza, connectionBaza);
                 if (reader.HasRows)
-                    poruka = "Vec postoji korisnik sa unesenim username-om!";
+                    throw new Exception("Vec postoji korisnik sa unesenim username-om!");
             }
+            //statusBarError = poruka;
         }
 
         private void AzurirajInformacijeKorisnika()
@@ -536,7 +546,7 @@ namespace it_shop.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                StatusBarError = ex.Message;
             }
 
 
@@ -722,7 +732,7 @@ namespace it_shop.ViewModel
         }
         private void UnesiNovogUposlenikaUBazu()
         {
-            
+            StatusBarError = string.Empty;
             try
             {
 
@@ -765,12 +775,11 @@ namespace it_shop.ViewModel
             }
             catch (System.AggregateException)
             {
-                MessageBox.Show("Neuspjela konekcija sa bazom podataka!\nPokušajte ponovo.");
+                StatusBarError = "Neuspjela konekcija sa bazom podataka!\nPokušajte ponovo.";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.ToString());
-                MessageBox.Show("Došlo je do greške!\nMolimo pokušajte ponovo ili kontaktirajte administratora!");
+                StatusBarError = "Došlo je do greške!\nMolimo pokušajte ponovo ili kontaktirajte administratora!";
             }
         }
 
@@ -789,6 +798,7 @@ namespace it_shop.ViewModel
             UsernameUposlenika = String.Empty;
             PasswordUposlenika = String.Empty;
             UcitajSlikuBinding = UcitajSliku(@"../../Resources/no_image.png");
+            StatusBarError = string.Empty;
         }
 
 

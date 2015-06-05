@@ -476,7 +476,7 @@
         </TabControl>
         <Menu Grid.ColumnSpan="2" Height="20" VerticalAlignment="Top" Margin="0,0,0,0"/>
         <StatusBar Margin="0" VerticalAlignment="Bottom" RenderTransformOrigin="0.9,4.6" Grid.ColumnSpan="2" Height="22">
-            <StatusBarItem Content="StatusBarItem" VerticalAlignment="Bottom"/>
+            <StatusBarItem Content="{Binding Path=StatusBarError}" Foreground="Red"></StatusBarItem>
         </StatusBar>
     </Grid>
 </Window>
