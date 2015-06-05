@@ -96,6 +96,7 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\ProdavacViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\ServiserViewModel.cs" />
     <Compile Include="View\DirectorView.xaml.cs">
       <DependentUpon>DirectorView.xaml</DependentUpon>
     </Compile>
