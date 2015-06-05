@@ -8,17 +8,18 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using System.IO;
+
 
 namespace it_shop.ViewModel
 {
     public class DirektorViewModel : INotifyPropertyChanged
     {
        
-      
         public DirektorViewModel()
         {
             UcitajZahtjeve = new RelayCommand(new Action(UcitajZahjeveZaNabavkomIzBaze));
@@ -26,7 +27,8 @@ namespace it_shop.ViewModel
             AzuzirajInfoUposlenika = new RelayCommand(new Action(AzurirajInformacijeKorisnika));
             UnosUposlenika = new RelayCommand(new Action(UnesiNovogUposlenikaUBazu));
             PonistiUnosUposlenika = new RelayCommand(new Action(OcistiFormuZaUnosKorisnika));
-            PonistiInfoUposlenika = new RelayCommand(new Action(OcistiFormuZaAzuriranjeInformacijaUposlenih));
+            UcitajSlikuBinding = UcitajSliku(@"../../Resources/no_image.png");
+            IzaberiSliku = new RelayCommand(new Action(IzaberiSliku1));
         }
 
         private MySqlDataReader UpitNaBazu(string upit, MySqlConnection con)
@@ -137,7 +139,6 @@ namespace it_shop.ViewModel
         private ObservableCollection<Uposlenik> listaUposlenika = new ObservableCollection<Uposlenik>();
         private ICommand obrisiUposlenika;
         private ICommand azuzirajInfoUposlenika;
-        private ICommand ponistiInfoUposlenika;
         private string imeAzuriraj;
         private string prezimeAzuriraj;
         private string spolAzuriraj;
@@ -167,11 +168,7 @@ namespace it_shop.ViewModel
             get { return obrisiUposlenika; }
             set { obrisiUposlenika = value; }
         }
-        public ICommand PonistiInfoUposlenika
-        {
-            get { return ponistiInfoUposlenika; }
-            set { ponistiInfoUposlenika = value; }
-        }
+       
         public int OdabraniTab
         {
             get { return odabraniTab; }
@@ -180,6 +177,8 @@ namespace it_shop.ViewModel
                 odabraniTab = value;
                 if (OdabraniTab == 1)
                     UcitajUposlenikeIzBaze();
+
+
             }
         }
 
@@ -303,16 +302,14 @@ namespace it_shop.ViewModel
 
 
         #region Metode
-      
         private void UcitajUposlenikeIzBaze()
         {
-
             if (ListaUposlenika.Count == 0)
             {
                 MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
 
                 string upitBaza = "SELECT * FROM uposlenici;";
-                string naziv, spol, telefon, adresa;
+                string naziv, spol, telefon, adresa, datumZaposlenja;
                 double plata, dodatak;
                 int godisnji;
                 DateTime zaposlenjeDatum;
@@ -320,20 +317,19 @@ namespace it_shop.ViewModel
 
                 try
                 {
-                    Task<MySqlDataReader> nit = Task<MySqlDataReader>.Factory.StartNew(() => UpitNaBazu(upitBaza, connectionBaza));
-                    
-                    MySqlDataReader r = nit.Result;
+                    MySqlDataReader r = UpitNaBazu(upitBaza, connectionBaza);
                     while (r.Read())
                     {
                         naziv = r.GetString("ime_i_prezime");
                         spol = r.GetString("spol");
                         adresa = r.GetString("adresa");
                         telefon = r.GetString("broj_telefona");
+                        datumZaposlenja = r.GetString("datum_zaposlenja");
                         plata = double.Parse(r.GetString("plata"), System.Globalization.CultureInfo.InvariantCulture);
                         dodatak = double.Parse(r.GetString("dodatak_na_platu"), System.Globalization.CultureInfo.InvariantCulture);
-                        zaposlenjeDatum = r.GetDateTime("datum_zaposlenja"); 
+                        zaposlenjeDatum = DateTime.Parse(datumZaposlenja, new CultureInfo("en-CA"));
                         godisnji = Int32.Parse(r.GetString("dani_godisnjeg_odmora"));
-                        
+
                         //Tip Resolve
                         Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, zaposlenjeDatum, spol, plata, dodatak, godisnji);
                         ListaUposlenika.Add(tmp);
@@ -357,15 +353,11 @@ namespace it_shop.ViewModel
         {
             MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
             Uposlenik uposlenik = OdabraniUposlenik;
-      
             string upit = "DELETE FROM uposlenici WHERE ime_i_prezime = '" + uposlenik.PunoIme + "';";
             DMLUpitiNaBazu(upit, connectionBaza);
-
-            ListaUposlenika.Clear();
-            UcitajUposlenikeIzBaze();
+            //ListaUposlenika.Remove(uposlenik);
         }
 
-        //Username i Tip treba jos citat i azurirat
         private void UcitajInformacijeZaposlenika()
         {
             ImeAzuriraj = OdabraniUposlenik.PunoIme;
@@ -421,7 +413,7 @@ namespace it_shop.ViewModel
             UsernameAzuriraj = String.Empty;
             PasswordAzuriraj = String.Empty;
         }
-
+        
         #endregion
        
         
@@ -443,14 +435,21 @@ namespace it_shop.ViewModel
         private string dodatakNaPlatuUposlenika;
         private string daniGodisnjeUposlenika;
         private string usernameUposlenika;
-        private string  passwordUposlenik;
+        private string passwordUposlenik;
+        private string putanja;
+        private ICommand izaberiSliku;
         private ICommand unosUposlenika;
         private ICommand ponistiUnosUposlenika;
+        private BitmapImage ucitajSlikuBinding;
+
 
         #endregion
 
         #region Properties
-
+        public ICommand IzaberiSliku {
+            get { return izaberiSliku; }
+            set { izaberiSliku = value; }
+        }
         public ICommand PonistiUnosUposlenika
         {
             get { return ponistiUnosUposlenika; }
@@ -539,34 +538,80 @@ namespace it_shop.ViewModel
         #endregion
 
         #region Metode
-
+        private void IzaberiSliku1 ( ) {
+            Microsoft.Win32.OpenFileDialog openFileDialog1 = new Microsoft.Win32.OpenFileDialog();
+            openFileDialog1.Filter = "JPEG Files(*.png)|*.jpg|All Files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.Multiselect = false;
+            openFileDialog1.ShowDialog();
+            putanja = openFileDialog1.FileName;
+            if (putanja == string.Empty) {
+                MessageBox.Show("Niste odabrali datoteku.");
+            } else {
+                UcitajSlikuBinding = UcitajSliku(putanja);
+            }
+        }
+        private BitmapImage UcitajSliku ( string _putanja ) {
+            BitmapImage b = new BitmapImage();
+            b.BeginInit();
+            b.UriSource = new Uri(System.IO.Path.GetFullPath(_putanja), UriKind.RelativeOrAbsolute);
+            b.EndInit();
+            return b;
+        }
+        public BitmapImage UcitajSlikuBinding {
+            get {
+                return ucitajSlikuBinding;
+            }
+            set {
+                ucitajSlikuBinding = value;
+                OnPropertyChanged("UcitajSlikuBinding");
+            }
+        }
         private void UnesiNovogUposlenikaUBazu()
         {
 
-            SpolUposlenika = SpolUposlenika.Substring(38);
-            TipUposlenika = TipUposlenika.Substring(38);
+            SpolUposlenika = SpolUposlenika.Substring(37);
+            TipUposlenika = TipUposlenika.Substring(37);
 
             
             DaniGodisnjegUposlenika = DaniGodisnjegUposlenika.Substring(37);
             
             try
             {
-                string upit = "INSERT INTO uposlenici (ime_i_prezime, spol, broj_telefona, adresa, tip_uposlenika, datum_zaposlenja, plata, dodatak_na_platu, dani_godisnjeg_odmora, username, password) VALUES ('" +
+                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+                MySqlCommand cmd = new MySqlCommand();
+                int FileSize;
+                byte[] rawData;
+                FileStream fs;
+
+                string upit = "INSERT INTO uposlenici (ime_i_prezime, spol, broj_telefona, adresa, tip_uposlenika, datum_zaposlenja, plata, dodatak_na_platu, dani_godisnjeg_odmora, username, password, slika, velicina_slike) VALUES ('" +
                 ImeUposlenika + " " + PrezimeUposlenika + "','" + SpolUposlenika + "','" + BrojTelefonaUposlenika + "','" + AdresaUposlenika + "','" + TipUposlenika +
-                "', STR_TO_DATE('" + DateTime.Now.ToShortDateString() + "','%d.%m.%Y'), " + PlataUposlenika + "," + DodatakNaPlatuUposlenika + "," + DaniGodisnjegUposlenika + ",'" + UsernameUposlenika + "','" + PasswordUposlenika + "');";
+                "', STR_TO_DATE('" + DateTime.Now.ToShortDateString() + "','%d.%m.%Y'), " + PlataUposlenika + "," + DodatakNaPlatuUposlenika + "," + DaniGodisnjegUposlenika + ",'" + UsernameUposlenika + "','" + PasswordUposlenika + "', ";
+
+                fs = new FileStream(putanja, FileMode.Open, FileAccess.Read);
+                FileSize = Convert.ToInt32(fs.Length);
+                rawData = new byte[FileSize];
+                fs.Read(rawData, 0, FileSize);
+                fs.Close();
+                cmd.Parameters.AddWithValue("@FileSize", FileSize);
+                cmd.Parameters.AddWithValue("@File", rawData);
+
+                upit += "@File, @FileSize);";
+                connectionBaza.Open();
+                cmd.Connection = connectionBaza;
+                cmd.CommandText = upit;
+
+                cmd.ExecuteNonQuery();
            
                 MessageBox.Show(upit);
-                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
-                DMLUpitiNaBazu(upit, connectionBaza);
+                //DMLUpitiNaBazu(upit, connectionBaza);
                 OcistiFormuZaUnosKorisnika();
+                connectionBaza.Close();
+            } catch (System.AggregateException) {
+                MessageBox.Show("Neuspjela konekcija sa bazom podataka!\nPokušajte ponovo.");
+            } catch (Exception ex) {
+                MessageBox.Show("Došlo je do greške!\nMolimo pokušajte ponovo ili kontaktirajte administratora!");
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            ListaUposlenika.Clear();
-            UcitajUposlenikeIzBaze();
-
         }
 
         private void OcistiFormuZaUnosKorisnika()
@@ -583,7 +628,7 @@ namespace it_shop.ViewModel
             DaniGodisnjegUposlenika = String.Empty;
             UsernameUposlenika = String.Empty;
             PasswordUposlenika = String.Empty;
-
+            UcitajSlikuBinding = UcitajSliku(@"../../Resources/no_image.png");
         }
 
 

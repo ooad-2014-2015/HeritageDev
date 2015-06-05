@@ -67,8 +67,6 @@ namespace it_shop.ViewModel {
             Printaj = new RelayCommand(new Action(PrintajRacun));
         }
 
-
-
         #region Properties Korpa
         public string BrojArtikala {
             get { return brojArtikala; }
@@ -245,7 +243,6 @@ namespace it_shop.ViewModel {
         private BitmapImage UcitajSliku( string _putanja ) {
             BitmapImage b = new BitmapImage();
             b.BeginInit();
-            //b.UriSource = new Uri(System.IO.Path.GetFullPath(@"../../Resources/no_image.png"), UriKind.RelativeOrAbsolute);
             b.UriSource = new Uri(System.IO.Path.GetFullPath(_putanja), UriKind.RelativeOrAbsolute);
             b.EndInit();
             return b;
@@ -317,41 +314,43 @@ namespace it_shop.ViewModel {
 
         #region Funkcije za korpu
         private void PrintajRacun ( ) {
-            string racunPrint = "\n";
+            if (ListaArtikalaKorpa.Count != 0) {
+                string racunPrint = "\n";
+                racunPrint += "======================================\n";
+                racunPrint += "                   Racun\n";
+                racunPrint += "======================================\n";
+                racunPrint += " Naziv \t\t\t Cijena\n";
+                racunPrint += "======================================\n";
+                foreach (var item in ListaArtikalaKorpa) {
+                    string naziv = item.Naziv;
+                    string cijena = item.Cijena.ToString("0.00") + " KM";
+                    racunPrint += " " + naziv + " \t\t\t " + cijena + "\n";
+                }
+                racunPrint += "======================================\n";
+                racunPrint += "Iznos PDV:\t " + (cijenaArtikala - (cijenaArtikala / Convert.ToDouble(1.17))).ToString("0.00") + " KM\n";
+                racunPrint += "Ukupno bez PDV:\t " + (cijenaArtikala / Convert.ToDouble(1.17)).ToString("0.00") + " KM\n";
+                racunPrint += "Ukupno sa PDV:\t " + cijenaArtikala.ToString("0.00") + " KM\n";
+                racunPrint += "======================================\n";
+                racunPrint += "Datum i vrijeme prodaje: \t" + DateTime.Now.ToShortDateString() + "  " + DateTime.Now.ToShortTimeString() + "\n";
+                racunPrint += "======================================\n";
 
-            racunPrint += "=================================================================\n";
-            racunPrint += "                             Racun\n";
-            racunPrint += "=================================================================\n";
-            racunPrint += " Naziv \t\t\t Cijena\n";
-            racunPrint += "=================================================================\n";
-            foreach (var item in ListaArtikalaKorpa) {
-                string naziv = item.Naziv;
-                string cijena = item.Cijena.ToString();
-                racunPrint += " "+ naziv + " \t\t\t "+cijena+"\n";
+
+                PrintDialog printDialog = new PrintDialog();
+                FlowDocument fl = new FlowDocument(new Paragraph(new Run(racunPrint)));
+                fl.Name = "printanje";
+                IDocumentPaginatorSource idpSource = fl;
+
+                printDialog.PrintDocument(idpSource.DocumentPaginator, "racun");
+
+
+                MessageBox.Show("Racun isprintan.", "Info");
+
+                ListaArtikalaKorpa.Clear();
+                cijenaArtikala = 0;
+                brojacArtikala = 0;
+                UkupnaCijena = cijenaArtikala.ToString();
+                BrojArtikala = brojacArtikala.ToString();
             }
-            racunPrint += "=================================================================\n";
-            racunPrint += "Iznos PDV:\t " + (cijenaArtikala - (cijenaArtikala / Convert.ToDouble(1.17))).ToString("0.00") + " KM\n";
-            racunPrint += "Ukupno bez PDV:\t " + (cijenaArtikala / Convert.ToDouble(1.17)).ToString("0.00") + " KM\n";
-            racunPrint += "Ukupno sa PDV:\t " + cijenaArtikala.ToString("0.00") + " KM\n";
-            racunPrint += "=================================================================\n";
-            racunPrint += "Datum i vrijeme prodaje: \t\t" + DateTime.Now.ToShortDateString() + "  " + DateTime.Now.ToShortTimeString() + "\n";
-            racunPrint += "=================================================================\n";
- 
-
-            PrintDialog printDialog = new PrintDialog();
-            FlowDocument fl = new FlowDocument(new Paragraph(new Run(racunPrint)));
-            fl.Name = "printanje";
-            IDocumentPaginatorSource idpSource = fl;
-
-            printDialog.PrintDocument(idpSource.DocumentPaginator, "racun");
-
-
-            MessageBox.Show("Racun isprintan.", "Info");
-            ListaArtikalaKorpa.Clear();
-            cijenaArtikala = 0;
-            brojacArtikala = 0;
-            UkupnaCijena = cijenaArtikala.ToString();
-            BrojArtikala = brojacArtikala.ToString();
         }
         private void DodajArtikalUKorpu ( ) {
             ListaArtikalaKorpa.Add(OdabraniArtikal);
@@ -407,7 +406,6 @@ namespace it_shop.ViewModel {
             }
         }
         #endregion
-
 
         private MySqlDataReader UpitNaBazu ( string upit, MySqlConnection con ) {
             con.Open();
