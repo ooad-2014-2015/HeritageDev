@@ -46,6 +46,12 @@
                             <DataGridTextColumn Header="Kolicina" Binding="{Binding Kolicina}"/>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Label Width="75" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                           Grid.Column="1" Margin="5,0,0,5">Kolicina:</Label>
+                    <TextBox Width="75" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                             Grid.Column="1" Margin="65,0,0,5"></TextBox>
+                    <Button Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                            Grid.Column="1" Margin="150,5,115,5">Zahtijevaj</Button>
                     <Button Width="100" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                             Grid.Column="1" Margin="5,5,5,5">Dodaj u korpu</Button>
                     <ScrollViewer Grid.Column="1" Grid.Row="1">
