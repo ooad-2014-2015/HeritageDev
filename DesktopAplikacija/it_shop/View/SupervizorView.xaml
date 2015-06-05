@@ -60,43 +60,28 @@
                            Margin="5,5,5,0">Potrebni proizvodi</Label>
                     <DataGrid HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
-                              Margin="5,30,5,5"
+                              Margin="5,30,5,35"
                               ScrollViewer.VerticalScrollBarVisibility="Auto"></DataGrid>
-                    <Label Margin="5,5,5,0"
-                           Width="100"
-                           VerticalAlignment="Top"
-                           HorizontalAlignment="Left"
-                           Grid.Column="1">Proizvod:</Label>
-                    <TextBox Margin="110,5,5,0"
-                             Height="25"
-                             VerticalAlignment="Top"
-                             HorizontalAlignment="Stretch"
-                             Grid.Column="1"></TextBox>
-                    <Label Margin="5,35,5,0"
-                           Width="100"
-                           VerticalAlignment="Top"
-                           HorizontalAlignment="Left"
-                           Grid.Column="1">Kolicina:</Label>
-                    <TextBox Margin="110,35,110,0"
-                             Height="25"
-                             VerticalAlignment="Top"
-                             HorizontalAlignment="Stretch"
-                             Grid.Column="1"></TextBox>
-                    <Button Margin="0,35,5,0"
+                    <Button Margin="5,5,5,5"
                             Width="100" Height="25"
-                            VerticalAlignment="Top"
-                            HorizontalAlignment="Right"
-                            Grid.Column="1">Dodaj</Button>
-                    <Label Margin="5,65,0,0"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Center"
+                            Grid.Column="0">Dodaj</Button>
+                    <Label Margin="5,5,0,0"
                            Height="25"
                            VerticalAlignment="Top"
                            HorizontalAlignment="Left"
                            Grid.Column="1">Stavke narudzbe:</Label>
-                    <DataGrid Margin="5,95,5,5"
+                    <DataGrid Margin="5,30,5,35"
                               HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
                               Grid.Column="1"
                               ScrollViewer.VerticalScrollBarVisibility="Auto"></DataGrid>
+                    <Button Margin="5,5,5,5"
+                            Width="100" Height="25"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Center"
+                            Grid.Column="1">Posalji zahtjev</Button>
                 </Grid>
             </TabItem>
         </TabControl>

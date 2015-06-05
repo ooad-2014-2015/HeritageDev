@@ -53,7 +53,7 @@
                     <Button Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                             Grid.Column="1" Margin="150,5,115,5">Zahtijevaj</Button>
                     <Button Width="100" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                            Grid.Column="1" Margin="5,5,5,5">Dodaj u korpu</Button>
+                            Grid.Column="1" Margin="5,5,5,5" Command="{Binding Path=DodajArtikalUkorpu}">Dodaj u korpu</Button>
                     <ScrollViewer Grid.Column="1" Grid.Row="1">
                         <StackPanel>
                             <Grid>

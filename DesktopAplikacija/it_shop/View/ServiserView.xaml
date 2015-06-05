@@ -9,30 +9,36 @@
         <StatusBar Margin="0" VerticalAlignment="Bottom" RenderTransformOrigin="0.9,4.6" Grid.ColumnSpan="2" Height="22">
             <StatusBarItem Content="StatusBarItem" VerticalAlignment="Bottom"/>
         </StatusBar>
+        
         <TabControl Margin="0,20,0,22">
             <TabItem Header="Dodaj novi servisni predracun">
-                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,10,0,0">Ime i prezime kupca:</Label>
-                    <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,40,0,0">Naziv proizvoda:</Label>
-                    <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,70,0,0">Godina proizvodnje:</Label>
-                    <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,100,0,0">Proizvodjac:</Label>
-                    <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,130,0,0">Serijski broj:</Label>
-                    <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,160,0,0">Opis kvara:</Label>
-                    <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,370,0,0">Cijena popravke:</Label>
-                    <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,400,0,0">Datum predaje:</Label>
-                    <TextBox Text="{Binding NazivKupca}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,10,30,0"></TextBox>
-                    <TextBox Text="{Binding NazivProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,40,30,0"></TextBox>
-                    <TextBox Text="{Binding GodinaProizvodnjeProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,70,30,0"></TextBox>
-                    <TextBox Text="{Binding ProizvodjacProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,100,30,0"></TextBox>
-                    <TextBox Text="{Binding SerijeskiBrojProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,130,30,0"></TextBox>
-                    <TextBox Text="{Binding OpisKvaraProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="205" Margin="150,160,30,0" 
+                <ScrollViewer>
+                    <StackPanel>
+                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,10,0,0">Ime i prezime kupca:</Label>
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,40,0,0">Naziv proizvoda:</Label>
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,70,0,0">Godina proizvodnje:</Label>
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,100,0,0">Proizvodjac:</Label>
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,130,0,0">Serijski broj:</Label>
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,160,0,0">Opis kvara:</Label>
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,370,0,0">Cijena popravke:</Label>
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,400,0,0">Datum predaje:</Label>
+                            <TextBox Text="{Binding NazivKupca}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,10,30,0"></TextBox>
+                            <TextBox Text="{Binding NazivProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,40,30,0"></TextBox>
+                            <TextBox Text="{Binding GodinaProizvodnjeProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,70,30,0"></TextBox>
+                            <TextBox Text="{Binding ProizvodjacProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,100,30,0"></TextBox>
+                            <TextBox Text="{Binding SerijeskiBrojProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,130,30,0"></TextBox>
+                            <TextBox Text="{Binding OpisKvaraProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="205" Margin="150,160,30,0" 
                              ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"></TextBox>
-                    <TextBox Text="{Binding CijenaPopravkeProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,370,30,0"></TextBox>
-                    <TextBox Text="{Binding DatumPredajeProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,400,30,0"></TextBox>
-                    <Button Command="{Binding Path=UnesiPredracunBtn}" Width="100" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,435,140,0">Unesi</Button>
-                    <Button Command="{Binding Path=PonistiUnosPredracunaBtn}" Width="100" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,435,30,0">Ponisti</Button>
-                </Grid>
+                            <TextBox Text="{Binding CijenaPopravkeProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,370,30,0"></TextBox>
+                            <TextBox Text="{Binding DatumPredajeProizvoda}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="150,400,30,0"></TextBox>
+                            <Button Command="{Binding Path=UnesiPredracunBtn}" Width="100" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,435,140,0">Unesi</Button>
+                            <Button Command="{Binding Path=PonistiUnosPredracunaBtn}" Width="100" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,435,30,0">Ponisti</Button>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
+            
             <TabItem Header="Pregled uredjaja za servisiranje">
                 <Grid>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,5,0,0">Postojeci uredjaji za servisiranje:</Label>
