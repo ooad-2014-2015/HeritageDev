@@ -54,6 +54,9 @@ namespace it_shop.ViewModel {
         private ICommand unesiButton;
         private ICommand ponistiButton;
         private ICommand izaberiSlikuButton;
+        private string godinaProizvodnje;
+        private string serijskiBroj;
+        private string barKod;
         private BitmapImage ucitajSliku;
 #endregion
 
@@ -68,6 +71,27 @@ namespace it_shop.ViewModel {
         }
 
         #region Properties Korpa
+        public string BarKod {
+            get { return barKod; }
+            set { 
+                barKod = value;
+                OnPropertyChanged("BarKod");
+            }
+        }
+        public string SerijskiBroj {
+            get { return serijskiBroj; }
+            set { 
+                serijskiBroj = value;
+                OnPropertyChanged("SerijskiBroj");
+            }
+        }
+        public string GodinaPRoizvodnje {
+            get { return godinaProizvodnje; }
+            set { 
+                godinaProizvodnje = value;
+                OnPropertyChanged("GodinaPRoizvodnje");
+            }
+        }
         public string BrojArtikala {
             get { return brojArtikala; }
             set { 
@@ -270,7 +294,8 @@ namespace it_shop.ViewModel {
             try {
                 string _mjeseciGarancije = MjeseciGarancije.Substring(37);
                 string _kategorijaProizvoda = KategorijaProizvoda.Substring(37);
-                string upit = "INSERT INTO artikli VALUES (" + IdProizvoda + ", '" + NazivProizvoda + "', '" + _kategorijaProizvoda + "', " + Cijena + ", '" + Opis + "', " + _mjeseciGarancije + ", '" + Proizvodjac + "', '" + DodatnaOprema + "', " + Kolicina + ", ";
+                string upit = "INSERT INTO artikli (naziv, kategorija, godina_proizvodnje, cijena, opis, mjeseci_garancije, proizvodjac, serijski_broj, barkod, dodatna_oprema, kolicina, slika, velicina_slike)" + 
+                + "VALUES (" + IdProizvoda + ", '" + NazivProizvoda + "', '" + _kategorijaProizvoda + "', " + Cijena + ", '" + Opis + "', " + _mjeseciGarancije + ", '" + Proizvodjac + "', '" + DodatnaOprema + "', " + Kolicina + ", ";
 
                 fs = new FileStream(putanja, FileMode.Open, FileAccess.Read);
                 FileSize = Convert.ToInt32(fs.Length);
@@ -308,6 +333,9 @@ namespace it_shop.ViewModel {
             Proizvodjac = string.Empty;
             DodatnaOprema = string.Empty;
             Kolicina = string.Empty;
+            GodinaPRoizvodnje = string.Empty;
+            SerijskiBroj = string.Empty;
+            BarKod = string.Empty;
             UcitajSlikuBinding = UcitajSliku(@"../../Resources/no_image.png");
         }
         #endregion

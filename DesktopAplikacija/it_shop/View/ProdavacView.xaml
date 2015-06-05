@@ -279,7 +279,8 @@
                              Height="25"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
+                             VerticalAlignment="Top"
+                             Text="{Binding Path=GodinaProizvodnje}"></TextBox>
                     <TextBox Margin="175,140,50,0"
                              Height="25"
                              Grid.Column="1"
@@ -325,12 +326,14 @@
                              Height="25"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
+                             VerticalAlignment="Top"
+                             Text="{Binding Path=SerijskiBroj}"></TextBox>
                     <TextBox Margin="175,420,50,0"
                              Height="25"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"></TextBox>
+                             VerticalAlignment="Top"
+                             Text="{Binding Path=BarKod}"></TextBox>
                     <TextBox Margin="175,450,50,0"
                              Height="25"
                              Grid.Column="1"
