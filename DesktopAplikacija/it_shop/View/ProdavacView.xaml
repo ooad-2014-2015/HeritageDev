@@ -21,7 +21,22 @@
                     <DataGrid Name="txt_kategorije" ScrollViewer.VerticalScrollBarVisibility="Auto"
                               Margin="5,5,0,5" Grid.RowSpan="2"></DataGrid>
                     <DataGrid Grid.Column="1" Height="260"
-                              VerticalAlignment="Top" Margin="5,5,5,5"></DataGrid>
+                              VerticalAlignment="Top" Margin="5,5,5,5"
+                              ItemsSource="{Binding Path=ListaArtikalaKatalog}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Naziv" Binding="{Binding Naziv}"/>
+                            <DataGridTextColumn Header="Kategorija" Binding="{Binding Kategorija}"/>
+                            <DataGridTextColumn Header="Godina proizvodnje" Binding="{Binding GodinaProizvodnje}"/>
+                            <DataGridTextColumn Header="Cijena" Binding="{Binding Cijena}"/>
+                            <DataGridTextColumn Header="Opis" Binding="{Binding Opis}"/>
+                            <DataGridTextColumn Header="Mjeseci garancije" Binding="{Binding MjeseciGarancije}"/>
+                            <DataGridTextColumn Header="Proizvodjac" Binding="{Binding Proizvodjac}"/>
+                            <DataGridTextColumn Header="Dodatna oprema" Binding="{Binding DodatnaOprema}"/>
+                            <DataGridTextColumn Header="Serijski broj" Binding="{Binding SerijskiBroj}"/>
+                            <DataGridTextColumn Header="Barkod" Binding="{Binding BarKod}"/>
+                            <DataGridTextColumn Header="Kolicina" Binding="{Binding Kolicina}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Button Width="100" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                             Grid.Column="1" Margin="5,5,5,5">Dodaj u korpu</Button>
                     <ScrollViewer Grid.Column="1" Grid.Row="1">
@@ -39,16 +54,16 @@
                                 <Label Margin="160,290,5,0" Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Top">Dodatna oprema</Label>
                                 <Label Margin="160,345,5,5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top">Serijski broj</Label>
                                 <Label Margin="160,375,5,0" Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Top">Bar kod</Label>
-                                <TextBox Margin="300,5,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
-                                <TextBox Margin="300,35,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
-                                <TextBox Margin="300,65,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
-                                <TextBox Margin="300,95,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
-                                <TextBox Margin="300,125,5,0" Height="100" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
-                                <TextBox Margin="300,230,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
-                                <TextBox Margin="300,260,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
-                                <TextBox Margin="300,290,5,0" Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
-                                <TextBox Margin="300,345,5,5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
-                                <TextBox Margin="300,375,5,5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
+                                <TextBox Margin="300,5,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=NazivProizvodakatalog}"></TextBox>
+                                <TextBox Margin="300,35,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=KategorijaKatalog}"></TextBox>
+                                <TextBox Margin="300,65,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=GodinaProizvodnjekatalog}"></TextBox>
+                                <TextBox Margin="300,95,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=CijenaKatalog}"></TextBox>
+                                <TextBox Margin="300,125,5,0" Height="100" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=OpisKatalog}"></TextBox>
+                                <TextBox Margin="300,230,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=MjeseciGarancijekatalog}"></TextBox>
+                                <TextBox Margin="300,260,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=ProizvodjacKatalog}"></TextBox>
+                                <TextBox Margin="300,290,5,0" Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=DodatnaopremaKatalog}"></TextBox>
+                                <TextBox Margin="300,345,5,5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=SerijskiBrojKatalog}"></TextBox>
+                                <TextBox Margin="300,375,5,5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=BarKodKatalog}"></TextBox>
                             </Grid>
                         </StackPanel>
                     </ScrollViewer>

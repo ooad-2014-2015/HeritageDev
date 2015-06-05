@@ -137,7 +137,7 @@ namespace it_shop.ViewModel {
                 string _naziv, _kategoija, _opis, _proizvodjac, _dodatnaOprema, _serijskiBroj, _barkod;
                 int _godina, _mjeseciGarancije, _kolicina;
                 double _cijena;
-                string upitBaza = "SELECT * FROM artikli WHERE;";
+                string upitBaza = "SELECT * FROM artikli;";
                 UInt32 velicinaSlike;
                 byte[] rawData;
                 FileStream fs;
@@ -159,7 +159,7 @@ namespace it_shop.ViewModel {
                     velicinaSlike = r.GetUInt32(r.GetOrdinal("velicina_slike"));
                     rawData = new byte[velicinaSlike];
                     r.GetBytes(r.GetOrdinal("slika"), 0, rawData, 0, (int)velicinaSlike);
-                    fs = new FileStream(@"../../Resources/tmp/" + _serijskiBroj + ".png", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                    fs = new FileStream(@"../../Resources/tmp/artikal_" + _serijskiBroj + ".png", FileMode.OpenOrCreate, FileAccess.ReadWrite);
                     fs.Write(rawData, 0, (int)velicinaSlike);
                     fs.Close();
                     Artikal artikal = new Artikal(_naziv, _kategoija, _godina, _cijena, _opis, _mjeseciGarancije, _proizvodjac, _dodatnaOprema, _kolicina, _serijskiBroj, _barkod);
@@ -520,9 +520,6 @@ namespace it_shop.ViewModel {
                 con.Open();
                 cmd.Connection = con;
                 cmd.CommandText = upit;
-
-                MessageBox.Show(upit);
-
                 cmd.ExecuteNonQuery();
 
                 MessageBox.Show("Artikal uspjesno unesen.");
@@ -561,6 +558,7 @@ namespace it_shop.ViewModel {
             IzvrsiPretragu = new RelayCommand(new Action(UcitajArtikleIzBaze));
             DodajUKorpu = new RelayCommand(new Action(DodajArtikalUKorpu));
             Printaj = new RelayCommand(new Action(PrintajRacun));
+            UcitajSveArtikleIzBaze();
         }
         private MySqlDataReader UpitNaBazu ( string upit, MySqlConnection con ) {
             con.Open();
