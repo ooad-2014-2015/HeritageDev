@@ -8,14 +8,14 @@ namespace it_shop.Model
 {
     public class Artikal : Proizvod
     {
-        private readonly string barKod;
+       
         private double cijena;
         private int mjeseciGarancije;
         private string dodatnaOprema;
         private string kategorija;
         private string opis;
         private int kolicina;
-        public Artikal(string naziv, string kategorija, int godinaProizvodnje, double cijena, string opis, int mjeseciGarancije, string proizvodjac, string dodatnaOprema, int kolicina, string serijskiBroj, string barKod)
+        public Artikal(string naziv, string kategorija, int godinaProizvodnje, double cijena, string opis, int mjeseciGarancije, string proizvodjac, string dodatnaOprema, int kolicina, string serijskiBroj)
             : base(naziv, godinaProizvodnje, proizvodjac, serijskiBroj)
         {
             Kategorija = kategorija;
@@ -57,10 +57,7 @@ namespace it_shop.Model
             set { cijena = value; }
         }
         
-        public string BarKod
-        {
-            get { return barKod; }
-        }
+       
         #endregion
 
     }

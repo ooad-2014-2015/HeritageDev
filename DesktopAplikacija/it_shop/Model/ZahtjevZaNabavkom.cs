@@ -16,11 +16,11 @@ namespace it_shop.Model
 
        
 
-        public ZahtjevZaNabavkom(List<Artikal> lista, bool odobren)
+        public ZahtjevZaNabavkom(List<Artikal> lista, bool odobren, string datum)
         {
             ZahtjevOdobren = odobren;
             ListaArtikala = lista;
-            DatumZahtjeva = DateTime.Now.ToShortDateString();
+            DatumZahtjeva = datum;
 
         }
 

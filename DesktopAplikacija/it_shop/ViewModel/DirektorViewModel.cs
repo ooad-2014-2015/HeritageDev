@@ -54,7 +54,7 @@ namespace it_shop.ViewModel
         #region Atributi
 
         private ZahtjevZaNabavkom odabraniZahtjev = null;
-        private ObservableCollection<ZahtjevZaNabavkom> listaZahtjeva;
+        private ObservableCollection<ZahtjevZaNabavkom> listaZahtjeva = new ObservableCollection<ZahtjevZaNabavkom>();
         private ObservableCollection<Artikal> listaArtikalaZahtjeva = new ObservableCollection<Artikal>();
 
         private ICommand obrisiZahtjev;
@@ -122,12 +122,13 @@ namespace it_shop.ViewModel
             try
             {
 
-                string upitBaza = "SELECT * FROM zahtjevi_nabavke zn, artikli a WHERE a.id_nabavka = zn.id;";
+                string upitBaza = "SELECT * FROM zahtjevi_nabavke zn, artikli a, zahtjevi_proizvoda zp  " +
+                                  "WHERE zn.zahtjev_nabavke_id = zp.zahtjev_nabavke_id AND zp.artikal_id = a.artikal_id;";
                 string datum;
                 string odobren;
                 bool odobrenZah;
                 string idZahtjeva;
-                string _naziv, _kategoija, _opis, _proizvodjac, _dodatnaOprema, _serijskiBroj, _barkod;
+                string _naziv, _kategoija, _opis = String.Empty, _proizvodjac = String.Empty, _dodatnaOprema = String.Empty, _serijskiBroj;
                 int _godina, _mjeseciGarancije, _kolicina;
                 double _cijena;
                 List<Artikal> lista = new List<Artikal>();
@@ -135,33 +136,40 @@ namespace it_shop.ViewModel
                 while (r.Read())
                 {
                     //Zahtjev
-                    datum = r.GetString("datum_zahtjeva");
+                    datum = r.GetString("datum");
                     odobren = r.GetString("odobren");
-                    idZahtjeva = r.GetString("id");
+                    idZahtjeva = r.GetString("zahtjev_nabavke_id");
 
                     //Proizvod
                     _naziv = r.GetString("naziv");
                     _kategoija = r.GetString("kategorija");
                     _godina = r.GetInt32("godina_proizvodnje");
                     _cijena = r.GetDouble("cijena");
-                    _opis = r.GetString("opis");
-                    _mjeseciGarancije = r.GetInt32("mjeseci_garancije");
-                    _proizvodjac = r.GetString("proizvodjac");
-                    _dodatnaOprema = r.GetString("dodatna_oprema");
-                    _serijskiBroj = r.GetString("serijski_broj");
-                    _barkod = r.GetString("barkod");
+                    if (!r.IsDBNull(11))
+                    {
+                        _opis = r.GetString(11);
+                    }
+                    if (!r.IsDBNull(9))
+                    {
+                        _dodatnaOprema = r.GetString(9);
+                    }
+                    if (!r.IsDBNull(5))
+                    {
+                        _proizvodjac = r.GetString(5);
+                    }
+                    _mjeseciGarancije = r.GetInt32("garancija");
+                    _serijskiBroj = r.GetString("artikal_id");
                     _kolicina = r.GetInt32("kolicina");
 
-                    Artikal artikal = new Artikal(_naziv, _kategoija, _godina, _cijena, _opis, _mjeseciGarancije, _proizvodjac, _dodatnaOprema, _kolicina, _serijskiBroj, _barkod);
+                    Artikal artikal = new Artikal(_naziv, _kategoija, _godina, _cijena, _opis, _mjeseciGarancije, _proizvodjac, _dodatnaOprema, _kolicina, _serijskiBroj);
                     lista.Add(artikal);
                     if (odobren == "1")
                         odobrenZah = true;
                     else
                         odobrenZah = false;
-                    ZahtjevZaNabavkom tmp = new ZahtjevZaNabavkom(lista, odobrenZah);
+                    ZahtjevZaNabavkom tmp = new ZahtjevZaNabavkom(lista , odobrenZah, datum);
                     tmp.Id = idZahtjeva;
-                    //listaUposlenika.Add(naziv + " " + spol + " " + adresa + " " + telefon);
-                    //ListaUposlenika.Add(tmp);
+                    
                     ListaZahtjeva.Add(tmp);
 
                 }
@@ -169,6 +177,7 @@ namespace it_shop.ViewModel
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.ToString());
                 StatusBarError = ex.Message;
             }
 
@@ -393,14 +402,14 @@ namespace it_shop.ViewModel
 
 
         #region Metode
+        
         private void UcitajUposlenikeIzBaze()
         {
-            StatusBarError = string.Empty;
             if (ListaUposlenika.Count == 0)
             {
                 MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
 
-                string upitBaza = "SELECT * FROM uposlenici;";
+                string upitBaza = "SELECT * FROM _uposlenici;";
                 string naziv, spol, telefon, adresa, datumZaposlenja;
                 double plata, dodatak;
                 int godisnji;
@@ -427,10 +436,10 @@ namespace it_shop.ViewModel
                         velicinaSlike = r.GetUInt32(r.GetOrdinal("velicina_slike"));
                         rawData = new byte[velicinaSlike];
                         r.GetBytes(r.GetOrdinal("slika"), 0, rawData, 0, (int)velicinaSlike);
-                        fs = new FileStream(@"../../Resources/tmp/" + naziv + telefon + ".png", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                        fs = new FileStream(/*@"../../Resources/tmp/"*/System.IO.Path.GetFullPath(@"../../Resources/tmp/") + naziv + telefon + ".png", FileMode.OpenOrCreate, FileAccess.ReadWrite);
                         fs.Write(rawData, 0, (int)velicinaSlike);
                         fs.Close();
-
+                        
                         //Tip Resolve
                         Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, zaposlenjeDatum, spol, plata, dodatak, godisnji);
                         ListaUposlenika.Add(tmp);
@@ -441,6 +450,7 @@ namespace it_shop.ViewModel
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show(ex.ToString());
                     StatusBarError = ex.Message;
                 }
 
