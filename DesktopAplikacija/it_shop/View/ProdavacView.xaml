@@ -53,12 +53,13 @@
                     <Button Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                             Grid.Column="1" Margin="150,5,115,5">Zahtijevaj</Button>
                     <Button Width="100" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                            Grid.Column="1" Margin="5,5,5,5" Command="{Binding Path=DodajArtikalUkorpu}">Dodaj u korpu</Button>
+                            Grid.Column="1" Margin="5,5,5,5" Command="{Binding Path=DodajUKorpuKatalog}">Dodaj u korpu</Button>
                     <ScrollViewer Grid.Column="1" Grid.Row="1">
                         <StackPanel>
                             <Grid>
                                 <Image Width="150" Height="150"
-                                       VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,0,0"></Image>
+                                       VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,0,0" 
+                                       Source="{Binding Path=SlikaKatalog}"></Image>
                                 <Label Margin="160,5,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top">Naziv proizvoda</Label>
                                 <Label Margin="160,35,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top">Kategorija</Label>
                                 <Label Margin="160,65,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top">Godina proizvodnje</Label>
@@ -71,12 +72,12 @@
                                 <Label Margin="160,375,5,0" Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Top">Bar kod</Label>
                                 <TextBox Margin="300,5,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=NazivKatalog}"></TextBox>
                                 <TextBox Margin="300,35,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=KategorijaKatalog}"></TextBox>
-                                <TextBox Margin="300,65,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=GodinaProizvodnjekatalog}"></TextBox>
+                                <TextBox Margin="300,65,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=GodinaProizvodnjeKatalog}"></TextBox>
                                 <TextBox Margin="300,95,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=CijenaKatalog}"></TextBox>
                                 <TextBox Margin="300,125,5,0" Height="100" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=OpisKatalog}"></TextBox>
                                 <TextBox Margin="300,230,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=MjeseciGarancijekatalog}"></TextBox>
                                 <TextBox Margin="300,260,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=ProizvodjacKatalog}"></TextBox>
-                                <TextBox Margin="300,290,5,0" Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=DodatnaopremaKatalog}"></TextBox>
+                                <TextBox Margin="300,290,5,0" Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=DodatnaOpremaKatalog}"></TextBox>
                                 <TextBox Margin="300,345,5,5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=SerijskiBrojKatalog}"></TextBox>
                                 <TextBox Margin="300,375,5,5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=BarKodKatalog}"></TextBox>
                             </Grid>
@@ -109,7 +110,7 @@
                              HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                              Margin="140,0,110,5"
                              Text="{Binding Path=PojamZaPretragu}"></TextBox>
-                    <Button Width="100" Height="25" Margin="0,5,5,0" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding Path=DodajUKorpu}">Dodaj u korpu</Button>
+                    <Button Width="100" Height="25" Margin="0,5,5,0" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding Path=DodajUKorpuPretraga}">Dodaj u korpu</Button>
                     <Button Width="100" Height="25" Margin="0,35,5,0" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding Path=IzvrsiPretragu}">
                         <StackPanel>
                             <Image Width="100" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Center" Source="/it_shop;component/Resources/search.png"></Image>
@@ -367,7 +368,7 @@
         </TabControl>
         <Menu Grid.ColumnSpan="2" Height="20" VerticalAlignment="Top" Margin="0,0,-3,0"/>
         <StatusBar Margin="0" VerticalAlignment="Bottom" RenderTransformOrigin="0.9,4.6" Grid.ColumnSpan="2" Height="22">
-            <StatusBarItem Content="StatusBarItem" VerticalAlignment="Bottom"/>
+            <StatusBarItem Content="{Binding Path=ProdavacStatusBar}" VerticalAlignment="Bottom"/>
         </StatusBar>
 
     </Grid>
