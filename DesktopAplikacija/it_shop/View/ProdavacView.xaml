@@ -15,46 +15,15 @@
                         <ColumnDefinition Width="4*" />
                     </Grid.ColumnDefinitions>
                     <DataGrid Name="txt_kategorije" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></DataGrid>
-                    <ScrollViewer Grid.Column="1">
-                        <StackPanel>
-                            <Grid Name="grid_proizvodi" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Column="1" Margin="5,0,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                </Grid.RowDefinitions>
-                            </Grid>
+                    <ScrollViewer Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <DataGrid VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                     Margin="5,5,5,0" Height="176"></DataGrid>
+                            <Image Width="200" Height="200" Margin="10,0,0,10"
+                            	VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
-
 
             </TabItem>
             <TabItem Header="Korpa">

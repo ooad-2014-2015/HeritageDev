@@ -24,95 +24,95 @@ namespace it_shop {
         public ProdavacView() {
             InitializeComponent();
             this.DataContext = new ProdavacViewModel();
-            popuni();
-            for (int i = 0; i < 100; i++) {
-                txt_kategorije.Items.Add("kategorija" + (i + 1).ToString());
-            }
-        }
-
-        private void popuni() {
+            //popuni();
             for (int i = 0; i < 10; i++) {
                 txt_kategorije.Items.Add("kategorija" + (i + 1).ToString());
             }
-            for (int i = 0; i < 200; i += 2) {
-                //loadirajProizvod(i, i);
-                string tempPath = System.IO.Path.GetFullPath(@"../../Resources/tmp/") + "1.png";
-
-                //loadiraj sliku
-                Image img = new Image();
-                //img.Source = new BitmapImage(new Uri("C:/Users/ado/Documents/GitHub/HeritageDev/DesktopAplikacija/it_shop/Resources/tmp/1.png", UriKind.Absolute));
-                img.Source = new BitmapImage(new Uri(tempPath, UriKind.RelativeOrAbsolute));
-                img.Stretch = System.Windows.Media.Stretch.Fill;
-                Grid.SetRow(img, i / 4);
-                Grid.SetColumn(img, i % 4);
-                grid_proizvodi.Children.Add(img);
-                img.Margin = new Thickness(10, 10, 0, 0);
-
-                //loadiraj opis
-                TextBlock txt = new TextBlock();
-                txt.Text = "OS: SuSE Linux; CPU: Intel Core i5-4210U, 1.7/2.7GHz; Display: 15.6'' HD LED; RAM: 4GB; HDD: 1TB; VGA: AMD Radeon R5 M255 2GB;";
-                txt.TextWrapping = TextWrapping.Wrap;
-                Grid.SetRow(txt, i / 4);
-                Grid.SetColumn(txt, (i % 4) + 1);
-                grid_proizvodi.Children.Add(txt);
-                txt.Margin = new Thickness(10, 10, 0, 25);
-                txt.FontStyle = FontStyles.Normal;
-
-
-                Button btn_korpa = new Button();
-                btn_korpa.Content = "Dodaj u korpu";
-                //btn_korpa += dodajUKorpu(Artikal a);
-                btn_korpa.Width = 100;
-                btn_korpa.Height = 20;
-                btn_korpa.Margin = new Thickness(0, 5, 0, 5);
-                btn_korpa.HorizontalAlignment = HorizontalAlignment.Center;
-                btn_korpa.VerticalAlignment = VerticalAlignment.Bottom;
-                Grid.SetRow(btn_korpa, i / 4);
-                Grid.SetColumn(btn_korpa, (i % 4) + 1);
-                grid_proizvodi.Children.Add(btn_korpa);
-            }
-
         }
 
-        private void loadirajProizvod(int id_proizvoda, int i) {
+        //private void popuni() {
+        //    for (int i = 0; i < 10; i++) {
+        //        txt_kategorije.Items.Add("kategorija" + (i + 1).ToString());
+        //    }
+        //    for (int i = 0; i < 200; i += 2) {
+        //        //loadirajProizvod(i, i);
+        //        string tempPath = System.IO.Path.GetFullPath(@"../../Resources/tmp/") + "1.png";
+
+        //        //loadiraj sliku
+        //        Image img = new Image();
+        //        //img.Source = new BitmapImage(new Uri("C:/Users/ado/Documents/GitHub/HeritageDev/DesktopAplikacija/it_shop/Resources/tmp/1.png", UriKind.Absolute));
+        //        img.Source = new BitmapImage(new Uri(tempPath, UriKind.RelativeOrAbsolute));
+        //        img.Stretch = System.Windows.Media.Stretch.Fill;
+        //        Grid.SetRow(img, i / 4);
+        //        Grid.SetColumn(img, i % 4);
+        //        grid_proizvodi.Children.Add(img);
+        //        img.Margin = new Thickness(10, 10, 0, 0);
+
+        //        //loadiraj opis
+        //        TextBlock txt = new TextBlock();
+        //        txt.Text = "OS: SuSE Linux; CPU: Intel Core i5-4210U, 1.7/2.7GHz; Display: 15.6'' HD LED; RAM: 4GB; HDD: 1TB; VGA: AMD Radeon R5 M255 2GB;";
+        //        txt.TextWrapping = TextWrapping.Wrap;
+        //        Grid.SetRow(txt, i / 4);
+        //        Grid.SetColumn(txt, (i % 4) + 1);
+        //        grid_proizvodi.Children.Add(txt);
+        //        txt.Margin = new Thickness(10, 10, 0, 25);
+        //        txt.FontStyle = FontStyles.Normal;
+
+
+        //        Button btn_korpa = new Button();
+        //        btn_korpa.Content = "Dodaj u korpu";
+        //        //btn_korpa += dodajUKorpu(Artikal a);
+        //        btn_korpa.Width = 100;
+        //        btn_korpa.Height = 20;
+        //        btn_korpa.Margin = new Thickness(0, 5, 0, 5);
+        //        btn_korpa.HorizontalAlignment = HorizontalAlignment.Center;
+        //        btn_korpa.VerticalAlignment = VerticalAlignment.Bottom;
+        //        Grid.SetRow(btn_korpa, i / 4);
+        //        Grid.SetColumn(btn_korpa, (i % 4) + 1);
+        //        grid_proizvodi.Children.Add(btn_korpa);
+        //    }
+
+        //}
+
+        //private void loadirajProizvod(int id_proizvoda, int i) {
             
-            //downloaduje sliku
-            loadImage(@"../../Resources/tmp/", id_proizvoda);
+        //    //downloaduje sliku
+        //    loadImage(@"../../Resources/tmp/", id_proizvoda);
 
-            //full path do slike
-            string tempPath = System.IO.Path.GetFullPath(@"../../Resources/tmp/") + id_proizvoda.ToString() + ".png";
+        //    //full path do slike
+        //    string tempPath = System.IO.Path.GetFullPath(@"../../Resources/tmp/") + id_proizvoda.ToString() + ".png";
 
-            //loadiraj sliku
-            Image img = new Image();
-            //img.Source = new BitmapImage(new Uri("C:/Users/ado/Documents/GitHub/HeritageDev/DesktopAplikacija/it_shop/Resources/tmp/1.png", UriKind.Absolute));
-            img.Source = new BitmapImage(new Uri(tempPath, UriKind.RelativeOrAbsolute));
-            img.Stretch = System.Windows.Media.Stretch.Fill;
-            Grid.SetRow(img, i / 4);
-            Grid.SetColumn(img, i % 4);
-            grid_proizvodi.Children.Add(img);
-            img.Margin = new Thickness(10, 10, 0, 0);
+        //    //loadiraj sliku
+        //    Image img = new Image();
+        //    //img.Source = new BitmapImage(new Uri("C:/Users/ado/Documents/GitHub/HeritageDev/DesktopAplikacija/it_shop/Resources/tmp/1.png", UriKind.Absolute));
+        //    img.Source = new BitmapImage(new Uri(tempPath, UriKind.RelativeOrAbsolute));
+        //    img.Stretch = System.Windows.Media.Stretch.Fill;
+        //    Grid.SetRow(img, i / 4);
+        //    Grid.SetColumn(img, i % 4);
+        //    grid_proizvodi.Children.Add(img);
+        //    img.Margin = new Thickness(10, 10, 0, 0);
 
-            //loadiraj opis
-            TextBlock txt = new TextBlock();
-            txt.Text = "";
-            txt.TextWrapping = TextWrapping.Wrap;
-            Grid.SetRow(txt, i / 4);
-            Grid.SetColumn(txt, (i % 4) + 1);
-            grid_proizvodi.Children.Add(txt);
-            txt.Margin = new Thickness(10, 10, 0, 0);
-            txt.FontStyle = FontStyles.Normal;
+        //    //loadiraj opis
+        //    TextBlock txt = new TextBlock();
+        //    txt.Text = "";
+        //    txt.TextWrapping = TextWrapping.Wrap;
+        //    Grid.SetRow(txt, i / 4);
+        //    Grid.SetColumn(txt, (i % 4) + 1);
+        //    grid_proizvodi.Children.Add(txt);
+        //    txt.Margin = new Thickness(10, 10, 0, 0);
+        //    txt.FontStyle = FontStyles.Normal;
 
             
-            Button btn_korpa = new Button();
-            //btn_korpa += dodajUKorpu(Artikal a);
-            btn_korpa.Width = 100;
-            btn_korpa.Height = 50;
-            Grid.SetRow(btn_korpa, i/4);
-            Grid.SetColumn(btn_korpa, (i % 4) + 1);
-            btn_korpa.Margin = new Thickness(0,0,5,5);
-            btn_korpa.HorizontalAlignment = HorizontalAlignment.Right;
-            btn_korpa.VerticalAlignment = VerticalAlignment.Bottom;
-        }
+        //    Button btn_korpa = new Button();
+        //    //btn_korpa += dodajUKorpu(Artikal a);
+        //    btn_korpa.Width = 100;
+        //    btn_korpa.Height = 50;
+        //    Grid.SetRow(btn_korpa, i/4);
+        //    Grid.SetColumn(btn_korpa, (i % 4) + 1);
+        //    btn_korpa.Margin = new Thickness(0,0,5,5);
+        //    btn_korpa.HorizontalAlignment = HorizontalAlignment.Right;
+        //    btn_korpa.VerticalAlignment = VerticalAlignment.Bottom;
+        //}
 
         private void loadImage(string filePath, int id_proizvoda) {
             MySqlConnection conn;
