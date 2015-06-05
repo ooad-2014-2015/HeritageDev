@@ -22,6 +22,50 @@ using System.Collections.ObjectModel;
 
 namespace it_shop.ViewModel {
     public class ProdavacViewModel : INotifyPropertyChanged {
+        public ProdavacViewModel ( ) {
+
+            putanja = @"../../Resources/no_image.png";
+            UnesiButton = new RelayCommand(new Action(UnosNovogArtikla));
+            PonistiButton = new RelayCommand(new Action(PonistiIzmjene));
+            IzaberiSlikuButton = new RelayCommand(new Action(IzaberiSliku));
+            UcitajSlikuBinding = UcitajSliku(@"../../Resources/no_image.png");
+            IzvrsiPretragu = new RelayCommand(new Action(UcitajArtikleIzBazePretraga));
+            DodajUKorpu = new RelayCommand(new Action(DodajArtikalUKorpu));
+            Printaj = new RelayCommand(new Action(PrintajRacun));
+            KategorijeUKatalogu.Add(new KategorijeKatalog("Laptop"));
+            KategorijeUKatalogu.Add(new KategorijeKatalog("Racunar"));
+            KategorijeUKatalogu.Add(new KategorijeKatalog("Mobitel"));
+            KategorijeUKatalogu.Add(new KategorijeKatalog("Mrezna oprema"));
+            KategorijeUKatalogu.Add(new KategorijeKatalog("Softver"));
+        }
+        private MySqlDataReader UpitNaBazu ( string upit, MySqlConnection con ) {
+            con.Open();
+            MySqlCommand u = new MySqlCommand(upit, con);
+            return u.ExecuteReader();
+        }
+        #region Funkcije za slike
+        private BitmapImage UcitajSliku ( string _putanja ) {
+            BitmapImage b = new BitmapImage();
+            b.BeginInit();
+            b.UriSource = new Uri(System.IO.Path.GetFullPath(_putanja), UriKind.RelativeOrAbsolute);
+            b.EndInit();
+            return b;
+        }
+        private void IzaberiSliku ( ) {
+            Microsoft.Win32.OpenFileDialog openFileDialog1 = new Microsoft.Win32.OpenFileDialog();
+            openFileDialog1.Filter = "JPEG Files(*.png)|*.jpg|All Files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.Multiselect = false;
+            openFileDialog1.ShowDialog();
+            putanja = openFileDialog1.FileName;
+            if (putanja == string.Empty) {
+                MessageBox.Show("Niste odabrali datoteku.");
+            } else {
+                UcitajSlikuBinding = UcitajSliku(putanja);
+            }
+        }
+        #endregion
+
         //tab1
         #region Katalog
         #region Atributi
@@ -36,11 +80,38 @@ namespace it_shop.ViewModel {
         private string dodatnaOpremaKatalog;
         private string serijskiBrojKatalog;
         private string barKodKatalog;
+        private Artikal odabraniArtikalKatalog;
+        private KategorijeKatalog odabranaKategorija;
+        private ObservableCollection<KategorijeKatalog> kategorijeUKatalogu = new ObservableCollection<KategorijeKatalog>();
+
         private ObservableCollection<Artikal> listaArtikalaKatalog = new ObservableCollection<Artikal>();
         private BitmapImage slikaKatalog;
         #endregion
 
         #region Preperties
+        public Artikal OdabraniArtikalKatalog {
+            get { return odabraniArtikalKatalog; }
+            set {
+                odabraniArtikalKatalog = value;
+                PrikaziArtikal();
+                OnPropertyChanged("OdabraniArtikalKatalog");
+            }
+        }
+        public KategorijeKatalog OdabranaKategorija {
+            get { return odabranaKategorija; }
+            set {
+                odabranaKategorija = value;
+                UcitajArtikleizBazeKategorija();
+                OnPropertyChanged("OdabranaKategorija");
+            }
+        }
+        public ObservableCollection<KategorijeKatalog> KategorijeUKatalogu {
+            get { return kategorijeUKatalogu; }
+            set {
+                kategorijeUKatalogu = value;
+                OnPropertyChanged("KategorijeUKatalogu");
+            }
+        }
         public BitmapImage SlikaKatalog {
             get { return slikaKatalog; }
             set {
@@ -50,10 +121,10 @@ namespace it_shop.ViewModel {
         }
         public ObservableCollection<Artikal> ListaArtikalaKatalog {
             get {
-                return listaArtikalaPretrage;
+                return listaArtikalaKatalog;
             }
             set {
-                listaArtikalaPretrage = value;
+                listaArtikalaKatalog = value;
                 OnPropertyChanged("ListaArtikalaKatalog");
             }
         }
@@ -127,21 +198,24 @@ namespace it_shop.ViewModel {
         #endregion
 
         #region Metode
-        private void UcitajSveArtikleIzBaze ( ) {
+        private void PrikaziArtikal ( ) {
+
+        }
+        private void UcitajArtikleizBazeKategorija ( ) {
             if (listaArtikalaKatalog.Count != 0) {
                 listaArtikalaKatalog.Clear();
             }
-
             try {
                 MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
                 string _naziv, _kategoija, _opis, _proizvodjac, _dodatnaOprema, _serijskiBroj, _barkod;
                 int _godina, _mjeseciGarancije, _kolicina;
                 double _cijena;
-                string upitBaza = "SELECT * FROM artikli;";
+                string upitBaza = "SELECT * FROM artikli WHERE kategorija = '" + OdabranaKategorija.Kategorija +"';";
+                MessageBox.Show(upitBaza);
+
                 UInt32 velicinaSlike;
                 byte[] rawData;
                 FileStream fs;
-
 
                 MySqlDataReader r = UpitNaBazu(upitBaza, connectionBaza);
                 while (r.Read()) {
@@ -185,7 +259,7 @@ namespace it_shop.ViewModel {
         private ICommand dodajUKorpu;
         private ICommand izvrsiPretragu;
         private ICommand printaj;
-        private Artikal odabraniArtikal;
+        private Artikal odabraniArtikalKorpa;
         private ObservableCollection<Artikal> listaArtikalaPretrage = new ObservableCollection<Artikal>();
         private ObservableCollection<Artikal> listaArtikalaKorpa = new ObservableCollection<Artikal>();
         #endregion
@@ -228,11 +302,13 @@ namespace it_shop.ViewModel {
             }
         }
 
-        public Artikal OdabraniArtikal {
-            get { return odabraniArtikal; }
+ 
+        public Artikal OdabraniArtikalKorpa {
+            get { return odabraniArtikalKorpa; }
             set {
-                odabraniArtikal = value;
-                OnPropertyChanged("OdabraniArtikal");
+
+                odabraniArtikalKorpa = value;
+                OnPropertyChanged("OdabraniArtikalKorpa");
             }
         }
         public ObservableCollection<Artikal> ListaArtikalaKorpa {
@@ -319,13 +395,13 @@ namespace it_shop.ViewModel {
             }
         }
         private void DodajArtikalUKorpu ( ) {
-            ListaArtikalaKorpa.Add(OdabraniArtikal);
-            cijenaArtikala += ListaArtikalaKorpa.First(U => U == OdabraniArtikal).Cijena;
+            ListaArtikalaKorpa.Add(OdabraniArtikalKorpa);
+            cijenaArtikala += ListaArtikalaKorpa.First(U => U == OdabraniArtikalKorpa).Cijena;
             brojacArtikala++;
             UkupnaCijena = cijenaArtikala.ToString();
             BrojArtikala = brojacArtikala.ToString();
         }
-        private void UcitajArtikleIzBaze ( ) {
+        private void UcitajArtikleIzBazePretraga ( ) {
             if (ListaArtikalaPretrage.Count != 0) {
                 ListaArtikalaPretrage.Clear();
             }
@@ -475,26 +551,8 @@ namespace it_shop.ViewModel {
         #endregion Properties
 
         #region Metode
-        private BitmapImage UcitajSliku ( string _putanja ) {
-            BitmapImage b = new BitmapImage();
-            b.BeginInit();
-            b.UriSource = new Uri(System.IO.Path.GetFullPath(_putanja), UriKind.RelativeOrAbsolute);
-            b.EndInit();
-            return b;
-        }
-        private void IzaberiSliku ( ) {
-            Microsoft.Win32.OpenFileDialog openFileDialog1 = new Microsoft.Win32.OpenFileDialog();
-            openFileDialog1.Filter = "JPEG Files(*.png)|*.jpg|All Files (*.*)|*.*";
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.Multiselect = false;
-            openFileDialog1.ShowDialog();
-            putanja = openFileDialog1.FileName;
-            if (putanja == string.Empty) {
-                MessageBox.Show("Niste odabrali datoteku.");
-            } else {
-                UcitajSlikuBinding = UcitajSliku(putanja);
-            }
-        }
+
+
         private void UnosNovogArtikla ( ) {
             MySqlConnection con = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
             MySqlCommand cmd = new MySqlCommand();
@@ -502,7 +560,7 @@ namespace it_shop.ViewModel {
             byte[] rawData;
             FileStream fs;
 
-            try {
+            //try {
                 string _mjeseciGarancije = MjeseciGarancije.Substring(38);
                 string _kategorijaProizvoda = KategorijaProizvoda.Substring(38);
                 string upit = "INSERT INTO artikli (naziv, kategorija, godina_proizvodnje, cijena, opis, mjeseci_garancije, proizvodjac, serijski_broj, barkod, dodatna_oprema, kolicina, slika, velicina_slike)" +
@@ -525,11 +583,11 @@ namespace it_shop.ViewModel {
                 MessageBox.Show("Artikal uspjesno unesen.");
                 PonistiIzmjene();
 
-            } catch (System.AggregateException) {
-                MessageBox.Show("Neuspjela konekcija sa bazom podataka!\nPokušajte ponovo.");
-            } catch (Exception ex) {
-                MessageBox.Show("Došlo je do greške!\nMolimo pokušajte ponovo ili kontaktirajte administratora!");
-            }
+            //} catch (System.AggregateException) {
+            //    MessageBox.Show("Neuspjela konekcija sa bazom podataka!\nPokušajte ponovo.");
+            //} catch (Exception ex) {
+            //    MessageBox.Show("Došlo je do greške!\nMolimo pokušajte ponovo ili kontaktirajte administratora!");
+            //}
             con.Close();
 
         }
@@ -550,21 +608,7 @@ namespace it_shop.ViewModel {
         #endregion
         #endregion
 
-        public ProdavacViewModel ( ) {
-            UnesiButton = new RelayCommand(new Action(UnosNovogArtikla));
-            PonistiButton = new RelayCommand(new Action(PonistiIzmjene));
-            IzaberiSlikuButton = new RelayCommand(new Action(IzaberiSliku));
-            UcitajSlikuBinding = UcitajSliku(@"../../Resources/no_image.png");
-            IzvrsiPretragu = new RelayCommand(new Action(UcitajArtikleIzBaze));
-            DodajUKorpu = new RelayCommand(new Action(DodajArtikalUKorpu));
-            Printaj = new RelayCommand(new Action(PrintajRacun));
-            UcitajSveArtikleIzBaze();
-        }
-        private MySqlDataReader UpitNaBazu ( string upit, MySqlConnection con ) {
-            con.Open();
-            MySqlCommand u = new MySqlCommand(upit, con);
-            return u.ExecuteReader();
-        }
+
 
         #region INotify Implementation
         public event PropertyChangedEventHandler PropertyChanged;

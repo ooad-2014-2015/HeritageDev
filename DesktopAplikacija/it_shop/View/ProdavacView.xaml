@@ -18,11 +18,20 @@
                         <RowDefinition Height="300"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <DataGrid Name="txt_kategorije" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                              Margin="5,5,0,5" Grid.RowSpan="2"></DataGrid>
+                    <DataGrid ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              Margin="5,5,0,5" Grid.RowSpan="2"
+                              AutoGenerateColumns="False"
+                              ItemsSource="{Binding Path=KategorijeUKatalogu}"
+                              SelectedItem="{Binding Path = OdabranaKategorija}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Kategorija" Width="*" Binding="{Binding Kategorija}">
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <DataGrid Grid.Column="1" Height="260"
                               VerticalAlignment="Top" Margin="5,5,5,5"
-                              ItemsSource="{Binding Path=ListaArtikalaKatalog}">
+                              ItemsSource="{Binding Path=ListaArtikalaKatalog}"
+                              SelectedItem="{Binding Path = OdabraniArtikalKatalog}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Naziv" Binding="{Binding Naziv}"/>
                             <DataGridTextColumn Header="Kategorija" Binding="{Binding Kategorija}"/>
@@ -54,7 +63,7 @@
                                 <Label Margin="160,290,5,0" Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Top">Dodatna oprema</Label>
                                 <Label Margin="160,345,5,5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top">Serijski broj</Label>
                                 <Label Margin="160,375,5,0" Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Top">Bar kod</Label>
-                                <TextBox Margin="300,5,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=NazivProizvodakatalog}"></TextBox>
+                                <TextBox Margin="300,5,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=NazivKatalog}"></TextBox>
                                 <TextBox Margin="300,35,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=KategorijaKatalog}"></TextBox>
                                 <TextBox Margin="300,65,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=GodinaProizvodnjekatalog}"></TextBox>
                                 <TextBox Margin="300,95,5,0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{Binding Path=CijenaKatalog}"></TextBox>
@@ -112,13 +121,13 @@
                            Grid.Column="1" 
                            Content="{Binding Path=BrojArtikala}" Height="23"></Label>
                     <DataGrid VerticalAlignment="Stretch" 
-                              HorizontalAlignment="Stretch"
-                              ScrollViewer.VerticalScrollBarVisibility="Auto"
-                              Grid.Column="0"
-                              Grid.Row="1"
-                              Margin="5,0,5,5"
-                              ItemsSource="{Binding ListaArtikalaPretrage}"
-                              SelectedItem="{Binding OdabraniArtikal}">
+                             HorizontalAlignment="Stretch"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto"
+                             Grid.Column="0"
+                             Grid.Row="1"
+                             Margin="5,0,5,5"
+                             ItemsSource="{Binding ListaArtikalaPretrage}"
+                             SelectedItem="{Binding OdabraniArtikalKorpa}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Naziv" Binding="{Binding Naziv}"/>
                             <DataGridTextColumn Header="Kategorija" Binding="{Binding Kategorija}"/>

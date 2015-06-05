@@ -76,6 +76,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\Artikal.cs" />
     <Compile Include="Model\Direktor.cs" />
+    <Compile Include="Model\KategorijeKatalog.cs" />
     <Compile Include="Model\Kupac.cs" />
     <Compile Include="Model\Monter.cs" />
     <Compile Include="Model\Osoba.cs" />

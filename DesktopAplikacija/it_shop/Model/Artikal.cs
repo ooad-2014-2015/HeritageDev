@@ -15,16 +15,16 @@ namespace it_shop.Model
         private string kategorija;
         private string opis;
         private int kolicina;
-
-
-        public Artikal(string naziv, string kategorija, int godinaProizvodnje, double cijena, string opis, int mjeseciGarancije, string proizvodjac, string dodatnaOprema, int kolicina, string serijskiBroj, string barkod)
+        public Artikal(string naziv, string kategorija, int godinaProizvodnje, double cijena, string opis, int mjeseciGarancije, string proizvodjac, string dodatnaOprema, int kolicina, string serijskiBroj, string barKod)
             : base(naziv, godinaProizvodnje, proizvodjac, serijskiBroj)
         {
-            this.barKod = barkod;
+            Kategorija = kategorija;
             Cijena = cijena;
+            Opis = opis;
             MjeseciGarancije = mjeseciGarancije;
             DodatnaOprema = dodatnaOprema;
-
+            Kolicina = kolicina;
+            SerijskiBroj = serijskiBroj;
         }
 
         #region Properties
