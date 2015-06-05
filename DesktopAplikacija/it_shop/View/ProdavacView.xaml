@@ -142,14 +142,13 @@
                             <DataGridTextColumn Header="Kolicina" Binding="{Binding Kolicina}"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Width="105" Height="25"
-                            Grid.Column="1"
-                            Grid.Row="0"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom"
-                            Margin="0,0,120,5"
-                            Command="{Binding Path=ZahtjevajIsporuku}">Zahtjevaj isporuku</Button>
-                    <Button Width="105" Height="25"
+                    <CheckBox Width="130" Height="25"
+                              Grid.Column="1"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Bottom"
+                              Margin="0,0,110,0"
+                              Command="{Binding Path=ZahtjevajIsporuku}">Zahtjevaj isporuku</CheckBox>
+                    <Button Width="100" Height="25"
                             Grid.Column="1"
                             Grid.Row="0"
                             HorizontalAlignment="Right"
