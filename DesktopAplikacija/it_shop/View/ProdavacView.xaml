@@ -51,7 +51,7 @@
                     <TextBox Width="75" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                              Grid.Column="1" Margin="65,0,0,5"></TextBox>
                     <Button Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                            Grid.Column="1" Margin="150,5,115,5">Zahtijevaj</Button>
+                            Grid.Column="1" Margin="150,5,115,5" >Zahtijevaj</Button>
                     <Button Width="100" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                             Grid.Column="1" Margin="5,5,5,5" Command="{Binding Path=DodajUKorpuKatalog}">Dodaj u korpu</Button>
                     <ScrollViewer Grid.Column="1" Grid.Row="1">
@@ -101,7 +101,7 @@
                               HorizontalAlignment="Stretch" VerticalAlignment="Top"
                               Margin="140,5,110,0"
                               SelectedIndex="{Binding Path=VrstaPretrage}">
-                        <ComboBoxItem HorizontalAlignment="Stretch">Po ID-u proizvoda</ComboBoxItem>
+                        <ComboBoxItem HorizontalAlignment="Stretch">Po serijskom broju</ComboBoxItem>
                         <ComboBoxItem HorizontalAlignment="Stretch">Po nazivu</ComboBoxItem>
                         <ComboBoxItem HorizontalAlignment="Stretch">Po proizvodjacu</ComboBoxItem>
                     </ComboBox>
