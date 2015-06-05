@@ -317,6 +317,16 @@ namespace it_shop.ViewModel {
 
         #region Funkcije za korpu
         private void PrintajRacun ( ) {
+            PrintDialog printDialog = new PrintDialog();
+
+            FlowDocument fl = new FlowDocument(new Paragraph(new Run("doc")));
+            fl.Name = "printanje";
+
+            IDocumentPaginatorSource idpSource = fl;
+
+            printDialog.PrintDocument(idpSource.DocumentPaginator, "Ovo je opis");
+
+
             MessageBox.Show("Racun isprintan...", "Info");
             ListaArtikalaKorpa.Clear();
             cijenaArtikala = 0;
