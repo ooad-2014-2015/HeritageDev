@@ -12,6 +12,8 @@ namespace PhoneApp.Pages {
     public partial class Kontakt : PhoneApplicationPage {
         public Kontakt() {
             InitializeComponent();
+            txt_kontakt.Items.Add("Aplikaciju radili:\nAdnan Hrnjic\nAdemir Havic\nSalem Suljkanovic\n\n");
+            txt_kontakt.Items.Add("HERITAGE DEV TEAM");
         }
     }
 }

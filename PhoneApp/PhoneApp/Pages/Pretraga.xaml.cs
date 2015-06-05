@@ -17,6 +17,11 @@ namespace PhoneApp.Pages {
 
         private void btn_trazi_Tap(object sender, System.Windows.Input.GestureEventArgs e) {
             string s = txt_trazi.Text;
+            for (int i = 0; i < 10; i++) {
+                string imeButtona = "btn_" + (i + 1).ToString();
+                Button t = grid_katalog.FindName(imeButtona) as Button;
+                t.Visibility = Visibility.Visible;
+            }
             popuni(s);
         }
 
@@ -69,6 +74,15 @@ namespace PhoneApp.Pages {
                 txt.Margin = new Thickness(185, 25, 25, 25);
                 index++;
             }
+            //skrivanje preostalih buttona
+            if (index < 10) {
+                while (index < 10) {
+                    string imeButtona = "btn_" + (index + 1).ToString();
+                    Button t = grid_katalog.FindName(imeButtona) as Button;
+                    t.Visibility = Visibility.Collapsed;
+                    index++;
+                }
+            }
         }
 
         private void pobrisi() {
@@ -78,6 +92,17 @@ namespace PhoneApp.Pages {
                     i--;
                 }
             }
+        }
+
+        private void txt_trazi_GotFocus(object sender, RoutedEventArgs e) {
+            txt_trazi.Text = string.Empty;
+            txt_trazi.FontStyle = FontStyles.Normal;
+        }
+
+        private void txt_trazi_LostFocus(object sender, RoutedEventArgs e) {
+            if (txt_trazi.Text == string.Empty)
+                txt_trazi.Text = "Unesite pojam za pretragu";
+            txt_trazi.FontStyle = FontStyles.Italic;
         }
     }
 }

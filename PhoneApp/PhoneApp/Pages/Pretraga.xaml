@@ -31,13 +31,18 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <TextBox Name="txt_trazi"
+                     Text="Unesite pojam za pretragu"
+                     FontStyle="Italic"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Top"
-                     Margin="0,0,100,0" FontSize="20"></TextBox>
+                     Margin="10,0,100,0" FontSize="20"
+                     GotFocus="txt_trazi_GotFocus"
+                     LostFocus="txt_trazi_LostFocus"></TextBox>
             <Button Name="btn_trazi"
                     Width="100" Height="65"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
+                    Margin="0,0,10,0"
                     Tap="btn_trazi_Tap">
                 <StackPanel>
                     <Image Width="40" Height="25" HorizontalAlignment="Stretch" 
@@ -63,18 +68,16 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Button Height="200" Background="#FF0A316A" Opacity="0.75" />
-                        <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="1"></Button>
-                        <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="2"></Button>
-                        <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="3"></Button>
-                        <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="4"></Button>
-                        <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="5"></Button>
-                        <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="6"></Button>
-                        <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="7"></Button>
-                        <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="8"></Button>
-                        <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="9"></Button>
-                        <Button Height="75" Background="#FF0A316A" Opacity="0.75" Grid.Row="10"
-                            Width="200" HorizontalAlignment="Center">Sljedeca</Button>
+                        <Button Name="btn_1" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="0" Visibility="Collapsed"></Button>
+                        <Button Name="btn_2" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="1" Visibility="Collapsed"></Button>
+                        <Button Name="btn_3" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="2" Visibility="Collapsed"></Button>
+                        <Button Name="btn_4" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="3" Visibility="Collapsed"></Button>
+                        <Button Name="btn_5" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="4" Visibility="Collapsed"></Button>
+                        <Button Name="btn_6" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="5" Visibility="Collapsed"></Button>
+                        <Button Name="btn_7" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="6" Visibility="Collapsed"></Button>
+                        <Button Name="btn_8" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="7" Visibility="Collapsed"></Button>
+                        <Button Name="btn_9" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="8" Visibility="Collapsed"></Button>
+                        <Button Name="btn_10" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="9" Visibility="Collapsed"></Button>
                     </Grid>
                 </StackPanel>
             </ScrollViewer>

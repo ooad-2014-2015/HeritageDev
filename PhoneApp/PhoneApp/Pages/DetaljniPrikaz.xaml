@@ -14,7 +14,10 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush Opacity="0.75" ImageSource="/Resources/backgroung.png" Stretch="Fill"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -22,14 +25,26 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="Detaljni prikaz" HorizontalAlignment="Center" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle2Style}"/>
         </StackPanel>
-
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-
-        </Grid>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel>
+                <!--ContentPanel - place additional content here-->
+                <Grid x:Name="grid_katalog" Grid.Row="1" Margin="10,0,10,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="430"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Image Name="slika"
+                           Margin="10,10,10,0"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Top"
+                           Width="430" Height="430"></Image>
+                    <TextBlock Name="txt" Width="430" TextWrapping="Wrap"
+                               Margin="10,0,10,10"
+                               Grid.Row="1"></TextBlock>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
-
 </phone:PhoneApplicationPage>

@@ -46,18 +46,112 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Button Height="200" Background="#FF0A316A" Opacity="0.75" />
-                    <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="1"></Button>
-                    <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="2"></Button>
-                    <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="3"></Button>
-                    <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="4"></Button>
-                    <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="5"></Button>
-                    <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="6"></Button>
-                    <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="7"></Button>
-                    <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="8"></Button>
-                    <Button Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="9"></Button>
-                    <Button Height="75" Background="#FF0A316A" Opacity="0.75" Grid.Row="10"
-                            Width="200" HorizontalAlignment="Center">Sljedeca</Button>
+                    <Button Name="btn_1" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="0" Tap="btn_1_Tap">
+                        <Grid Name="g_1" HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Width="400" Height="150">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </Button>
+                    <Button Name="btn_2" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="1" Tap="btn_2_Tap">
+                        <Grid Name="g_2" HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Width="400" Height="150">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </Button>
+                    <Button Name="btn_3" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="2" Tap="btn_3_Tap">
+                        <Grid Name="g_3" HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Width="400" Height="150">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </Button>
+                    <Button Name="btn_4" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="3" Tap="btn_4_Tap">
+                        <Grid Name="g_4" HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Width="400" Height="150">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </Button>
+                    <Button Name="btn_5" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="4" Tap="btn_5_Tap">
+                        <Grid Name="g_5" HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Width="400" Height="150">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </Button>
+                    <Button Name="btn_6" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="5" Tap="btn_6_Tap">
+                        <Grid Name="g_6" HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Width="400" Height="150">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </Button>
+                    <Button Name="btn_7" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="6" Tap="btn_7_Tap">
+                        <Grid Name="g_7" HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Width="400" Height="150">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </Button>
+                    <Button Name="btn_8" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="7" Tap="btn_8_Tap">
+                        <Grid Name="g_8" HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Width="400" Height="150">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </Button>
+                    <Button Name="btn_9" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="8" Tap="btn_9_Tap">
+                        <Grid Name="g_9" HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Width="400" Height="150">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </Button>
+                    <Button Name="btn_10" Height="200" Background="#FF0A316A" Opacity="0.75" Grid.Row="9" Tap="btn_10_Tap">
+                        <Grid Name="g_10" HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Width="400" Height="150">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </Button>
+                    <Button Name="btn_sljedeca" Height="75" Background="#FF0A316A" Opacity="0.75" Grid.Row="10"
+                            Width="180" HorizontalAlignment="Center" Margin="200,0,0,0"
+                            Tap="btn_sljedeca_Tap">Sljedeca</Button>
+                    <Button Name="btn_prethodna" Height="75" Background="#FF0A316A" Opacity="0.75" Grid.Row="10"
+                            Width="180" HorizontalAlignment="Center" Margin="0,0,200,0"
+                            Tap="btn_prethodna_Tap">Prethodna</Button>
                 </Grid>
             </StackPanel>
         </ScrollViewer>
