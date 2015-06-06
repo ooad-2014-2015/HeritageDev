@@ -423,8 +423,9 @@ namespace it_shop.ViewModel
         
         private void UcitajUposlenikeIzBaze()
         {
-            if (ListaUposlenika.Count == 0)
-            {
+            //if (ListaUposlenika.Count == 0)
+            //{
+            ListaUposlenika.Clear();
                 MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
 
                 string upitBaza = "SELECT * FROM uposlenici;";
@@ -480,7 +481,7 @@ namespace it_shop.ViewModel
                 }
 
 
-            }
+            //}
 
 
         }
