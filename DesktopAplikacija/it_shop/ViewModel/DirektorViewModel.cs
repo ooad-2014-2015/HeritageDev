@@ -289,11 +289,13 @@ namespace it_shop.ViewModel
             get { return datumZaposlenjaAzuriraj; }
             set { datumZaposlenjaAzuriraj = value; OnPropertyChanged("DatumZaposlenjaAzuriraj"); }
         }
+      
         public BitmapImage SlikaAzuriraj
         {
             get { return slikaAzuriraj; }
             set { slikaAzuriraj = value; OnPropertyChanged("SlikaAzuriraj"); }
         }
+      
         public ICommand AzuzirajInfoUposlenika
         {
             get { return azuzirajInfoUposlenika; }
@@ -384,7 +386,6 @@ namespace it_shop.ViewModel
             set { adresaAzuriraj = value; OnPropertyChanged("AdresaAzuriraj"); }
         }
 
-
         public string BrojTelefonaAzuriraj
         {
             get { return brojTelefonaAzuriraj; }
@@ -464,7 +465,7 @@ namespace it_shop.ViewModel
                             }
                         }
                         
-                        //Tip Resolve
+                        
                         Uposlenik tmp = new Uposlenik(naziv, adresa, telefon, zaposlenjeDatum, spol, plata, dodatak, godisnji);
                         ListaUposlenika.Add(tmp);
 
@@ -491,6 +492,7 @@ namespace it_shop.ViewModel
             string upit = "DELETE FROM uposlenici WHERE ime_prezime = '" + uposlenik.PunoIme + "' AND broj_telefona = '" + uposlenik.BrojTelefona + "';";
             DMLUpitiNaBazu(upit, connectionBaza);
             ListaUposlenika.Remove(uposlenik);
+           
         }
 
         private void UcitajInformacijeZaposlenika()
@@ -498,49 +500,54 @@ namespace it_shop.ViewModel
             StatusBarError = String.Empty;
             try
             {
-                MessageBox.Show(PrezimeAzuriraj);
-                PrezimeAzuriraj = OdabraniUposlenik.PunoIme.Substring(OdabraniUposlenik.PunoIme.IndexOf(' ') + 1);
-                ImeAzuriraj = OdabraniUposlenik.PunoIme.Remove(OdabraniUposlenik.PunoIme.IndexOf(' '));
-                AdresaAzuriraj = OdabraniUposlenik.Adresa;
-                BrojTelefonaAzuriraj = OdabraniUposlenik.BrojTelefona;
-                SpolAzuriraj = OdabraniUposlenik.Spol;
-                DatumZaposlenjaAzuriraj = OdabraniUposlenik.DatumZaposlenja.ToShortDateString();      
-                PlataAzuriraj = OdabraniUposlenik.Plata.ToString();
-                DodatakNaPlatuAzuriraj = OdabraniUposlenik.DodatakNaPlatu.ToString();
-                DaniGodisnjegAzuriraj = OdabraniUposlenik.DaniGodisnjegOdmora.ToString();
+               
+                    PrezimeAzuriraj = OdabraniUposlenik.PunoIme.Substring(OdabraniUposlenik.PunoIme.IndexOf(' ') + 1);
+                    ImeAzuriraj = OdabraniUposlenik.PunoIme.Remove(OdabraniUposlenik.PunoIme.IndexOf(' '));
+                    AdresaAzuriraj = OdabraniUposlenik.Adresa;
+                    BrojTelefonaAzuriraj = OdabraniUposlenik.BrojTelefona;
+                    SpolAzuriraj = OdabraniUposlenik.Spol;
+                    DatumZaposlenjaAzuriraj = OdabraniUposlenik.DatumZaposlenja.ToShortDateString();
+                    PlataAzuriraj = OdabraniUposlenik.Plata.ToString();
+                    DodatakNaPlatuAzuriraj = OdabraniUposlenik.DodatakNaPlatu.ToString();
+                    DaniGodisnjegAzuriraj = OdabraniUposlenik.DaniGodisnjegOdmora.ToString();
 
 
-                string putanjaSlike = @"../../Resources/tmp/artikal_" + OdabraniUposlenik.PunoIme + OdabraniUposlenik.BrojTelefona + ".png";
+                    string putanjaSlike = @"../../Resources/tmp/artikal_" + OdabraniUposlenik.PunoIme + OdabraniUposlenik.BrojTelefona + ".png";
 
-                if (!File.Exists(putanjaSlike))
-                {
-                    putanjaSlike = @"../../Resources/no_image.png";
-                }
+                    if (!File.Exists(putanjaSlike))
+                    {
+                        putanjaSlike = @"../../Resources/no_image.png";
+                    }
 
-                SlikaAzuriraj = UcitajSliku(putanjaSlike);
+                    SlikaAzuriraj = UcitajSliku(putanjaSlike);
 
 
-                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
-                string upitBaza = "SELECT * FROM uposlenici WHERE ime_prezime='" + OdabraniUposlenik.PunoIme
-                                + "' and broj_telefona='" + OdabraniUposlenik.BrojTelefona + "';";
+                    MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+                    string upitBaza = "SELECT * FROM uposlenici WHERE ime_prezime='" + OdabraniUposlenik.PunoIme
+                                    + "' and broj_telefona='" + OdabraniUposlenik.BrojTelefona + "';";
 
-                connectionBaza.Open();
-                MySqlCommand u = new MySqlCommand(upitBaza, connectionBaza);
+                    connectionBaza.Open();
+                    MySqlCommand u = new MySqlCommand(upitBaza, connectionBaza);
 
-                MySqlDataReader reader = u.ExecuteReader();
-                while (reader.Read())
-                {
-                    TipUposlenikaAzuriraj = reader.GetString("tip_uposlenika");
-                    UsernameAzuriraj = reader.GetString("username");
-                    PasswordAzuriraj = reader.GetString("password");
-                    
+                    MySqlDataReader reader = u.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        TipUposlenikaAzuriraj = reader.GetString("tip_uposlenika");
+                        UsernameAzuriraj = reader.GetString("username");
+                        PasswordAzuriraj = reader.GetString("password");
 
-                }
-                connectionBaza.Close();
-            }
-            catch(Exception ex)
+
+                    }
+                    connectionBaza.Close();
+              
+            }catch(NullReferenceException)
+            
             {
-                MessageBox.Show(ex.ToString());
+
+
+            }
+            catch (Exception ex)
+            {
                 StatusBarError = ex.Message;
             }
         }
@@ -550,9 +557,9 @@ namespace it_shop.ViewModel
             if (tip != "azuriranje" && tip != "unos")
                 return;
             //string throw new Exception(string.Empty;
-            if (!Regex.IsMatch(s1, @"^[a-zA-Z]+$"))
+            if (!Regex.IsMatch(s1, @"^[a-zA-Z ]+$"))
                 throw new Exception("Ime sadrzi ilegalne znakove!");
-            else if (!Regex.IsMatch(s2, @"^[a-zA-Z]+$"))
+            else if (!Regex.IsMatch(s2, @"^[a-zA-Z ]+$"))
                 throw new Exception("Prezime sadrzi ilegalne znakove!");
             else if (tip == "azuriranje" && !Regex.IsMatch(s3, @"^[MZ]+$"))
                 throw new Exception("Spol sadrzi ilegalne znakove!");
@@ -592,23 +599,27 @@ namespace it_shop.ViewModel
             try
             {
                 ValidacijaPodataka("azuriranje", ImeAzuriraj, PrezimeAzuriraj, SpolAzuriraj, BrojTelefonaAzuriraj, AdresaAzuriraj, TipUposlenikaAzuriraj, PlataAzuriraj,
-                                  DodatakNaPlatuAzuriraj, DaniGodisnjegAzuriraj, UsernameAzuriraj, PasswordAzuriraj);
+                                 DodatakNaPlatuAzuriraj, DaniGodisnjegAzuriraj, UsernameAzuriraj, PasswordAzuriraj);
 
                 string upit = "UPDATE uposlenici SET ime_prezime = '" + ImeAzuriraj + " " + PrezimeAzuriraj + "', spol = '" + SpolAzuriraj + "', adresa = '" +
                                 AdresaAzuriraj + "', broj_telefona = '" + BrojTelefonaAzuriraj + "', tip_uposlenika = '" + TipUposlenikaAzuriraj + "', plata = " + PlataAzuriraj + ", dodatak_na_platu = " + DodatakNaPlatuAzuriraj + ", dani_godisnjeg_odmora = " +
                                 DaniGodisnjegAzuriraj + ", username = '" + UsernameAzuriraj + "', password = '" + PasswordAzuriraj + "' WHERE ime_prezime = '" +
-                                ImeAzuriraj + " " + PrezimeAzuriraj + "' AND broj_telefona = '" + BrojTelefonaAzuriraj + "';";
-
+                                OdabraniUposlenik.PunoIme + "' AND broj_telefona = '" + OdabraniUposlenik.BrojTelefona + "';";
+                
                 MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
                 DMLUpitiNaBazu(upit, connectionBaza);
-                OcistiFormuZaAzuriranjeInformacijaUposlenih();
                 ListaUposlenika.Clear();
+               
                 UcitajUposlenikeIzBaze();
-
+                
+                OcistiFormuZaAzuriranjeInformacijaUposlenih();
+                
+               
 
             }
             catch (Exception ex)
             {
+               
                 StatusBarError = ex.Message;
             }
 
