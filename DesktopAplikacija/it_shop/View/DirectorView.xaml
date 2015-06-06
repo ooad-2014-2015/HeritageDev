@@ -26,7 +26,8 @@
                               ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ListaZahtjeva}" SelectedItem="{Binding OdabraniZahtjev}" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Datum zahtjeva" Binding="{Binding DatumZahtjeva}" Width="1*"/>
-                            <DataGridTextColumn Header="Zahtjev odobren" Binding="{Binding Odobren}" Width="1*"/>
+                            <DataGridTextColumn Header="Zahtjev odobren" Binding="{Binding ZahtjevOdobren}" Width="1*"/>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="1*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button Command="{Binding Path=UcitajZahtjeve}"

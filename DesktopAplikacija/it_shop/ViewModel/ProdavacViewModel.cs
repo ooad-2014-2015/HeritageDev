@@ -471,7 +471,7 @@ namespace it_shop.ViewModel {
             if (ListaArtikalaPretrage.Count != 0) {
                 ListaArtikalaPretrage.Clear();
             }
-            //try {
+            try {
             MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
             string _naziv, _kategorija, _opis = null, _proizvodjac = null, _dodatnaOprema = null, _id;
             int _godina, _mjeseciGarancije, _kolicina;
@@ -511,9 +511,9 @@ namespace it_shop.ViewModel {
                 Artikal artikal = new Artikal(_naziv, _kategorija, _godina, _cijena, _opis, _mjeseciGarancije, _proizvodjac, _dodatnaOprema, _kolicina, _id);
                 ListaArtikalaPretrage.Add(artikal);
             }
-            //} catch (Exception ex) {
-            //    MessageBox.Show(ex.ToString());
-            //}
+            } catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            }
         }
         #endregion
         #endregion
