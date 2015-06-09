@@ -15,7 +15,7 @@ namespace it_shop.Model
 
 
         public ProdajniRacun(Kupac kupac, StavkaNarudzbe stavka, double popust) 
-            : base(kupac)
+            : base(kupac,0)
         {
             ListaStavkiNarudzbe.Add(stavka);
             Popust = popust;

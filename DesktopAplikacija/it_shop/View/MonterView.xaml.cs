@@ -1,4 +1,5 @@
-﻿using System;
+﻿using it_shop.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace it_shop.View {
     public partial class MonterView : Window {
         public MonterView() {
             InitializeComponent();
+            this.DataContext = new MonterViewModel();
         }
     }
 }

@@ -12,11 +12,12 @@ namespace it_shop.Model
         private DateTime datumPredaje;
         private bool status;
 
-        public ServisniPredracun(Kupac kupac, ServisniUredjaj serUredjaj, DateTime datumPredaje) 
-            : base(kupac)
+        public ServisniPredracun(Kupac kupac, ServisniUredjaj serUredjaj, DateTime datumPredaje, double cijena, bool status) 
+            : base(kupac, cijena)
         {
             ServisniUredjaj = serUredjaj;
             DatumPredaje = datumPredaje;
+            Status = status;
         }
 
         #region Properties

@@ -12,9 +12,10 @@ namespace it_shop.Model
         private Kupac kupac;
         private double ukupnaCijena;
 
-        public Racun(Kupac kup)
+        public Racun(Kupac kup, double cijena)
         {
             Kupac = kup;
+            UkupnaCijena = cijena;
         }
 
 

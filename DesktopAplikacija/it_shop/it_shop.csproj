@@ -95,6 +95,7 @@
     <Compile Include="Model\ZahtjevZaPlacanjeNaRate.cs" />
     <Compile Include="ViewModel\DirektorViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\MonterViewModel.cs" />
     <Compile Include="ViewModel\ProdavacViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\ServiserViewModel.cs" />

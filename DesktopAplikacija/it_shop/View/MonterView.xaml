@@ -15,12 +15,37 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Label Margin="5,5,5,0" HorizontalAlignment="Left" VerticalAlignment="Top">Postojeci zahtjevi za dostavom:</Label>
-            <DataGrid Margin="5,30,5,35" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                      ScrollViewer.VerticalScrollBarVisibility="Auto"></DataGrid>
+            <DataGrid  ItemsSource="{Binding ListaZahtjevaZaDostavom}"
+                       SelectedItem="{Binding OdabraniZahtjevDostave}"
+                      IsReadOnly ="True"
+                      AutoGenerateColumns="False"
+                      Margin="5,30,5,35" 
+                      VerticalAlignment="Stretch" 
+                      HorizontalAlignment="Stretch" 
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id zahtjeva" Binding="{Binding IdZahtjeva}" Width="1*" />
+                    <DataGridTextColumn Header="Adresa dostave" Binding="{Binding AdresaDostave}" Width="1*"/>
+                </DataGrid.Columns>
+            </DataGrid>
             <Button Margin="5,0,0,5" Width="100" Height="25" HorizontalAlignment="Center" VerticalAlignment="Bottom">Obrisi zahtjev</Button>
             <Label Margin="5,5,5,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1">Artikli za dostaviti:</Label>
-            <DataGrid Margin="0,30,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                      ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="1"></DataGrid>
+            <DataGrid ItemsSource="{Binding ListaZahtjevaArtikala}"
+                IsReadOnly="True"
+                AutoGenerateColumns="False"
+                Margin="0,30,5,5" 
+                      VerticalAlignment="Stretch" 
+                      HorizontalAlignment="Stretch" 
+                      ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                      Grid.Column="1">
+                <DataGrid.Columns>
+                <DataGridTextColumn Header="Naziv artikla" Binding="{Binding Naziv}" Width="1*" />
+                <DataGridTextColumn Header="Godina proizvodnje" Binding="{Binding GodinaProizvodnje}" Width="1*"/>
+                <DataGridTextColumn Header="Proizvodjac" Binding="{Binding Proizvodjac}" Width="1*"/>
+                <DataGridTextColumn Header="Godina proizvodnje" Binding="{Binding GodinaProizvodnje}" Width="1*"/>
+                <DataGridTextColumn Header="Garancija" Binding="{Binding MjeseciGarancije}" Width="1*"/>
+                    </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Grid>
 </Window>
