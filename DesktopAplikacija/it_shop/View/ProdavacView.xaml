@@ -7,7 +7,7 @@
         MinHeight="600" MinWidth="800" Icon="/it_shop;component/Resources/prodavac_icon.png">
 
     <Grid>
-        <TabControl Name="tabovi" Margin="0,20, 5, 22">
+        <TabControl Name="tabovi" Margin="0,20, 5, 22" SelectedIndex="{Binding Path=OdabraniTab}">
             <TabItem Header="Katalog">
                 <Grid Name="grid_katalog">
                     <Grid.ColumnDefinitions>
@@ -51,7 +51,7 @@
                     <TextBox Width="75" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                              Grid.Column="1" Margin="65,0,0,5" Text="{Binding Path=KolicinaProizvoda}" ></TextBox>
                     <Button Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                            Grid.Column="1" Margin="150,5,115,5" Command="{Binding Path=ZahtjevajProizvodKatalog}">Zahtijevaj</Button>
+                            Grid.Column="1" Margin="150,5,115,5" Command="{Binding Path=ZahtijevajProizvodKatalog}">Zahtijevaj</Button>
                     <Button Width="100" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                             Grid.Column="1" Margin="5,5,5,5" Command="{Binding Path=DodajUKorpuKatalog}">Dodaj u korpu</Button>
                     <ScrollViewer Grid.Column="1" Grid.Row="1">

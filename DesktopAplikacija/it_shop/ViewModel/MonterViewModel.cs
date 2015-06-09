@@ -66,7 +66,7 @@ namespace it_shop.ViewModel
         {
             try
             {
-                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.127; user=root; pwd=root; database=it_shop");
+                MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
                 string upitBaza = "SELECT zd.adresa, zd.zahtjev_dostave_id FROM zahtjevi_dostave zd;";
                 // MessageBox.Show(upitBaza);
                 MySqlDataReader r = UpitNaBazu(upitBaza, connectionBaza);
@@ -90,13 +90,13 @@ namespace it_shop.ViewModel
         {
             try
             {
-                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.127; user=root; pwd=root; database=it_shop");
+                MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
                 string upitBaza = "SELECT artikal_id FROM artikli_zahtjevi_dostave WHERE zahtjev_dostave_id = " + OdabraniZahtjevDostave.IdZahtjeva + ";";
                 // MessageBox.Show(upitBaza);
                 MySqlDataReader r = UpitNaBazu(upitBaza, connectionBaza);
                 while (r.Read())
                 {
-                    MySqlConnection connectionBaza1 = new MySqlConnection("server=192.168.1.127; user=root; pwd=root; database=it_shop");
+                    MySqlConnection connectionBaza1 = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
                     string upitBaza1 = "SELECT naziv, proizvodjac, godina_proizvodnje, cijena, garancija, dodatna_oprema, kategorija, opis" +
                                         " FROM artikli a WHERE artikal_id = " + r.GetString("artikal_id") + ";";
 

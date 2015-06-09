@@ -156,7 +156,7 @@ namespace it_shop.ViewModel
                 string unosServisnogUredjaja = "INSERT INTO servisni_uredjaji (naziv, godina_proizvodnje, proizvodjac, serijski_broj, opis_kvara, cijena) values ('" + NazivProizvoda + "0'," + GodinaProizvodnjeProizvoda + ",'" + ProizvodjacProizvoda + "'," + SerijskiBrojProizvoda + ",'" + OpisKvaraProizvoda + "'," + CijenaPopravkeProizvoda + ");";
                 string dajIDServisnogUredjaja = "SELECT servisni_uredjaj_id FROM servisni_uredjaji WHERE serijski_broj = " + SerijskiBrojProizvoda + ";";
 
-                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.127; user=root; pwd=root; database=it_shop");
+                MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
 
                 DMLUpitiNaBazu(unosServisnogUredjaja, connectionBaza);
                 MySqlDataReader r = UpitNaBazu(dajIDServisnogUredjaja, connectionBaza);
@@ -286,7 +286,7 @@ namespace it_shop.ViewModel
             ListaServisnihUredjaja.Clear();
             try
             {
-                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.127; user=root; pwd=root; database=it_shop");
+                MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
                 string upitBaza = "SELECT sp.datum, sp.ukupna_cijena, sp.status, k.ime_prezime, k.adresa, k.broj_telefon, su.naziv,"
                                   + " su.godina_proizvodnje, su.proizvodjac, su.serijski_broj, su.opis_kvara, su.cijena "
                                   + "FROM servisni_predracuni sp, kupci k, servisni_uredjaji su "
@@ -346,7 +346,7 @@ namespace it_shop.ViewModel
             StatusBarError = String.Empty;
             try
             {
-                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.127; user=root; pwd=root; database=it_shop");
+                MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
 
                 int i = ListaServisnihUredjaja.IndexOf(OdabraniUredjaj);
                 bool stat = false;
@@ -378,7 +378,7 @@ namespace it_shop.ViewModel
             try
             {
                 
-                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.127; user=root; pwd=root; database=it_shop");
+                MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
 
                 string upitBaza = "DELETE FROM servisni_predracuni WHERE  "
                                    + "servisni_uredjaj_id = (SELECT s.servisni_uredjaj_id FROM servisni_uredjaji s WHERE s.serijski_broj = " + OdabraniUredjaj.ServisniUredjaj.SerijskiBroj + ");";

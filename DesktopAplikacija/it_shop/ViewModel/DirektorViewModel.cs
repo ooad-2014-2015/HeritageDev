@@ -119,7 +119,7 @@ namespace it_shop.ViewModel
 
         private void UcitajZahjeveZaNabavkomIzBaze()
         {
-            MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+            MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
             ListaZahtjeva.Clear();
             try
             {
@@ -200,7 +200,7 @@ namespace it_shop.ViewModel
             {
                 try
                 {
-                    MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+                    MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
                     string upitBaza = "UPDATE zahtjevi_nabavke SET odobren = true WHERE zahtjev_nabavke_id = " + OdabraniZahtjev.Id + ";";
 
                     DMLUpitiNaBazu(upitBaza, connectionBaza);
@@ -223,7 +223,7 @@ namespace it_shop.ViewModel
             {
                 try
                 {
-                    MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+                    MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
                     string upit = "DELETE FROM zahtjevi_proizvoda WHERE zahtjev_nabavke_id = " + OdabraniZahtjev.Id + ";";
                     DMLUpitiNaBazu(upit, connectionBaza);
                     string upitBaza = "DELETE FROM zahtjevi_nabavke WHERE zahtjev_nabavke_id = " + OdabraniZahtjev.Id + ";";
@@ -426,7 +426,7 @@ namespace it_shop.ViewModel
             //if (ListaUposlenika.Count == 0)
             //{
             ListaUposlenika.Clear();
-                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.127; user=root; pwd=root; database=it_shop");
+                MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
 
                 string upitBaza = "SELECT * FROM uposlenici;";
                 string naziv, spol, telefon, adresa, datumZaposlenja;
@@ -491,7 +491,7 @@ namespace it_shop.ViewModel
             StatusBarError = String.Empty;
             try
             {
-                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.127; user=root; pwd=root; database=it_shop");
+                MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
                 Uposlenik uposlenik = OdabraniUposlenik;
                 string upit = "DELETE FROM uposlenici WHERE ime_prezime = '" + uposlenik.PunoIme + "' AND broj_telefona = '" + uposlenik.BrojTelefona + "';";
                 DMLUpitiNaBazu(upit, connectionBaza);
@@ -531,7 +531,7 @@ namespace it_shop.ViewModel
                     SlikaAzuriraj = UcitajSliku(putanjaSlike);
 
 
-                    MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.127; user=root; pwd=root; database=it_shop");
+                    MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
                     string upitBaza = "SELECT * FROM uposlenici WHERE ime_prezime='" + OdabraniUposlenik.PunoIme
                                     + "' and broj_telefona='" + OdabraniUposlenik.BrojTelefona + "';";
 
@@ -593,7 +593,7 @@ namespace it_shop.ViewModel
             else if (string.IsNullOrEmpty(s11))
                 throw new Exception("Password ne smije biti prazan!");
             else {
-                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.127; user=root; pwd=root; database=it_shop");
+                MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
                 string upitBaza = "SELECT * FROM uposlenici WHERE USERNAME='" + s10 + "';";
                 MySqlDataReader reader = UpitNaBazu(upitBaza, connectionBaza);
                 if (reader.HasRows)
@@ -615,7 +615,7 @@ namespace it_shop.ViewModel
                                 DaniGodisnjegAzuriraj + ", username = '" + UsernameAzuriraj + "', password = '" + PasswordAzuriraj + "' WHERE ime_prezime = '" +
                                 OdabraniUposlenik.PunoIme + "' AND broj_telefona = '" + OdabraniUposlenik.BrojTelefona + "';";
                 
-                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.127; user=root; pwd=root; database=it_shop");
+                MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
                 DMLUpitiNaBazu(upit, connectionBaza);
                 ListaUposlenika.Clear();
                
@@ -827,7 +827,7 @@ namespace it_shop.ViewModel
                 ValidacijaPodataka("unos", ImeUposlenika, PrezimeUposlenika, SpolUposlenika, BrojTelefonaUposlenika, AdresaUposlenika, TipUposlenika, PlataUposlenika,
                                   DodatakNaPlatuUposlenika, DaniGodisnjegUposlenika, UsernameUposlenika, PasswordUposlenika);
 
-                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.127; user=root; pwd=root; database=it_shop");
+                MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
                 MySqlCommand cmd = new MySqlCommand();
                 int FileSize;
                 byte[] rawData;

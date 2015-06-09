@@ -31,7 +31,9 @@ namespace it_shop.ViewModel {
             IzvrsiPretragu = new RelayCommand(new Action(UcitajArtikleIzBazePretraga));
             DodajUKorpuPretraga = new RelayCommand(new Action(DodajArtikalUKorpuPretraga));
             DodajUKorpuKatalog = new RelayCommand(new Action(DodajArtikalUKorpuKatalog));
+            ZahtijevajProizvodKatalog = new RelayCommand(new Action(DodajArtikalZaNabavku));
             Printaj = new RelayCommand(new Action(PrintajRacun));
+            KategorijeUKatalogu.Add(new KategorijeKatalog("SVI ARTIKLI"));
             KategorijeUKatalogu.Add(new KategorijeKatalog("LAPTOP"));
             KategorijeUKatalogu.Add(new KategorijeKatalog("RACUNAR"));
             KategorijeUKatalogu.Add(new KategorijeKatalog("MOBITEL"));
@@ -71,6 +73,7 @@ namespace it_shop.ViewModel {
         #region Katalog
 
         #region Atributi
+        private int odabraniTab;
         private string nazivKatalog;
         private string kategorijaKatalog;
         private string godinaProizvodnjeKatalog;
@@ -83,8 +86,10 @@ namespace it_shop.ViewModel {
         private string barKodKatalog;
         private string kolicinaKatalog;
         private string prodavacStatusBar;
+        private string  kolicinaProizvoda;
         private BitmapImage slikaKatalog;
         private ICommand dodajUKorpuKatalog;
+        private ICommand zahtijevajProizvodKatalog;
         private Artikal odabraniArtikalKatalog;
         private KategorijeKatalog odabranaKategorija;
         private ObservableCollection<KategorijeKatalog> kategorijeUKatalogu = new ObservableCollection<KategorijeKatalog>();
@@ -93,6 +98,24 @@ namespace it_shop.ViewModel {
         #endregion
 
         #region Preperties
+        public int OdabraniTab {
+            get { return odabraniTab; }
+            set { 
+                odabraniTab = value;
+                ProdavacStatusBar = string.Empty;
+            }
+        }
+        public string KolicinaProizvoda {
+            get { return kolicinaProizvoda; }
+            set { 
+                kolicinaProizvoda = value;
+                OnPropertyChanged("KolicinaProizvoda");
+            }
+        }
+        public ICommand ZahtijevajProizvodKatalog {
+            get { return zahtijevajProizvodKatalog; }
+            set { zahtijevajProizvodKatalog = value; }
+        }
         public string ProdavacStatusBar {
             get { return prodavacStatusBar; }
             set {
@@ -225,12 +248,39 @@ namespace it_shop.ViewModel {
         #endregion
 
         #region Metode
+        private void DodajArtikalZaNabavku ( ) {
+            MySqlConnection con = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
+            MySqlCommand cmd = new MySqlCommand();
+
+            try {
+                if (OdabraniArtikalKatalog == null || KolicinaProizvoda == null) {
+                    throw new Exception("Molimo odaberite proizvod i kolicinu.");
+                }
+                string upit = "INSERT INTO zahtjevi_proizvoda (kolicina, artikal_id, zahtjev_nabavke_id) VALUES (" + KolicinaProizvoda + ", " + OdabraniArtikalKatalog.SerijskiBroj + ", null)";
+
+                con.Open();
+                cmd.Connection = con;
+                cmd.CommandText = upit;
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Zahtijev uspjesno unesen.");
+                KolicinaProizvoda = "";
+
+            } catch (System.AggregateException) {
+                ProdavacStatusBar = "Neuspjela konekcija sa bazom podataka!Pokušajte ponovo.";
+            } catch (Exception ex) {
+                ProdavacStatusBar = ex.Message;
+            }
+            con.Close();
+        }
         private void DodajArtikalUKorpuKatalog ( ) {
-            ListaArtikalaKorpa.Add(OdabraniArtikalKatalog);
-            cijenaArtikala += ListaArtikalaKorpa.First(U => U == OdabraniArtikalKatalog).Cijena;
-            brojacArtikala++;
-            UkupnaCijena = cijenaArtikala.ToString();
-            BrojArtikala = brojacArtikala.ToString();
+            if (OdabraniArtikalKatalog != null) {
+                ListaArtikalaKorpa.Add(OdabraniArtikalKatalog);
+                cijenaArtikala += ListaArtikalaKorpa.First(U => U == OdabraniArtikalKatalog).Cijena;
+                brojacArtikala++;
+                UkupnaCijena = cijenaArtikala.ToString();
+                BrojArtikala = brojacArtikala.ToString();
+            }
         }
         private void PrikaziArtikal ( ) {
             if (OdabraniArtikalKatalog != null) {
@@ -259,11 +309,16 @@ namespace it_shop.ViewModel {
                 listaArtikalaKatalog.Clear();
             }
             try {
-                MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+                MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
                 string _naziv, _kategorija, _opis = null, _proizvodjac = null, _dodatnaOprema = null, _serijskiBroj;
                 int _godina, _mjeseciGarancije, _kolicina;
                 double _cijena;
-                string upitBaza = "SELECT * FROM artikli, stanje_proizvoda WHERE artikli.kategorija = '" + OdabranaKategorija.Kategorija + "' AND artikli.artikal_id = stanje_proizvoda.artikal_id;";
+                string upitBaza;
+                if (OdabranaKategorija.Kategorija == "SVI ARTIKLI") {
+                    upitBaza = "SELECT * FROM artikli, stanje_proizvoda WHERE artikli.artikal_id = stanje_proizvoda.artikal_id;";
+                } else {
+                    upitBaza = "SELECT * FROM artikli, stanje_proizvoda WHERE artikli.kategorija = '" + OdabranaKategorija.Kategorija + "' AND artikli.artikal_id = stanje_proizvoda.artikal_id;";
+                }
 
                 UInt32 velicinaSlike;
                 byte[] rawData;
@@ -302,7 +357,7 @@ namespace it_shop.ViewModel {
                     listaArtikalaKatalog.Add(artikal);
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.ToString());
+                ProdavacStatusBar = ex.Message;
             }
         }
         #endregion
@@ -472,50 +527,57 @@ namespace it_shop.ViewModel {
                 ListaArtikalaPretrage.Clear();
             }
             try {
-            MySqlConnection connectionBaza = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
-            string _naziv, _kategorija, _opis = null, _proizvodjac = null, _dodatnaOprema = null, _id;
-            int _godina, _mjeseciGarancije, _kolicina;
-            double _cijena;
-            int tip = Int32.Parse(VrstaPretrage);
-            string upitBaza = null;
-            switch (tip) {
-                case 0:
-                    upitBaza = "SELECT * FROM artikli, stanje_proizvoda WHERE artikal_id LIKE '" + PojamZaPretragu + "%' AND artikli.artikal_id = stanje_proizvoda.artikal_id;";
-                    break;
-                case 1:
-                    upitBaza = "SELECT * FROM artikli, stanje_proizvoda WHERE naziv LIKE '" + PojamZaPretragu + "%' AND artikli.artikal_id = stanje_proizvoda.artikal_id;";
-                    break;
-                case 2:
-                    upitBaza = "SELECT * FROM artikli, stanje_proizvoda WHERE proizvodjac LIKE '" + PojamZaPretragu + "%' AND artikli.artikal_id = stanje_proizvoda.artikal_id;";
-                    break;
-            }
-            MessageBox.Show(upitBaza);
-            MySqlDataReader r = UpitNaBazu(upitBaza, connectionBaza);
-            while (r.Read()) {
-                _id = r.GetString("artikal_id");
-                _naziv = r.GetString("naziv");
-                _kategorija = r.GetString("kategorija");
-                _cijena = r.GetDouble("cijena");
-                _mjeseciGarancije = r.GetInt32("garancija");
-                _kategorija = r.GetString("kategorija");
-                _kolicina = r.GetInt32("kolicina");
-                _godina = r.GetInt32("godina_proizvodnje");
-                if (!r.IsDBNull(8))
-                    _opis = r.GetString("opis");
-                if (!r.IsDBNull(2))
-                    _proizvodjac = r.GetString("proizvodjac");
 
-                if (!r.IsDBNull(6))
-                    _dodatnaOprema = r.GetString("dodatna_oprema");
+                if (VrstaPretrage == null) {
+                    throw new Exception("Niste odabrali vrstu pretrage.");
+                } else if (PojamZaPretragu == null) {
+                    throw new Exception("Niste unijeli pojam za pretragu.");
+                }
 
-                Artikal artikal = new Artikal(_naziv, _kategorija, _godina, _cijena, _opis, _mjeseciGarancije, _proizvodjac, _dodatnaOprema, _kolicina, _id);
-                ListaArtikalaPretrage.Add(artikal);
-            }
+                MySqlConnection connectionBaza = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
+                string _naziv, _kategorija, _opis = null, _proizvodjac = null, _dodatnaOprema = null, _id;
+                int _godina, _mjeseciGarancije, _kolicina;
+                double _cijena;
+                string upitBaza = null;
+                int tip = Int32.Parse(VrstaPretrage);
+                switch (tip) {
+                    case 0:
+                        upitBaza = "SELECT * FROM artikli a, stanje_proizvoda s WHERE a.artikal_id LIKE '" + PojamZaPretragu + "%' AND a.artikal_id = s.artikal_id ORDER BY a.artikal_id;";
+                        break;
+                    case 1:
+                        upitBaza = "SELECT * FROM artikli a, stanje_proizvoda s WHERE naziv LIKE '" + PojamZaPretragu + "%' AND a.artikal_id = s.artikal_id ORDER BY a.naziv;";
+                        break;
+                    case 2:
+                        upitBaza = "SELECT * FROM artikli a, stanje_proizvoda s WHERE proizvodjac LIKE '" + PojamZaPretragu + "%' AND a.artikal_id = s.artikal_id ORDER BY a.proizvodjac;";
+                        break;
+                }
+                MySqlDataReader r = UpitNaBazu(upitBaza, connectionBaza);
+                while (r.Read()) {
+                    _id = r.GetString("artikal_id");
+                    _naziv = r.GetString("naziv");
+                    _kategorija = r.GetString("kategorija");
+                    _cijena = r.GetDouble("cijena");
+                    _mjeseciGarancije = r.GetInt32("garancija");
+                    _kategorija = r.GetString("kategorija");
+                    _kolicina = r.GetInt32("kolicina");
+                    _godina = r.GetInt32("godina_proizvodnje");
+                    if (!r.IsDBNull(8))
+                        _opis = r.GetString("opis");
+                    if (!r.IsDBNull(2))
+                        _proizvodjac = r.GetString("proizvodjac");
+
+                    if (!r.IsDBNull(6))
+                        _dodatnaOprema = r.GetString("dodatna_oprema");
+
+                    Artikal artikal = new Artikal(_naziv, _kategorija, _godina, _cijena, _opis, _mjeseciGarancije, _proizvodjac, _dodatnaOprema, _kolicina, _id);
+                    ListaArtikalaPretrage.Add(artikal);
+                }
             } catch (Exception ex) {
-                MessageBox.Show(ex.ToString());
+                ProdavacStatusBar = ex.Message;
             }
         }
         #endregion
+        
         #endregion
 
         //tab3
@@ -624,7 +686,7 @@ namespace it_shop.ViewModel {
 
 
         private void UnosNovogArtikla ( ) {
-            MySqlConnection con = new MySqlConnection("server=192.168.1.11; user=root; pwd=root; database=it_shop");
+            MySqlConnection con = new MySqlConnection("server=10.42.0.45; user=root; pwd=root; database=it_shop");
             MySqlCommand cmd = new MySqlCommand();
             int FileSize;
             byte[] rawData;
@@ -649,17 +711,14 @@ namespace it_shop.ViewModel {
                 cmd.Connection = con;
                 cmd.CommandText = upit;
                 cmd.ExecuteNonQuery();
-
                 MessageBox.Show("Artikal uspjesno unesen.");
                 PonistiIzmjene();
-
             } catch (System.AggregateException) {
-                MessageBox.Show("Neuspjela konekcija sa bazom podataka!\nPokušajte ponovo.");
+                ProdavacStatusBar = "Neuspjela konekcija sa bazom podataka!\nPokušajte ponovo.";
             } catch (Exception ex) {
-                MessageBox.Show("Došlo je do greške!\nMolimo pokušajte ponovo ili kontaktirajte administratora!");
+                ProdavacStatusBar = "Došlo je do greške!\nMolimo pokušajte ponovo ili kontaktirajte administratora!";
             }
             con.Close();
-
         }
         private void PonistiIzmjene ( ) {
             NazivProizvoda = string.Empty;
@@ -673,6 +732,7 @@ namespace it_shop.ViewModel {
             GodinaProizvodnje = string.Empty;
             SerijskiBroj = string.Empty;
             BarKod = string.Empty;
+            ProdavacStatusBar = string.Empty;
             UcitajSlikuBinding = UcitajSliku(@"../../Resources/no_image.png");
         }
         #endregion
